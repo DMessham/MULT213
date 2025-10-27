@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome to the Sample HTML Page</h1>
+    <p>This is a simple HTML document.</p>
+
+    <script>
+        console.log("Hello, World!");
+        var someData = [];
+        var isStudent=true; //bool
+        var yourAge = 21; //int
+        var yourHeight = 174.1; //float
+        var yourName = "Daniel Messham"; //string
+
+        // answering data
+
+        var itemCost = 200;
+        var myMoney = 0;
+
+        var canBuyItem= (myMoney <= itemCost);
+        if (canBuyItem) {
+            console.log("You cannot afford this.");
+        } else {
+            console.log("You can buy this.");
+        }
+
+        //loops
+        var dailyIncome = 3;
+        var howManyDays = 0;
+
+        while (myMoney < itemCost) { //keep looping WHILE this condition is true
+            howManyDays++;
+            myMoney += dailyIncome;
+            console.log("WHILEloop: after " + howManyDays + " days you have " + myMoney);
+            
+        }
+
+        console.log("WHILEloop: You need to work for " + howManyDays + " day(s) to afford the item, which costs " + itemCost +".");
+        myMoney = 0;
+        howManyDays = 0;
+        //forloop 
+        for(i=0; myMoney < itemCost; i++){
+            myMoney = dailyIncome*i;
+            howManyDays = i;
+            console.log("FORloop: after " + howManyDays + " days you have " + myMoney);
+        }
+        console.log("FORloop: You need to work for " + howManyDays + " day(s) to afford the item, which costs " + itemCost +".");
+
+        //objects
+        var danielObject = {
+            name:"Daniel Messham",
+            age: 21,
+            height:174.1,
+            pets: [
+                "Alaska"
+            ]
+        }
+
+        //function
+        function greeter(personObject){
+            alert("Hello, " + personObject.name + "! You are " + personObject.age + " years old.")
+        }
+
+        greeter(danielObject);
+    </script>
+</body>
+</html>
