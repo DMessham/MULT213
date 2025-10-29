@@ -1,0 +1,14 @@
+{
+  "name": "mult213 assignment ",
+  "version": "1.0.0",
+  "description": "Demo made for mult213 class",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "DMessham",
+  "license": "ISC",
+  "dependencies": {
+    "@neth4ck/neth4ck": "^1.0.4"
+  }
+}

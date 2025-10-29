@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Welcome to the Sample HTML Page</h1>
+    <h1 id="title">Welcome to the Sample HTML Page</h1>
     <p>This is a simple HTML document.</p>
 
     <script>
@@ -63,10 +63,15 @@
 
         //function
         function greeter(personObject){
-            alert("Hello, " + personObject.name + "! You are " + personObject.age + " years old.")
+            // alert("Hello, " + personObject.name + "! You are " + personObject.age + " years old.")
+            console.log("Hello, " + personObject.name + "! You are " + personObject.age + " years old.");
+
         }
 
         greeter(danielObject);
+
+        var titleElement = document.getElementById("title");
+        
     </script>
 </body>
 </html>
