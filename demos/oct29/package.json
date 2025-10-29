@@ -1,5 +1,5 @@
 {
-  "name": "mult213 assignment ",
+  "name": "mult213 demo oct29",
   "version": "1.0.0",
   "description": "Demo made for mult213 class",
   "main": "index.js",
@@ -9,6 +9,8 @@
   "author": "DMessham",
   "license": "ISC",
   "dependencies": {
-    "@neth4ck/neth4ck": "^1.0.4"
+    "@neth4ck/neth4ck": "^1.0.4",
+    "hyper-nh": "^0.0.2",
+    "xkcd": "^1.1.3"
   }
 }
