@@ -28,7 +28,10 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "baseline 2022",
+      "ie 6-8",
+      "blackberry 7",
+      "blackberry 10"
     ],
     "development": [
       "last 1 chrome version",
