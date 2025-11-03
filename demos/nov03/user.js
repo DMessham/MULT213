@@ -1,8 +1,8 @@
 // Define a User object
 export class User {
-    constructor(name, move) {
+    constructor(name, moves) {
         this.name = name;
-        this.move = move;
+        this.moves = moves;
     }
 }
 
