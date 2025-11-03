@@ -41,7 +41,7 @@ function playMultiple(p1, p2){
         rounds:0
     }
 
-    // Play 10 rounds
+    //play as many rounds as there are moves listed for p1
     for (let i = 0; i < p1.moves.length; i++) {
         console.log(`Round ${i + 1}`);
         
