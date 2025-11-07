@@ -1,54 +1,64 @@
-import { playGame, playMultiple } from './game.js';
-import { User, greetUser } from './user.js';
+import { User } from './user.js';
+import { prompt, cleanUp } from './input.js';
+import { writeData, readData } from './db.js';
+import { playMultipleGames } from './game.js';
 
-// Make a user
-const p1moves = ["R", "P", "S", "R", "P", "S", "R", "P", "S", "R"];
-const p1 = new User("Alice", p1moves);
+import terminalImage from 'terminal-image';
 
-// Make another user
-const p2moves = ["R", "R", "R", "R", "R", "R", "R", "R", "R", "R"];
-const p2 = new User("Bill", p2moves);
+const demo_play_10_games = () => {
+    // Make a couple users
+    const p1_moves = ["R", "P", "S", "R", "P", "S", "R", "P", "S", "R"];
+    const p2_moves = ["R", "R", "R", "R", "R", "R", "R", "R", "R", "R"];
+    
+    const p1 = new User("Alice", p1_moves);
+    const p2 = new User("Bill", p2_moves);
+    
+    // Play multiple games and collect some stats
+    const stats = playMultipleGames(p1, p2);
+    
+    // Display our collected stats
+    console.log("Final Statistics:");
+    console.log(`${p1.name} Wins: ${stats.p1_wins}`);
+    console.log(`${p2.name} Wins: ${stats.p2_wins}`);
+    console.log(`Ties: ${stats.ties}`);
 
-
-// Play the game
-let winner = playGame(p1.move, p2.move);
-
-// Print out the result
-if (winner === 0) {
-    console.log("It's a tie!");
-} else if (winner === 1) {
-    console.log(p1.name + " won!");
-} else if (winner === 2) {
-    console.log(p2.name + " won!");
+    writeData("gameStats.json", stats);
 }
 
-//play a few games
-// for (let i=0; i<p1.moves.length; i++){
-//     console.log(`Round # ${i+1}`);
-    
-//     console.log(`   ${p1.name} [P1] plays ${p1.moves[i]}`);
-//     console.log(`   ${p2.name} [P2] plays ${p2.moves[i]}`);
-//     const roundWinner = playGame(p1moves[i], p2moves[i])
+async function main() {
+    // Startup logic, welcome, splash screen
+    console.log("Welcome to Rock, Paper, Scissors!");
 
-//     if (roundWinner === 0){
-//         stats.ties++;
-//         console.log(`   ${p1.name} [P1] & ${p2.name} [P2] Tied!`);
+    // Main Event Loop / Logic
+    // What are the main things our app does?
+    console.log("Type 'h' for help. 'q' to quit.");
 
-//     } else if (roundWinner === 1){
-//         stats.p1wins++;
-//         console.log(`   ${p1.name} [P1] won`);
-//     } else if (roundWinner === 2){
-//         stats.p2wins++;
-//         console.log(`   ${p2.name} [P2] won`);
-//     }
-//     stats.rounds++
-// }
+    // Start running our application
+    let running = true;
+    while (running) {
+        // Ask the user what they want to do
+        const userInput = await prompt("> ");
 
+        if (userInput === "h") {
+            console.log("Help Menu:");
+            console.log("h - Display this help menu");
+            console.log("oiia - Little fun surprise");
+            console.log("q - Quit the application");
+        } else if (userInput === "q") {
+            // Stop running
+            running = false;
+        } else if (userInput === "oiia") {
+            console.log("Welcome to the secret oiia mode!");  
+            console.log(await terminalImage.file('./data/oiia.jpeg'));
+        } else {
+            console.log("What are you even trying to do? Type 'h' for help.");
+        }
+    }
 
-let stats = playMultiple(p1,p2);
+    // Cleanup logic / shutdown
+    console.log("Thanks for playing! Goodbye!");
+    cleanUp();
+}
 
-console.log(`--Game Stats--`);
-console.log(`Games Played: ${stats.rounds}`);
-console.log(`${p1.name} won ${stats.p1wins} time(s)`);
-console.log(`${p2.name} won ${stats.p2wins} time(s)`);
-console.log(`${p1.name} & ${p2.name} tied ${stats.ties} time(s)`)
+// Start our application
+main();

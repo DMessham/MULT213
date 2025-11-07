@@ -1,32 +1,39 @@
-//persistant data time!
-
 import fs from "fs";
-const datafolder = "./data/"
-// 2 main methods
-// fs.readFileSync
-// fs.writeFileSync
 
-//we can can only write text data (or binary)
+const DB_FOLDER = "./data/";
 
-//take data and use json.stringify to convert to text
-
-export const writeData = (filename, jsonData) => {
-    //convert data to text
-    const jsonStr = JSON.stringify(jsonData);
-    //write it out
-    fs.writeFileSync(datafolder + filename, jsonStr);
-    console.log(`Data written to ${filename}`)
+/**
+ * Reads and parses JSON from a file.
+ * @param {string} filename - Path to the JSON file.
+ * @returns {any} Parsed JSON object.
+ */
+const readData = (filename) => {
+  try {
+    const filepath = DB_FOLDER + filename;
+    const data = fs.readFileSync(filepath, "utf8");
+    return JSON.parse(data);
+  } catch (err) {
+    console.error("Error reading file:", err);
+    return null;
+  }
 }
 
-const someData = {
-    "name":"alice",
-    "score": 42,
-    "moves": [
-        'r',
-        'p',
-        's',
-        'r'
-    ]
+/**
+ * Stringifies and writes JSON to a file.
+ * @param {string} filename - Path to the JSON file.
+ * @param {any} payload - Data to be written.
+ */
+const writeData = (filename, payload) => {
+  try {
+    const jsonStr = JSON.stringify(payload, null, 2); // pretty print
+    
+    const filepath = DB_FOLDER + filename;
+    
+    fs.writeFileSync(filepath, jsonStr, "utf8");
+    console.log("Data written to", filename);
+  } catch (err) {
+    console.error("Error writing file:", err);
+  }
 }
 
-writeData("alice.json", someData)
+export { readData, writeData };
