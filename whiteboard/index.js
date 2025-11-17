@@ -59,7 +59,7 @@ async function main() {
             case 'game':
             case 'g':
                 console.log("DEBUG - MAIN MENU: starting singleplayer");
-                singlePlayerGame();
+                await singlePlayerGame();
                 console.log("DEBUG - MAIN MENU: done singleplayer");
                 break;
                 
