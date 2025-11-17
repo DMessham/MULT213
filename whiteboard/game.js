@@ -32,16 +32,16 @@ function isValidMove(move){
 // };
 // console.log('valid move list: ' + moveNameList);
 
-const moveInput = async (prompt) => {
-    let move = '';
-        while (true){
-            move = (await prompt(`${prompt}Enter move to play ([r]ock,[p]aper,[s]cissors): `)).toLowerCase();
-            if (isValidMove(move)) {
-                return(move);
-            } else {
-                console.log(`${prompt}Invalid Move! Valid Moves are 'r' for Rock, 'p' for Paper, 's' for scissors.`)
-            }
+const moveInput = async (text) => {
+    while (true){
+        const move = (await prompt(`${text}Enter move to play ([r]ock,[p]aper,[s]cissors): `)).toLowerCase();
+        if (isValidMove(move)) {
+            break;
+        } else {
+            console.log(`${text}Invalid Move! Valid Moves are 'r' for Rock, 'p' for Paper, 's' for scissors.`)
         }
+    }
+    return(move);
 }
 
 
@@ -59,31 +59,6 @@ const playGame = (player1Choice, player2Choice) => {
     } else {
         return 2; // Player 2 wins
     }
-}
-
-const singlePlayerGame = async () => {
-    const playerName = await prompt("Enter your name: ");
-    const rounds = parseInt(await prompt(`Hello ${playerName}! How many rounds should be played? `));
-
-    //TODO: eventually add stats
-
-    console.log(`Playing ${rounds} round(s)`);
-    
-    for (let i = 0; i < rounds; i++){
-        let playerMove = moveInput(`${playerName}'s Turn: `);
-
-        //computers move (always rock rightnow)
-        const computerMove = 0;
-        // todo: make the computer better, but not too good, random isnt too fun rn
-        //const computerMove = Math.floor(math.random() * validMoves.length)
-        console.log(`   The Computer plays: ${moveNames[computerMove]}`);
-
-        //actually play game
-        const roundWinner = playGame(playerMove, validMoves[computerMove]);
-        let garb= 0; //dont log stats 
-        whoWon(roundWinner, playerName, 'The Computer', garb, garb, garb);
-
-    }   
 }
 
 const playMultipleGames = (p1, p2) => {
@@ -108,21 +83,61 @@ const playMultipleGames = (p1, p2) => {
         const roundWinner = playGame(p1Move, p2Move);
         // Update stats based on result
 
-        whoWon(roundWinner, p1.name, p2.name, stats.p1_wins, stats.p2_wins, stats.ties);
+        if (roundWinner === 0) {
+            stats.ties += 1;
+            console.log("   It's a tie!");
+        } else if (roundWinner === 1) {
+            stats.p1_wins += 1;
+            console.log(`   ${p1.name} won!`);
+        } else if (roundWinner === 2) {
+            stats.p2_wins += 1;
+            console.log(`   ${p2.name} won!`);
+        }
     }
 
     return stats;
 }
-function whoWon(roundWinner, p1name, p2name, p1wins, p2wins, tieStat){
-    if (roundWinner === 0) {
-        tieStat += 1;
-        console.log("   It's a tie!");
-    } else if (roundWinner === 1) {
-        p1wins += 1;
-        console.log(`   ${p1name} won!`);
-    } else if (roundWinner === 2) {
-        p2wins += 1;
-        console.log(`   ${p2name} won!`);
-    }
+
+
+const singlePlayerGame = async () => {
+    const playerName = await prompt("Enter your name: ");
+    const rounds = parseInt(await prompt(`Hello ${playerName}! How many rounds should be played? `));
+
+    //TODO: eventually add stats
+
+    console.log(`Playing ${rounds} round(s)`);
+    
+    for (let i = 0; i < rounds; i++){
+        console.log(`ROUND ${i+1} of ${rounds}:`)
+        
+        let playerMove=''
+        //get the players move and validate it
+        // let playerMove = moveInput(`    ${playerName}'s Turn: `);
+        while (true){
+            playerMove = (await prompt(`   ${playerName}'s Turn: Enter move to play ([r]ock,[p]aper,[s]cissors): `)).toLowerCase();
+            if (isValidMove(playerMove)) {
+                break;
+            } else {
+                console.log(`    Invalid Move! Valid Moves are 'r' for Rock, 'p' for Paper, 's' for scissors.`)
+            }
+        }
+        //computers move (always rock rightnow)
+        const computerMove = 0;
+        // todo: make the computer better, but not too good, random isnt too fun rn
+        //const computerMove = Math.floor(math.random() * validMoves.length)
+        console.log(`   The Computer plays: ${moveNames[computerMove]}`);
+
+        //actually play game
+        const roundWinner = playGame(playerMove, validMoves[computerMove]);
+        if (roundWinner === 0) {
+            console.log("    It's a tie!");
+        } else if (roundWinner === 1) {
+            console.log(`${playerName} won!`);
+        } else if (roundWinner === 2) {
+            console.log(`   The Computer won!`);
+        }
+
+    }   
 }
+
 export { playGame, playMultipleGames, singlePlayerGame };
