@@ -59,7 +59,7 @@ async function main() {
             case 'game':
             case 'g':
                 singlePlayerGame();
-                console.log
+                console.log("DEBUG - Singleplayer Game Exit: REACHED MAIN MENU");
                 break;
             case 'demo':
             case 'd':
