@@ -58,11 +58,14 @@ async function main() {
                 break;
             case 'game':
             case 'g':
+                console.log("DEBUG - MAIN MENU: starting singleplayer");
                 singlePlayerGame();
-                console.log("DEBUG - Singleplayer Game Exit: REACHED MAIN MENU");
+                console.log("DEBUG - MAIN MENU: done singleplayer");
                 break;
+                
             case 'demo':
             case 'd':
+                console.log("DEBUG - MAIN MENU: starting demo");
                 demo_play_10_games();
                 break;
             case 'oiia':
@@ -72,8 +75,9 @@ async function main() {
             default:
                 console.log("What are you even trying to do? Type 'h' for help.");
                 break;
-        }
-    }
+        };
+        console.log("DEBUG - MAIN MENU: EXITED SWITCH");
+    };
 
     // Cleanup logic / shutdown
     console.log("Thanks for playing! Goodbye!");

@@ -32,21 +32,21 @@ function isValidMove(move){
 // };
 // console.log('valid move list: ' + moveNameList);
 
-const moveInput = async (text) => {
-    while (true){
-        const move = (await prompt(`${text}Enter move to play ([r]ock,[p]aper,[s]cissors): `)).toLowerCase();
-        if (isValidMove(move)) {
-            break;
-        } else {
-            console.log(`${text}Invalid Move! Valid Moves are 'r' for Rock, 'p' for Paper, 's' for scissors.`)
-        }
-    }
-    return(move);
-}
+// const moveInput = async (text) => {
+//     while (true){
+//         const move = (await prompt(`${text}Enter move to play ([r]ock,[p]aper,[s]cissors): `)).toLowerCase();
+//         if (isValidMove(move)) {
+//             break;
+//         } else {
+//             console.log(`${text}Invalid Move! Valid Moves are 'r' for Rock, 'p' for Paper, 's' for scissors.`)
+//         }
+//     }
+//     return(move);
+// }
 
 
 const playGame = (player1Choice, player2Choice) => {
-    console.log("DEBUG: ENTERED FUNCTION playGame(player1Choice, player2Choice)");
+    // console.log("DEBUG: ENTERED FUNCTION playGame(player1Choice, player2Choice)");
     if (player1Choice === player2Choice) {
         return 0; // Tie
     }
@@ -102,7 +102,7 @@ const playMultipleGames = (p1, p2) => {
 
 
 const singlePlayerGame = async () => {
-    console.log('Starting Singleplayer Game...')
+    console.log('Starting Singleplayer Game...');
     const playerName = await prompt("Welcome! Please enter your name: ");
     const rounds = parseInt(await prompt(`Hello, ${playerName}! How many rounds should be played? `));
 
@@ -110,8 +110,8 @@ const singlePlayerGame = async () => {
 
     console.log(`Playing ${rounds} round(s)`);
     
-    for (let i = 0; i < rounds; i++){
-        console.log(`ROUND ${i+1} of ${rounds}:`)
+    for (let i = 1; i <= rounds; i++){
+        console.log(`ROUND ${i} of ${rounds}:`);
         
         let playerMove=''
         //get the players move and validate it
@@ -141,7 +141,7 @@ const singlePlayerGame = async () => {
         } else if (roundWinner === 2) {
             console.log(`   The Computer won!`);
         }
-        console.log(`   DEBUG: singlePlayerGame - End of main loop, i = ${i}`);
+        // console.log(`   DEBUG: singlePlayerGame - End of main loop, i = ${i}`);
     }   
     console.log("DEBUG: singlePlayerGame - exited main loop");
 }
