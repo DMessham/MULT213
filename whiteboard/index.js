@@ -39,25 +39,39 @@ async function main() {
         // Ask the user what they want to do
         const userInput = await prompt("[Whiteboard] > ");
 
-        if (userInput === "h") {
-            console.log("Help Menu:");
-            console.log("h - Display this help menu");
-            console.log("demo - run of preset of demo of 10 games");
-            console.log("game - play a game of rock paper scissors")
-            console.log("oiia - Little fun surprise");
-            console.log("q - Quit the application");
-        } else if (userInput === "game" || userInput ==='g') {
-            singlePlayerGame();
-        } else if (userInput === "demo"|| userInput ==='d') {
-            demo_play_10_games()
-        } else if (userInput === "q") {
-            // Stop running
-            running = false;
-        } else if (userInput === "oiia") {
-            console.log("Welcome to the secret oiia mode!");  
-            console.log(await terminalImage.file('./data/oiia.jpeg'));
-        } else {
-            console.log("What are you even trying to do? Type 'h' for help.");
+        switch (userInput){
+            case 'h':
+            case 'help':
+            case "?":
+                console.log("Help Menu:");
+                console.log("   h - Display this help menu");
+                console.log("   demo - run of preset of demo of 10 games");
+                console.log("   game - play a game of rock paper scissors")
+                console.log("   oiia - Little fun surprise");
+                console.log("   q - Quit the application");
+                break;
+            case "q":
+            case 'quit':
+            case 'exit':
+                // Stop running
+                running = false;
+                break;
+            case 'game':
+            case 'g':
+                singlePlayerGame();
+                console.log
+                break;
+            case 'demo':
+            case 'd':
+                demo_play_10_games();
+                break;
+            case 'oiia':
+                console.log("Welcome to the secret oiia mode!");  
+                console.log(await terminalImage.file('./data/oiia.jpeg'));
+                break;
+            default:
+                console.log("What are you even trying to do? Type 'h' for help.");
+                break;
         }
     }
 

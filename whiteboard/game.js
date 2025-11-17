@@ -46,6 +46,7 @@ const moveInput = async (text) => {
 
 
 const playGame = (player1Choice, player2Choice) => {
+    console.log("DEBUG: ENTERED FUNCTION playGame(player1Choice, player2Choice)");
     if (player1Choice === player2Choice) {
         return 0; // Tie
     }
@@ -62,6 +63,7 @@ const playGame = (player1Choice, player2Choice) => {
 }
 
 const playMultipleGames = (p1, p2) => {
+    console.log("DEBUG: ENTERED FUNCTION playMultipleGames(p1, p2)");
     const stats = {
         p1_wins: 0,
         p2_wins: 0,
@@ -100,8 +102,9 @@ const playMultipleGames = (p1, p2) => {
 
 
 const singlePlayerGame = async () => {
-    const playerName = await prompt("Enter your name: ");
-    const rounds = parseInt(await prompt(`Hello ${playerName}! How many rounds should be played? `));
+    console.log('Starting Singleplayer Game...')
+    const playerName = await prompt("Welcome! Please enter your name: ");
+    const rounds = parseInt(await prompt(`Hello, ${playerName}! How many rounds should be played? `));
 
     //TODO: eventually add stats
 
@@ -122,12 +125,14 @@ const singlePlayerGame = async () => {
             }
         }
         //computers move (always rock rightnow)
+        console.log("   DEBUG: singlePlayerGame - Calculating Computers move");
         const computerMove = 0;
         // todo: make the computer better, but not too good, random isnt too fun rn
         //const computerMove = Math.floor(math.random() * validMoves.length)
         console.log(`   The Computer plays: ${moveNames[computerMove]}`);
 
         //actually play game
+        // console.log("DEBUG: singlePlayerGame - Deciding who won");
         const roundWinner = playGame(playerMove, validMoves[computerMove]);
         if (roundWinner === 0) {
             console.log("    It's a tie!");
@@ -136,8 +141,9 @@ const singlePlayerGame = async () => {
         } else if (roundWinner === 2) {
             console.log(`   The Computer won!`);
         }
-
+        console.log(`   DEBUG: singlePlayerGame - End of main loop, i = ${i}`);
     }   
+    console.log("DEBUG: singlePlayerGame - exited main loop");
 }
 
 export { playGame, playMultipleGames, singlePlayerGame };
