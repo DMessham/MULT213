@@ -58,14 +58,11 @@ async function main() {
                 break;
             case 'game':
             case 'g':
-                console.log("DEBUG - MAIN MENU: starting singleplayer");
                 await singlePlayerGame();
-                console.log("DEBUG - MAIN MENU: done singleplayer");
                 break;
                 
             case 'demo':
             case 'd':
-                console.log("DEBUG - MAIN MENU: starting demo");
                 demo_play_10_games();
                 break;
             case 'oiia':
@@ -76,7 +73,6 @@ async function main() {
                 console.log("What are you even trying to do? Type 'h' for help.");
                 break;
         };
-        console.log("DEBUG - MAIN MENU: EXITED SWITCH");
     };
 
     // Cleanup logic / shutdown

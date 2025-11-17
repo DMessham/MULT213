@@ -63,7 +63,7 @@ const playGame = (player1Choice, player2Choice) => {
 }
 
 const playMultipleGames = (p1, p2) => {
-    console.log("DEBUG: ENTERED FUNCTION playMultipleGames(p1, p2)");
+    // console.log("DEBUG: ENTERED FUNCTION playMultipleGames(p1, p2)");
     const stats = {
         p1_wins: 0,
         p2_wins: 0,
@@ -125,7 +125,7 @@ const singlePlayerGame = async () => {
             }
         }
         //computers move (always rock rightnow)
-        console.log("   DEBUG: singlePlayerGame - Calculating Computers move");
+        console.log("   Calculating The Computer's move...");
         const computerMove = 0;
         // todo: make the computer better, but not too good, random isnt too fun rn
         //const computerMove = Math.floor(math.random() * validMoves.length)
@@ -143,7 +143,7 @@ const singlePlayerGame = async () => {
         }
         // console.log(`   DEBUG: singlePlayerGame - End of main loop, i = ${i}`);
     }   
-    console.log("DEBUG: singlePlayerGame - exited main loop");
+    // console.log("DEBUG: singlePlayerGame - exited main loop");
 }
 
 export { playGame, playMultipleGames, singlePlayerGame };
