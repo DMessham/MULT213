@@ -37,13 +37,19 @@ async function main() {
     let running = true;
     while (running) {
         // Ask the user what they want to do
-        const userInput = await prompt("> ");
+        const userInput = await prompt("[Whiteboard] > ");
 
         if (userInput === "h") {
             console.log("Help Menu:");
             console.log("h - Display this help menu");
+            console.log("demo - run of preset of demo of 10 games");
+            console.log("game - play a game of rock paper scissors")
             console.log("oiia - Little fun surprise");
             console.log("q - Quit the application");
+        } else if (userInput === "game" || userInput ==='g') {
+
+        } else if (userInput === "demo"|| userInput ==='d') {
+            demo_play_10_games()
         } else if (userInput === "q") {
             // Stop running
             running = false;

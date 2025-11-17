@@ -23,8 +23,10 @@ const playGame = (player1Choice, player2Choice) => {
         (player1Choice === "S" && player2Choice === "P") ||
         (player1Choice === "P" && player2Choice === "R")
     ) {
+        console.log(`   ${p1.name} won!`);
         return 1; // Player 1 wins
     } else {
+        console.log(`   ${p2.name} won!`);
         return 2; // Player 2 wins
     }
 }
@@ -38,28 +40,26 @@ const playMultipleGames = (p1, p2) => {
 
     // Play 10 rounds
     for (let i = 0; i < p1.moves.length; i++) {
-        // console.log(`Rounds ${i + 1}`);
+        console.log(`Round ${i + 1}`);
 
         // Figure out each person's moves for the round
         // Compare the moves against each other, get a result
         const p1Move = p1.moves[i];
-        // console.log(`${p1.name} plays ${p1Move}`);
+        console.log(`   ${p1.name} plays ${p1Move}`);
 
         const p2Move = p2.moves[i];
-        // console.log(`${p2.name} plays ${p2Move}`);
+        console.log(`   ${p2.name} plays ${p2Move}`);
 
         const roundWinner = playGame(p1Move, p2Move);
         // Update stats based on result
 
         if (roundWinner === 0) {
             stats.ties += 1;
-            // console.log("It's a tie!");
+            console.log("   It's a tie!");
         } else if (roundWinner === 1) {
             stats.p1_wins += 1;
-            // console.log(`${p1.name} won!`);
         } else if (roundWinner === 2) {
             stats.p2_wins += 1;
-            // console.log(`${p2.name} won!`);
         }
     }
 
