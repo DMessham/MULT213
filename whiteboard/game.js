@@ -13,6 +13,38 @@ Returns 0 for tie
 Returns 1 if player 1 win
 Returns 2 if player 2 win
 */
+
+import { prompt} from './input.js';
+
+const validMoves = ['r', 'p', 's'];
+
+const moveNames = ['Rock', 'Paper', 'Scissors'];
+
+function isValidMove(move){
+    return validMoves.includes(move);
+};
+
+// auto gen a list of moves to show to the user
+// let moveNameList = '';
+
+// for (let i = 0; i < validMoves.length; i++){
+    // moveNameList += `'${validMoves[i]}' for ${moveNames[i]}, `
+// };
+// console.log('valid move list: ' + moveNameList);
+
+const moveInput = async (prompt) => {
+    let move = '';
+        while (true){
+            move = (await prompt(`${prompt}Enter move to play ([r]ock,[p]aper,[s]cissors): `)).toLowerCase();
+            if (isValidMove(move)) {
+                return(move);
+            } else {
+                console.log(`${prompt}Invalid Move! Valid Moves are 'r' for Rock, 'p' for Paper, 's' for scissors.`)
+            }
+        }
+}
+
+
 const playGame = (player1Choice, player2Choice) => {
     if (player1Choice === player2Choice) {
         return 0; // Tie
@@ -31,42 +63,25 @@ const playGame = (player1Choice, player2Choice) => {
 
 const singlePlayerGame = async () => {
     const playerName = await prompt("Enter your name: ");
-    const rounds = parseInt(await prompt('Hello ${playerName}! How many rounds should be played? '));
+    const rounds = parseInt(await prompt(`Hello ${playerName}! How many rounds should be played? `));
 
     //TODO: eventually add stats
 
-    console.log('Playing ${rounds} round(s)');
-    const validMoves = ['r', 'p', 's'];
+    console.log(`Playing ${rounds} round(s)`);
+    
     for (let i = 0; i < rounds; i++){
-        let playerMove = '';
-        while (true){
-            playerMove = (await prompt("Enter move to play ([r]ock,[p]aper,[s]cissors): ")).toLowerCase();
-            if (validMoves.includes(playerMove)) {
-                break;
-            } else {
-                console.log("Invalid Move! Valid Moves are 'r' for Rock, 'p' for Paper, 's' for scissors.")
-            }
-        }
+        let playerMove = moveInput(`${playerName}'s Turn: `);
 
         //computers move (always rock rightnow)
-        const computerMove = "r";
+        const computerMove = 0;
         // todo: make the computer better, but not too good, random isnt too fun rn
-        //const randomMove = Math.floor(math.random() * validMoves.length)
-        //const computerMove = validMoves[randomMove]
-        console.log(`   The Computer plays: ${computerMove}`);
+        //const computerMove = Math.floor(math.random() * validMoves.length)
+        console.log(`   The Computer plays: ${moveNames[computerMove]}`);
 
         //actually play game
-        const roundWinner = playGame(playerMove, computerMove);
-        if (roundWinner === 0) {
-            stats.ties += 1;
-            console.log("   It's a tie!");
-        } else if (roundWinner === 1) {
-            stats.p1_wins += 1;
-            console.log(`   ${playerName} won!`);
-        } else if (roundWinner === 2) {
-            stats.p2_wins += 1;
-            console.log(`   The Computer won!`);
-        }
+        const roundWinner = playGame(playerMove, validMoves[computerMove]);
+        let garb= 0; //dont log stats 
+        whoWon(roundWinner, playerName, 'The Computer', garb, garb, garb);
 
     }   
 }
@@ -93,30 +108,21 @@ const playMultipleGames = (p1, p2) => {
         const roundWinner = playGame(p1Move, p2Move);
         // Update stats based on result
 
-        if (roundWinner === 0) {
-            stats.ties += 1;
-            console.log("   It's a tie!");
-        } else if (roundWinner === 1) {
-            stats.p1_wins += 1;
-            console.log(`   ${p1.name} won!`);
-        } else if (roundWinner === 2) {
-            stats.p2_wins += 1;
-            console.log(`   ${p2.name} won!`);
-        }
+        whoWon(roundWinner, p1.name, p2.name, stats.p1_wins, stats.p2_wins, stats.ties);
     }
 
     return stats;
 }
-function whoWon(roundWinner, p1name, p2name){
+function whoWon(roundWinner, p1name, p2name, p1wins, p2wins, tieStat){
     if (roundWinner === 0) {
-        stats.ties += 1;
+        tieStat += 1;
         console.log("   It's a tie!");
     } else if (roundWinner === 1) {
-        stats.p1_wins += 1;
-        console.log(`   ${p1.name} won!`);
+        p1wins += 1;
+        console.log(`   ${p1name} won!`);
     } else if (roundWinner === 2) {
-        stats.p2_wins += 1;
-        console.log(`   ${p2.name} won!`);
+        p2wins += 1;
+        console.log(`   ${p2name} won!`);
     }
 }
 export { playGame, playMultipleGames, singlePlayerGame };

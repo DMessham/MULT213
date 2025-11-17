@@ -1,7 +1,7 @@
 import { User } from './user.js';
 import { prompt, cleanUp } from './input.js';
 import { writeData, readData } from './db.js';
-import { playMultipleGames } from './game.js';
+import { playMultipleGames, singlePlayerGame } from './game.js';
 
 import terminalImage from 'terminal-image';
 
@@ -47,7 +47,7 @@ async function main() {
             console.log("oiia - Little fun surprise");
             console.log("q - Quit the application");
         } else if (userInput === "game" || userInput ==='g') {
-
+            singlePlayerGame();
         } else if (userInput === "demo"|| userInput ==='d') {
             demo_play_10_games()
         } else if (userInput === "q") {
