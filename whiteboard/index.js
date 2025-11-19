@@ -74,7 +74,7 @@ async function main() {
             case 's':
             case 'sandbox':
                 console.log("Starting sandbox Code...");
-                sandbox();
+                await sandbox();
                 break;
             default:
                 console.log("What are you even trying to do? Type 'h' for help.");
