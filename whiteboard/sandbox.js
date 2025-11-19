@@ -1,4 +1,6 @@
-
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
 function add(a, b, callback) {
     const result = a + b;
@@ -9,16 +11,29 @@ function logResult(result) {
     console.log(result);
 }
 
-function fetchdata(){
+const fetchdata = async () => {
     fetch('https://jsonplaceholder.typicode.com/posts/1')
     .then(response => response.json())
+    .then(postData => {
+        console.log('\n   post: ', postData)
+        return postData
+    })
     .then(post => fetch(`https://jsonplaceholder.typicode.com/comments?postId=${post.id}`))
     .then(response => response.json())
-    .then(comments => console.log(comments))
-    .catch(error => console.error('Error:', error))
+    .then(comments => console.log('    Comments: ', comments))
+    .catch(error => console.error('    Error:', error))
 }
 
-export const sandbox = () => {
+const sandbox = () => {
     add(1, 2, logResult);
-    fetchdata();
+    // fetchdata();
+    
+    console.log("start");
+    delay(2000)
+    .then(() => {
+        console.log("2 seconds passed");
+    })
+  .catch(error => console.error(error));
 }
+
+export {sandbox, delay}
