@@ -1,4 +1,20 @@
 # DMessham's Transit Tracker
+Started: Wed 2025/11/19, 11:32
+
+# Goal
+A web app i can use use for the buses in my city, that will work on devices that the official app doesnt support
+
+## Planned features
+    - realtime info for routes i use frequently
+    - more complex route planning
+    -    - multiple sets of routes that can switch between lines at predefined points automatically if a bus is late, canceled, etc. 
+            Example: there are 3 ways to go from A to B, 2 ways from B to C, 3 from C to D, along with a route that goes A > E > C > D. switch between different ones to get there faster, or if delays might cause a transfer to be missed
+        - reduce api usage by caching info about schedules, and the best connections to use when the bus is within that schedule, only using the api for route planning if the realtime info indicates that it wont be possible
+    - (optional) Map of realtime bus locations along a selected routes that share a stop
+    -   - If a bus that is packed shows up, or if i barely miss it, i want to be able to know if i can just take another one after, even of its a slightly slower
+    - (optional) turn by turn when walking between stops 
+    -   - OR a way to easily start a googlemaps, OSM, etc. trip
+
 
 
 # Api i am using
