@@ -25,4 +25,7 @@ yarn-debug.log*
 yarn-error.log*
 
 #database
-whiteboard/data/
+/whiteboard/data/
+*/private
+*/keys.json
+
