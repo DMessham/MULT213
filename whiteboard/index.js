@@ -2,6 +2,7 @@ import { User } from './user.js';
 import { prompt, cleanUp } from './input.js';
 import { writeData, readData } from './db.js';
 import { playMultipleGames, singlePlayerGame } from './game.js';
+import { sandbox} from './sandbox.js'
 
 import terminalImage from 'terminal-image';
 
@@ -44,11 +45,12 @@ async function main() {
             case 'help':
             case "?":
                 console.log("Help Menu:");
-                console.log("   h - Display this help menu");
-                console.log("   demo - run of preset of demo of 10 games");
-                console.log("   game - play a game of rock paper scissors")
+                console.log("   h / help - Display this help menu");
+                console.log("   g / game - play a game of rock paper scissors");
+                console.log("   d / demo - run of preset of demo of 10 games");
                 console.log("   oiia - Little fun surprise");
-                console.log("   q - Quit the application");
+                console.log("   s / sandbox - Sandbox test code");
+                console.log("   q / exit - Quit the application");
                 break;
             case "q":
             case 'quit':
@@ -68,6 +70,11 @@ async function main() {
             case 'oiia':
                 console.log("Welcome to the secret oiia mode!");  
                 console.log(await terminalImage.file('./data/oiia.jpeg'));
+                break;
+            case 's':
+            case 'sandbox':
+                console.log("Starting sandbox Code...");
+                sandbox();
                 break;
             default:
                 console.log("What are you even trying to do? Type 'h' for help.");
