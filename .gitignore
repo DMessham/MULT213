@@ -29,3 +29,4 @@ yarn-error.log*
 */src/private/
 */keys.json
 
+/workingdir/
