@@ -26,6 +26,6 @@ yarn-error.log*
 
 #database
 /whiteboard/data/
-*/private
+*/src/private/
 */keys.json
 

@@ -4,7 +4,10 @@ Started: Wed 2025/11/19, 11:32
 # Goal
 A web app i can use use for the buses in my city, that will work on devices that the official app doesnt support
 
-## Planned features
+## FOR A1
+just get info about a route, and a stop
+
+## Planned features (LONG TERM)
     - realtime info for routes i use frequently
     - more complex route planning
     -    - multiple sets of routes that can switch between lines at predefined points automatically if a bus is late, canceled, etc. 
