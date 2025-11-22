@@ -28,5 +28,6 @@ yarn-error.log*
 /whiteboard/data/
 */src/private/
 */keys.json
+a1/src/key.js
 
 /workingdir/

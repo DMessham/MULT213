@@ -1,6 +1,8 @@
 // API function to integrate with Open-Meteo Geocoding and Weather APIs
 // Reference: https://open-meteo.com/
 
+import {apiKey} from './key.js'
+
 export async function searchCity(city) {
   const res = await fetch(
     `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=10&language=en&format=json`
@@ -25,3 +27,15 @@ export async function fetchWeather(lat, lon) {
 
   return data.current_weather ?? "N/A";
 }
+
+
+const transitFeedID = "f-c9k0-saskatoontransit"; //saskatoon transit
+
+const apiBaseURL = 'https://transit.land/api/v2/rest'
+
+// api docs: https://www.transit.land/documentation/rest-api/routes
+
+// /api/v2/rest/routes/{route_key} route format, 
+// /api/v2/rest/routes/{route_key}.format adds format info
+
+// /api/v2/rest/stops/{route_key}.format get stops

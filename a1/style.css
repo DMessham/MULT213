@@ -1,36 +1,287 @@
-:root {
-    font-family: system-ui;
-}
 
-.container {
-    max-width: 480px;
-    margin: 3rem auto;
-    padding: 1rem;
-}
-
-.card {
-    padding: 1rem;
-    background: #f1f1f1;
-    border-radius: .5rem;
-    margin: 1rem 0;
-}
-
-form {
-    display: flex;
-    gap: .5rem;
-    margin-bottom: 1rem;
-}
-
-button {
-    padding: .5rem 1rem;
+main {
+    padding: 0.5rem;
 }
 
 fieldset {
     display: flex;
     flex-direction: column;
     gap: .5rem;
-    margin-bottom: 1rem;
+    margin: 0.5rem 0;
     border: 1px solid #ccc;
-    border-radius: .5rem;
-    padding: 1rem;
+    border-radius: .25rem;
+    padding: 0.45rem;
 }
+
+div{
+    display:inline-block;
+}
+
+a, button, input, select, .buttonStyle{
+	color: cadetblue;
+	text-decoration: underline;
+	border:2px solid transparent;
+	border-radius: inherit;
+	padding:2px 2px;
+	display:inline-block;
+	transition: var(--hoverdelay);
+}
+
+
+
+button, .buttonStyle {
+    cursor: pointer;
+    align-content: center;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    color:inherit;
+    position: relative;
+    width: 1.25em;
+    height: 1.25em;
+    /* Adjusts the position of the checkboxes on the text baseline */
+    vertical-align: -0.5em;
+  }
+  
+
+[type="checkbox"]::after {
+    content: "✘";
+    position: absolute;
+    font-size: 1.em;
+    top: -0.2em;
+    left:0.1em;
+    visibility: hidden;
+    visibility: visible;
+  }
+
+  .buttonStyle [type="checkbox"]:checked {
+    border:1px groove grey;
+  }
+  
+[type="checkbox"]:checked::after {
+    /* Use `visibility` instead of `display` to avoid recalculating layout */
+    visibility: visible;
+    content: "✔";
+  }
+  
+  .buttonStyle input[type="checkbox"]{
+    visibility: hidden;
+  }
+
+
+
+button, input, select, .buttonStyle{
+	background: rgba(103, 103, 103, 0.3);
+	border:1px solid darkseagreen;
+	border-bottom:2px groove darkseagreen;
+	border-radius:3px;
+	color:rgba(209, 209, 209, 0.8);
+	text-decoration: none;
+    margin: 1px;
+}
+
+input {
+    background: rgba(103, 103, 103, 0.3);
+    border:1px solid rgba(103, 103, 103, 0.3);
+	border-bottom:2px groove darkseagreen;
+}
+
+button:hover, input:hover, select:hover, .buttonStyle:hover, .buttonStyle input:has(:checked):active, input:has(:checked):active{
+	background: rgba(103, 103, 103, 0.5);
+	border:2px groove darkseagreen;
+    color:rgb(205, 255, 213);
+    margin:0.5px;
+}
+
+input:hover {
+    background: rgba(103, 103, 103, 0.5);
+    border:1px solid rgba(103, 103, 103, 0.3);
+	border-bottom:3px groove darkseagreen;
+    margin:0.5px 0;
+}
+
+.buttonStyle:has(:checked){
+    background-color: rgb(106, 152, 116);
+    color:black;
+}
+
+.error {
+	border-color:#A22c;
+	background:#400;
+	
+}
+div:has(.error){
+	/* background:#5002; */
+	color:#ffdbd7;
+	border-radius: inherit;
+	/* border-bottom: solid; */
+	border-color:#b00;
+}
+
+:root{
+    font-family:sans-serif;
+    background-color: rgb(14, 34, 14);
+    background: linear-gradient(rgba(73, 91, 69, 0.05), rgba(127,127,127,0), rgba(17, 26, 17, 0.4)), rgb(26, 62, 26);
+    background-attachment: fixed;
+    background-repeat: repeat;
+	
+	position: static;
+	flex-flow: column;
+
+	align-content: center;
+	align-items: center;
+
+    display:flex;
+
+    min-width: 400px;
+}
+body{
+    background-color: rgb(36, 43, 35);
+    background:linear-gradient(rgba(15, 18, 14, 0.75), rgba(12, 15, 12, 0.75));
+    color:beige;
+    border-radius: 6px;
+    min-width: 400px;
+    border: 1px groove rgba(128,128,128,0.5);
+    padding: 3px;
+    
+}
+h1, h2, h3, h4, caption {
+    color: rgba(255, 255, 255, 0.8);
+    margin:0.2em 0.1rem;
+    text-shadow: 0.075em 0.075em rgba(128,128,128,0.5);
+}
+main, section, article, figure {
+    background:linear-gradient(rgba(55, 55, 55, 0.25), rgba(19, 30, 19, 0.25));
+    border-bottom: 2px groove darkseagreen;
+}
+a{
+    color:rgb(169, 219, 169);
+    box-sizing: border-box;
+}
+a:hover, :any-link:hover, select:focus, .buttonStyle:has(input:checked):hover .buttonStyle:focus {
+    background:linear-gradient(rgba(55, 55, 55, 0.2), rgba(19, 30, 19, 0.4)),rgb(78, 103, 78);
+    color:rgb(205, 255, 213);
+    text-decoration: underline;
+    border:2px solid;
+}
+a:active, :any-link:active, .hamburger:active, button:active,select:focus, select:focus-within, input:focus, .buttonStyle:has(:active){
+	/* background: linear-gradient(rgb(0, 55, 0), black); */
+	color: rgb(106, 152, 116);
+	background-color:rgb(30, 37, 30);
+	border:2px inset ;
+	border-color: rgba(103, 103, 103, 0.3);
+}
+body >:first-child, main >:first-child{
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+body >:last-child{
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+header{
+    /* background: linear-gradient(130deg, rgb(76, 120, 81), rgb(26, 62, 26), rgba(9, 30, 9, 0.8)); */
+    margin: -3px;
+    padding: 3px;
+    padding-bottom: 1px;
+}
+nav {
+    display:flexbox;
+    flex-flow: row;
+    font-size: 17px;
+    line-height: 22px;            
+    /* background: linear-gradient(130deg,rgba(19, 30, 19, 0.6),rgba(19, 105, 97, 0.8),rgba(35, 82, 35, 0.8), rgba(0, 0, 0, 0.6)); */
+    margin: -2px;
+    /* border: 1px groove rgba(128,128,128,0.5); */
+    border-radius: 4px 4px 0 0;
+}
+nav ul{
+    display:block;
+    padding:0;
+    margin:0
+}
+nav ul li {
+    background: linear-gradient(rgba(55, 55, 55, 0.2), rgba(19, 30, 19, 0.4));
+}
+nav a{
+    display:inline-block;
+    text-decoration: none;
+    /* background: linear-gradient(rgba(55, 55, 55, 0.2), rgba(19, 30, 19, 0.4)); */
+    padding:0.075em 0.2em;
+}
+.breadcrumb {
+    display:block;
+    background:linear-gradient(rgba(55, 55, 55, 1), rgba(19, 30, 19, 0.9));
+    /* border-top: 1px solid darkseagreen; */
+    box-sizing: border-box;
+}
+.breadcrumb li:after{
+    content: " /";
+}
+
+table {
+	/* mainly meant for file listings, though i have edited it to work for all tables */
+	border-radius: inherit;
+	border-style: groove;
+	width:100%;
+
+	overflow: auto;
+	max-height: 240px;
+    position:relative;
+
+    border: 2px groove rgba(128,128,128,0.5);
+    background:linear-gradient(rgba(55, 55, 55, 0.5), rgba(19, 30, 19, 0.5));
+    font-family: monospace;
+    font-size: 13pt;
+}
+	tbody {
+		white-space: nowrap;
+		background: var(--bg-color);
+	}
+	th {
+		position: sticky;
+		top: 0;
+		background:rgba(35, 82, 35, 0.6);
+		z-index: 1;
+	}
+	td {
+		text-align: right;
+        
+	}
+	td:first-child:not(:empty) {
+		text-align: left;
+	}
+
+	th,td {
+		padding: 4px 6px;
+		border: 1px groove rgba(128,128,128,0.5);
+		border-radius: inherit;
+        vertical-align: baseline;
+	}
+	th a, td a{
+		border-radius: inherit;
+		display: block;
+		margin:0;
+		text-wrap:pretty;
+	}
+	td:has(a),
+	th:has(a),
+	tr:has(a),
+    td:has(button),
+	th:has(button),
+	tr:has(button)  {
+		padding: 0;
+		text-wrap: nowrap;
+		margin:0;
+	}
+	table tr:hover {
+		background: rgba(69, 79, 70, 0.5);
+	}
+    table td button, table th button {
+        line-height:1em;
+        border-radius:0;
+        font-size:1.1em;
+        padding:5px;
+        height:100%;
+    }
