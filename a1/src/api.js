@@ -39,3 +39,33 @@ const apiBaseURL = 'https://transit.land/api/v2/rest'
 // /api/v2/rest/routes/{route_key}.format adds format info
 
 // /api/v2/rest/stops/{route_key}.format get stops
+
+export async function fetchRoutes(lat, lon) {
+  const res = await fetch(
+    `${apiBaseURL}/routes?agencyKey=${transitFeedID}&lat=${lat}&lon=${lon}&key=${apikey}`
+  );
+
+  const data = await res.json();
+
+  console.log(data);
+}
+
+export async function fetchAllRoutes() {
+  const res = await fetch(
+    `${apiBaseURL}/routes?agencyKey=${transitFeedID}&key=${apikey}`
+  );
+
+  const data = await res.json();
+
+  console.log(data);
+}
+
+export async function fetchStops(route) {
+  const res = await fetch(
+    `${apiBaseURL}/routes?agencyKey=${transitFeedID}&served_by_onestop_ids=${route}&key=${apikey}`
+  );
+
+  const data = await res.json();
+
+  console.log(data);
+}
