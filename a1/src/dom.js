@@ -1,11 +1,7 @@
+//draw text to a html element
 export function renderMessage(el, text) {
   el.innerHTML = `<p>${text}</p>`;
 }
-
-const stopOutput = document.querySelector("#stop-output");
-
-// export function displayRouteList(data){
-// };
 
 export function displayStopList(data){
     let message = "<table><tr><th>Stop name</th><th>location</th><th>latitude</th><th>longitude</th><th>onestop ID</th><th>Actions</th></tr>";
@@ -15,6 +11,7 @@ export function displayStopList(data){
         const point = item.geometry
         const lat = `${point.coordinates[1]}`
         const lon = `${point.coordinates[0]}`
+        // build the table row
         message += `<tr>
             <td>${item.stop_name}</td>
             <td>${location}</td>
@@ -29,11 +26,14 @@ export function displayStopList(data){
   }
 
   export async function displayListButtonEvent(query){
+    
+    const stopOutput = document.querySelector("#stop-output"); 
     renderMessage(stopOutput, "Loading…");
-
+    
     try {
         const data = await fetchRouteStops(query);
         if (data.length === 0) {
+            //no data, something has gone wrong
             renderMessage(stopOutput, `No results found for "${query}".`);
             return;
         }

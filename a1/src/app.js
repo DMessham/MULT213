@@ -5,10 +5,13 @@ import { fetchStopsLocation, fetchRouteStops, searchRoutes, searchStops } from "
 
 const nearbyForm = document.querySelector("#nearby-form");
 const nearbyList = document.querySelector("#nearby-list");
+
 const routeForm = document.querySelector("#route-form");
 const routeList = document.querySelector("#route-list");
+
 const stopForm = document.querySelector("#stop-form");
 const stopOutput = document.querySelector("#stop-output");
+
 const routestopForm = document.querySelector("#routestop-form");
 const routestopOutput = document.querySelector("#routestop-output");
 
@@ -16,7 +19,7 @@ const routeListTableButton = document.querySelector("table tr td button");
 
 
 
-
+// for seeing nearby routes
 nearbyForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     // from https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
@@ -28,7 +31,7 @@ nearbyForm.addEventListener("submit", async (e) => {
     renderMessage(nearbyList, "Loading…");
 
     try {
-        // const data = await getNearbyStops();
+        //check if there is any data and display it
         
         let data = await fetchStopsLocation(latitude, longitude);
         if (data.length === 0) {
@@ -46,7 +49,7 @@ nearbyForm.addEventListener("submit", async (e) => {
     }
 });
 
-//listen for 
+//search routes
 routeForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -56,6 +59,7 @@ routeForm.addEventListener("submit", async (e) => {
     renderMessage(routeList, "Loading…");
 
     try {
+        //check if there is any data and display it
         const data = await searchRoutes(route);
         if (data.length === 0) {
             renderMessage(routeOutput, `No results found for "${route}".`);
@@ -105,6 +109,7 @@ routeForm.addEventListener("submit", async (e) => {
     }
 });
 
+// searching all stops
 stopForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -114,6 +119,7 @@ stopForm.addEventListener("submit", async (e) => {
     renderMessage(stopOutput, "Loading…");
 
     try {
+        //check if there is any data and display it
         const data = await searchStops(stop);
         if (data.length === 0) {
             renderMessage(stopOutput, `No results found for "${stop}".`);
@@ -130,6 +136,7 @@ stopForm.addEventListener("submit", async (e) => {
     }
 });
 
+//for searching stops along a route
 routestopForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -139,6 +146,7 @@ routestopForm.addEventListener("submit", async (e) => {
     renderMessage(routestopOutput, "Loading…");
 
     try {
+        //check if there is any data and display it
         const data = await fetchRouteStops(routestop);
         if (data.length === 0) {
             renderMessage(routestopOutput, `No results found for "${routestop}".`);
