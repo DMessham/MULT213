@@ -12,6 +12,8 @@ const routeForm = document.querySelector("#route-form");
 const routeList = document.querySelector("#route-list");
 const stopForm = document.querySelector("#stop-form");
 const stopOutput = document.querySelector("#stop-output");
+const routestopForm = document.querySelector("#routestop-form");
+const routestopOutput = document.querySelector("#routestop-output");
 
 // weatherForm.addEventListener("submit", async (e) => {
 //     e.preventDefault();
@@ -143,5 +145,30 @@ stopForm.addEventListener("submit", async (e) => {
         renderMessage(stopOutput, message);
     } catch (err) {
         renderMessage(stopOutput, `Error: ${err.message}`);
+    }
+});
+
+routestopForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const routestop = document.querySelector("#routestop").value;
+    if (!routestop) return;
+
+    renderMessage(routestopOutput, "Loading…");
+
+    try {
+        const data = await fetchRouteStops(routestop);
+        if (data.length === 0) {
+            renderMessage(routestopOutput, `No results found for "${routestop}".`);
+            return;
+        }
+        
+        let message = `Found ${data.length} result(s) for "${routestop}":`;
+        
+        message += displayStopList(data)
+        
+        renderMessage(routestopOutput, message);
+    } catch (err) {
+        renderMessage(routestopOutput, `Error: ${err.message}`);
     }
 });

@@ -44,7 +44,7 @@ const apiBaseURL = 'https://transit.land/api/v2/rest'
 
 export async function fetchAllRoutes() {
   const res = await fetch(
-    `${apiBaseURL}/routes?operator_onestop_id=${transitFeedID}&apikey=${apikey}&limit=50`
+    `${apiBaseURL}/routes?operator_onestop_id=${transitFeedID}&apikey=${apikey}&limit=50&include_stops=true`
   );
 
   const data = await res.json();
@@ -55,18 +55,18 @@ export async function fetchAllRoutes() {
 }
 
 export function displayRouteList(data){
-  let message = "<table><tr><th>#</th><th>Route full name</th><th>agency</th><th>onestop ID</th></tr>";
+  let message = "<table><tr><th>#</th><th>Route full name</th><th>agency</th><th>onestop ID</th><th>Actions</th></tr>";
   data.forEach((item) => {
       const agency_info = item.agency
       const agency_name = `${agency_info.agency_name}`
-      message += `<tr><td>${item.route_short_name}</td><td>${item.route_long_name}</td><td>${agency_info.agency_name}</td><td> ${item.onestop_id}</td></tr>`;
+      message += `<tr ><td style="border-left: 4px #${item.route_color} solid">${item.route_short_name}</td><td>${item.route_long_name}</td><td>${agency_info.agency_name}</td><td> ${item.onestop_id}</td></tr>`;
   });
   message += "</table>";
   return message
 }
 
 export function displayStopList(data){
-  let message = "<table><tr><th>Stop name</th><th>location</th><th>latitude</th><th>longitude</th><th>onestop ID</th></tr>";
+  let message = "<table><tr><th>Stop name</th><th>location</th><th>latitude</th><th>longitude</th><th>onestop ID</th><th>Actions</th></tr>";
   data.forEach((item) => {
       const loc = item.place
       const location = `${loc.adm1_name}, ${loc.adm0_name}`
@@ -149,7 +149,7 @@ export async function searchStops(query) {
 
 // fetchAllRoutes()
 
-fetchRouteStops('r-c9k0q-87')
+// fetchRouteStops('r-c9k0q-87')
 
 
 
