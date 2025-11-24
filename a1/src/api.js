@@ -76,11 +76,11 @@ export async function fetchAllRoutes() {
 
 export async function fetchRouteStops(route) {
   const res = await fetch(
-    `${apiBaseURL}/stops?operator_onestop_id=${transitFeedID}&served_by_onestop_ids=${route}&apikey=${apikey}`
+    `${apiBaseURL}/stops?operator_onestop_id=${transitFeedID}&served_by_onestop_ids=${route}&apikey=${apikey}&limit="50"`
   );
 
   const data = await res.json();
-  console.log('getting all stops on route ID: ', route, data)
+  console.log('getting first 50 stops on route ID: ', route, data)
 
   return data.stops || [];
 }
@@ -114,7 +114,7 @@ export async function fetchStop(stopID) {
   );
 
   const data = await res.json();
-  console.log('getting all Routes using stop ID: ', stopID, data)
+  console.log('getting stop ID: ', stopID, data)
 
   return data.stops || [];
 }

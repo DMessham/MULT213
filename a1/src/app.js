@@ -72,9 +72,15 @@ routeForm.addEventListener("submit", async (e) => {
                 <td style="border-left: 4px #${item.route_color} solid">${item.route_short_name}</td>
                 <td>${item.route_long_name}</td>
                 <td>${agency_info.agency_name}</td>
-                <td> ${item.onestop_id}</td>
-                <td>
-                <button type="button" id="${item.onestop_id}">List Stops</button>
+                <td>${item.onestop_id}</td>
+                <td><button type="button" 
+                    id="${item.onestop_id}" 
+                    onclick="
+                        alert('This feature is WIP, check console for a list of stops');
+                        console.log('stops for ${item.onestop_id}', fetchRouteStops(item.onestop_id))
+                    ">
+                    List Stops
+                </button>
                 </td>
             </tr>`;
             
@@ -89,7 +95,9 @@ routeForm.addEventListener("submit", async (e) => {
         data.routes.forEach((item) => {
             document.querySelector(`#${item.onestop_id}`).addEventListener("onClick", async (e) => {
                 //display a list of stops along that route
-                displayListButtonEvent(item.onestop_id)
+                // displayListButtonEvent(item.onestop_id)
+                alert("This feature is WIP, check console for a list of stops")
+                // console.log(`stops for ${item.onestop_id}`, fetchRouteStops(item.onestop_id))
             })
         })
     } catch (err) {
