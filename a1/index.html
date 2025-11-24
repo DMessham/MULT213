@@ -28,7 +28,7 @@
             <p>Awaiting input…</p>
         </section>
 
-        <form id="weather-form">
+        <!-- <form id="weather-form">
             <fieldset>
                 <legend>Search by Coordinates</legend>
 
@@ -43,6 +43,33 @@
         </form>
 
         <section id="weather-output" class="card">
+            <p>Awaiting input…</p>
+        </section> -->
+
+        
+        <section id="nearby-list" class="card">
+            <button type="button">Show Nearby Stops</button>
+            <p>Awaiting action…</p>
+        </section>
+
+        <form id="route-form">
+            <fieldset>
+                <legend>Search Routes that go to a Onestop Stop ID</legend>
+                <input id="route" placeholder="Enter a onestop stop ID" required />
+                <button>Search Route</button>
+            </fieldset>
+        </form>
+        <section id="route-list" class="card">
+            <p>Awaiting input…</p>
+        </section>
+        <form id="stop-form">
+            <fieldset>
+                <legend>Search Stops by Onestop ID</legend>
+                <input id="stop" placeholder="Enter a onestop stop ID" required />
+                <button>Search stops</button>
+            </fieldset>
+        </form>
+        <section id="stop-output" class="card">
             <p>Awaiting input…</p>
         </section>
     </main>

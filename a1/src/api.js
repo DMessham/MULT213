@@ -1,6 +1,7 @@
 // API function to integrate with Open-Meteo Geocoding and Weather APIs
 // Reference: https://open-meteo.com/
 
+import { renderMessage } from './dom.js';
 import {apikey} from './key.js'
 
 export async function searchCity(city) {
@@ -40,17 +41,6 @@ const apiBaseURL = 'https://transit.land/api/v2/rest'
 
 // /api/v2/rest/stops/{route_key}.format get stops
 
-export async function fetchRoutesLocation(lat, lon) {
-  const res = await fetch(
-    `${apiBaseURL}/routes?agency_key=${transitFeedID}&lat=${lat}&lon=${lon}&radius=250&apikey=${apikey}`
-  );
-
-  const data = await res.json();
-
-  console.log(data);
-
-  return data.results || [];
-}
 
 export async function fetchAllRoutes() {
   const res = await fetch(
@@ -72,7 +62,7 @@ export async function fetchRouteStops(route) {
   const data = await res.json();
   console.log('getting all stops on route ID: ', route, data)
 
-  return data.results || [];
+  return data.stops || [];
 }
 
 export async function fetchStopsLocation(lat, lon) {
@@ -84,18 +74,30 @@ export async function fetchStopsLocation(lat, lon) {
 
   console.log(`getting stops near: ${lat}, ${lon}`, data);
 
-  return data.results || [];
+  return data.stops || [];
+}
+
+export async function fetchRoutesByCommonStop(stopID) {
+  const res = await fetch(
+    `${apiBaseURL}/routes?agency_key=${transitFeedID}&served_by_onestop_ids=${stopID}&apikey=${apikey}`
+  );
+
+  const data = await res.json();
+  console.log('getting all Routes using stop ID: ', stopID, data)
+
+  return data.stops || [];
 }
 
 // fetchAllRoutes()
 
 fetchRouteStops('r-c9k0q-87')
 
-function getNearbyStops(){
+export async function getNearbyStops(){
   // from https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
   navigator.geolocation.getCurrentPosition((position) => {
     fetchStopsLocation(position.coords.latitude, position.coords.longitude);
   });
 }
+
 
 getNearbyStops()

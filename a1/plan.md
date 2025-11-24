@@ -5,7 +5,8 @@ Started: Wed 2025/11/19, 11:32
 A web app i can use use for the buses in my city, that will work on devices that the official app doesnt support
 
 ## FOR A1
-just get info about a route, and a stop
+get & display nearby stops
+get & display all routes that go by a specified stop
 
 ## Planned features (LONG TERM)
     - realtime info for routes i use frequently
