@@ -40,14 +40,16 @@ const apiBaseURL = 'https://transit.land/api/v2/rest'
 
 // /api/v2/rest/stops/{route_key}.format get stops
 
-export async function fetchRoutes(lat, lon) {
+export async function fetchRoutesLocation(lat, lon) {
   const res = await fetch(
-    `${apiBaseURL}/routes?agency_key=${transitFeedID}&lat=${lat}&lon=${lon}&apikey=${apikey}`
+    `${apiBaseURL}/routes?agency_key=${transitFeedID}&lat=${lat}&lon=${lon}&radius=250&apikey=${apikey}`
   );
 
   const data = await res.json();
 
   console.log(data);
+
+  return data.results || [];
 }
 
 export async function fetchAllRoutes() {
@@ -57,7 +59,9 @@ export async function fetchAllRoutes() {
 
   const data = await res.json();
 
-  console.log(data);
+  console.log('Getting all routes', data);
+
+  return data.results || [];
 }
 
 export async function fetchRouteStops(route) {
@@ -66,41 +70,32 @@ export async function fetchRouteStops(route) {
   );
 
   const data = await res.json();
+  console.log('getting all stops on route ID: ', route, data)
 
-  console.log(data);
+  return data.results || [];
 }
 
 export async function fetchStopsLocation(lat, lon) {
   const res = await fetch(
-    `${apiBaseURL}/stops?agency_key=${transitFeedID}&lat=${lat}&lon=${lon}&apikey=${apikey}`
+    `${apiBaseURL}/stops?agency_key=${transitFeedID}&lat=${lat}&lon=${lon}&radius=250&apikey=${apikey}`
   );
 
   const data = await res.json();
 
-  console.log(data);
+  console.log(`getting stops near: ${lat}, ${lon}`, data);
+
+  return data.results || [];
 }
 
-fetchAllRoutes()
+// fetchAllRoutes()
 
-export async function fetchStopsR87() {
-  const res = await fetch(
-    `${apiBaseURL}/stops?served_by_onestop_ids=r-c9k0q-87&apikey=${apikey}`
-  );
-
-  const data = await res.json();
-
-  console.log(data);
-}
-
-fetchStopsR87()
-
-
+fetchRouteStops('r-c9k0q-87')
 
 function getNearbyStops(){
   // from https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
-navigator.geolocation.getCurrentPosition((position) => {
-  fetchStopsLocation(position.coords.latitude, position.coords.longitude);
-});
+  navigator.geolocation.getCurrentPosition((position) => {
+    fetchStopsLocation(position.coords.latitude, position.coords.longitude);
+  });
 }
 
 getNearbyStops()
