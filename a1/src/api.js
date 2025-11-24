@@ -1,7 +1,7 @@
 // API function to integrate with Open-Meteo Geocoding and Weather APIs
 // Reference: https://open-meteo.com/
 
-import {apiKey} from './key.js'
+import {apikey} from './key.js'
 
 export async function searchCity(city) {
   const res = await fetch(
@@ -42,7 +42,7 @@ const apiBaseURL = 'https://transit.land/api/v2/rest'
 
 export async function fetchRoutes(lat, lon) {
   const res = await fetch(
-    `${apiBaseURL}/routes?agencyKey=${transitFeedID}&lat=${lat}&lon=${lon}&key=${apikey}`
+    `${apiBaseURL}/routes?agencyKey=${transitFeedID}&lat=${lat}&lon=${lon}&apikey=${apikey}`
   );
 
   const data = await res.json();
@@ -52,7 +52,7 @@ export async function fetchRoutes(lat, lon) {
 
 export async function fetchAllRoutes() {
   const res = await fetch(
-    `${apiBaseURL}/routes?agencyKey=${transitFeedID}&key=${apikey}`
+    `${apiBaseURL}/routes?agencyKey=${transitFeedID}&apikey=${apikey}`
   );
 
   const data = await res.json();
@@ -62,10 +62,24 @@ export async function fetchAllRoutes() {
 
 export async function fetchStops(route) {
   const res = await fetch(
-    `${apiBaseURL}/routes?agencyKey=${transitFeedID}&served_by_onestop_ids=${route}&key=${apikey}`
+    `${apiBaseURL}/stops?agencyKey=${transitFeedID}&served_by_onestop_ids=${route}&apikey=${apikey}`
   );
 
   const data = await res.json();
 
   console.log(data);
 }
+
+fetchAllRoutes()
+
+export async function fetchStopsR87() {
+  const res = await fetch(
+    `${apiBaseURL}/stops?served_by_onestop_ids=r-c9k0q-87&apikey=${apikey}`
+  );
+
+  const data = await res.json();
+
+  console.log(data);
+}
+
+fetchStopsR87()

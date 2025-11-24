@@ -29,5 +29,6 @@ yarn-error.log*
 */src/private/
 */keys.json
 a1/src/key.js
-
+a1/dist/main.js
 /workingdir/
+*/dist/main.js
