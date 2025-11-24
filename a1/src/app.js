@@ -1,5 +1,5 @@
 import { renderMessage } from "./dom.js";
-import { searchCity, fetchWeather, getNearbyStops, fetchStopsLocation, fetchRouteStops, fetchRoutesByCommonStop, searchRoutes, searchStops } from "./api.js";
+import { searchCity, displayStopList, fetchStopsLocation, fetchRouteStops, fetchRoutesByCommonStop, searchRoutes, searchStops } from "./api.js";
 
 // Grab references to various parts of the HTML page
 const cityForm = document.querySelector("#city-form");
@@ -91,15 +91,7 @@ nearbyForm.addEventListener("submit", async (e) => {
         
         let message = `Found ${data.length} result(s) within 250m of latitude:${latitude} lon:${longitude}:`;
         
-        message += "<table><tr><th>Stop name</th><th>location</th><th>latitude/longitude</th><th>onestop ID</th></tr>";
-        data.forEach((item) => {
-            const loc = item.place
-            const location = `${loc.adm1_name}, ${loc.adm0_name}`
-            const point = item.geometry
-            const latlon = `${point.coordinates[1]}/${point.coordinates[0]}`
-            message += `<tr><td>${item.stop_name}</td><td>${location}</td><td>${latlon}</td><td> ${item.onestop_id}</td></tr>`;
-        });
-        message += "</table>";
+        message += displayStopList(data)
         
         renderMessage(nearbyList, message);
     } catch (err) {
@@ -153,13 +145,7 @@ stopForm.addEventListener("submit", async (e) => {
         
         let message = `Found ${data.length} result(s) for "${stop}":`;
         
-        message += "<table><tr><th>Stop name</th><th>location</th><th>onestop ID</th></tr>";
-        data.forEach((item) => {
-            let loc = item.place
-            let location = `${loc.adm1_name}, ${loc.adm0_name}`
-            message += `<tr><td>${item.stop_name}</td><td>${location}</td><td> ${item.onestop_id}</td></tr>`;
-        });
-        message += "</table>";
+        message += displayStopList(data)
         
         renderMessage(stopOutput, message);
     } catch (err) {

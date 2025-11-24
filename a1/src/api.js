@@ -30,7 +30,7 @@ export async function fetchWeather(lat, lon) {
 }
 
 
-const transitFeedID = "f-c9k0-saskatoontransit"; //saskatoon transit
+const transitFeedID = "o-c9k0-saskatoontransit"; //saskatoon transit
 
 const apiBaseURL = 'https://transit.land/api/v2/rest'
 
@@ -44,7 +44,7 @@ const apiBaseURL = 'https://transit.land/api/v2/rest'
 
 export async function fetchAllRoutes() {
   const res = await fetch(
-    `${apiBaseURL}/routes?agency_key=${transitFeedID}&apikey=${apikey}`
+    `${apiBaseURL}/routes?operator_onestop_id=${transitFeedID}&apikey=${apikey}&limit=50`
   );
 
   const data = await res.json();
@@ -54,9 +54,28 @@ export async function fetchAllRoutes() {
   return data.results || [];
 }
 
+export function parseRouteList(route){
+
+}
+
+export function displayStopList(data){
+  let message = "<table><tr><th>Stop name</th><th>location</th><th>latitude</th><th>longitude</th><th>onestop ID</th></tr>";
+  data.forEach((item) => {
+      const loc = item.place
+      const location = `${loc.adm1_name}, ${loc.adm0_name}`
+      const point = item.geometry
+      const latlon = `${point.coordinates[1]}</td><td>${point.coordinates[0]}`
+      message += `<tr><td>${item.stop_name}</td><td>${location}</td><td>${latlon}</td><td> ${item.onestop_id}</td></tr>`;
+  });
+  message += "</table>";
+  return message
+}
+
+fetchAllRoutes()
+
 export async function fetchRouteStops(route) {
   const res = await fetch(
-    `${apiBaseURL}/stops?agency_key=${transitFeedID}&served_by_onestop_ids=${route}&apikey=${apikey}`
+    `${apiBaseURL}/stops?operator_onestop_id=${transitFeedID}&served_by_onestop_ids=${route}&apikey=${apikey}`
   );
 
   const data = await res.json();
@@ -67,7 +86,7 @@ export async function fetchRouteStops(route) {
 
 export async function fetchStopsLocation(lat, lon) {
   const res = await fetch(
-    `${apiBaseURL}/stops?agency_key=${transitFeedID}&lat=${lat}&lon=${lon}&radius=250&apikey=${apikey}`
+    `${apiBaseURL}/stops?operator_onestop_id=${transitFeedID}&lat=${lat}&lon=${lon}&radius=250&apikey=${apikey}`
   );
 
   const data = await res.json();
@@ -79,7 +98,7 @@ export async function fetchStopsLocation(lat, lon) {
 
 export async function fetchRoutesByCommonStop(stopID) {
   const res = await fetch(
-    `${apiBaseURL}/routes?agency_key=${transitFeedID}&served_by_onestop_ids=${stopID}&apikey=${apikey}`
+    `${apiBaseURL}/routes?operator_onestop_id=${transitFeedID}&served_by_onestop_ids=${stopID}&apikey=${apikey}`
   );
 
   const data = await res.json();
@@ -90,7 +109,7 @@ export async function fetchRoutesByCommonStop(stopID) {
 
 export async function fetchStop(stopID) {
   const res = await fetch(
-    `${apiBaseURL}/stopa?agency_key=${transitFeedID}&served_by_onestop_ids=${stopID}&apikey=${apikey}`
+    `${apiBaseURL}/stopa?operator_onestop_id=${transitFeedID}&served_by_onestop_ids=${stopID}&apikey=${apikey}`
   );
 
   const data = await res.json();
@@ -101,7 +120,7 @@ export async function fetchStop(stopID) {
 
 export async function searchRoutes(query) {
   const res = await fetch(
-    `${apiBaseURL}/routes?agency_key=${transitFeedID}&search=${query}&apikey=${apikey}`
+    `${apiBaseURL}/routes?operator_onestop_id=${transitFeedID}&search=${query}&apikey=${apikey}`
   );
 
   const data = await res.json();
@@ -112,7 +131,7 @@ export async function searchRoutes(query) {
 
 export async function searchStops(query) {
   const res = await fetch(
-    `${apiBaseURL}/stops?agency_key=${transitFeedID}&search=${query}&apikey=${apikey}`
+    `${apiBaseURL}/stops?operator_onestop_id=${transitFeedID}&search=${query}&apikey=${apikey}`
   );
 
   const data = await res.json();
