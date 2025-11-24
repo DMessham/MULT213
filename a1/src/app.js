@@ -1,5 +1,5 @@
 import { renderMessage } from "./dom.js";
-import { searchCity, displayStopList, fetchStopsLocation, fetchRouteStops, fetchRoutesByCommonStop, searchRoutes, searchStops } from "./api.js";
+import { searchCity, displayStopList, fetchStopsLocation, fetchRouteStops, displayRouteList, searchRoutes, searchStops } from "./api.js";
 
 // Grab references to various parts of the HTML page
 const cityForm = document.querySelector("#city-form");
@@ -12,35 +12,6 @@ const routeForm = document.querySelector("#route-form");
 const routeList = document.querySelector("#route-list");
 const stopForm = document.querySelector("#stop-form");
 const stopOutput = document.querySelector("#stop-output");
-
-cityForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const city = document.querySelector("#city").value.trim();
-  if (!city) return;
-
-  renderMessage(cityList, "Loading…");
-
-  try {
-    const data = await searchCity(city);
-    if (data.length === 0) {
-        renderMessage(cityList, `No results found for "${city}".`);
-        return;
-    }
-    
-    let message = `Found ${data.length} result(s) for "${city}":`;
-    
-    message += "<ul>";
-    data.forEach((item) => {
-        message += `<li>${item.name}, ${item.country} (Lat: ${item.latitude}, Lon: ${item.longitude})</li>`;
-    });
-    message += "</ul>";
-    
-    renderMessage(cityList, message);
-  } catch (err) {
-    renderMessage(cityList, `Error: ${err.message}`);
-  }
-});
 
 // weatherForm.addEventListener("submit", async (e) => {
 //     e.preventDefault();
@@ -102,7 +73,7 @@ nearbyForm.addEventListener("submit", async (e) => {
 routeForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const route = document.querySelector("#route").value.trim();
+    const route = document.querySelector("#route").value;
     if (!route) return;
 
     renderMessage(routeList, "Loading…");
@@ -110,22 +81,44 @@ routeForm.addEventListener("submit", async (e) => {
     try {
         const data = await searchRoutes(route);
         if (data.length === 0) {
-            renderMessage(routeList, `No results found for "${route}".`);
+            renderMessage(routeOutput, `No results found for "${route}".`);
             return;
         }
         
-        let message = `Found ${data.length} result(s) for "${route}":`;
+        let message = `Found ${data.routes.length} result(s) for "${route}":`;
         
-        message += "<ul>";
-        data.forEach((item) => {
-            message += `<li>${item.route_name} (onestop ID: ${item.onestop_id})</li>`;
-        });
-        message += "</ul>";
+        message += displayRouteList(data.routes)
         
         renderMessage(routeList, message);
     } catch (err) {
         renderMessage(routeList, `Error: ${err.message}`);
     }
+    // e.preventDefault();
+
+    // const route = document.querySelector("#route").value.trim();
+    // if (!route) return;
+
+    // renderMessage(routeList, "Loading…");
+
+    // try {
+    //     const data = await searchRoutes(route);
+    //     if (data.length === 0) {
+    //         renderMessage(routeList, `No results found for "${route}".`);
+    //         return;
+    //     }
+        
+    //     let message = `Found ${data.length} result(s) for "${route}":`;
+        
+    //     message += "<ul>";
+    //     data.forEach((item) => {
+    //         message += `<li>${item.route_name} (onestop ID: ${item.onestop_id})</li>`;
+    //     });
+    //     message += "</ul>";
+        
+    //     renderMessage(routeList, message);
+    // } catch (err) {
+    //     renderMessage(routeList, `Error: ${err.message}`);
+    // }
 });
 
 stopForm.addEventListener("submit", async (e) => {

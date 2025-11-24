@@ -54,8 +54,15 @@ export async function fetchAllRoutes() {
   return data.results || [];
 }
 
-export function parseRouteList(route){
-
+export function displayRouteList(data){
+  let message = "<table><tr><th>#</th><th>Route full name</th><th>agency</th><th>onestop ID</th></tr>";
+  data.forEach((item) => {
+      const agency_info = item.agency
+      const agency_name = `${agency_info.agency_name}`
+      message += `<tr><td>${item.route_short_name}</td><td>${item.route_long_name}</td><td>${agency_info.agency_name}</td><td> ${item.onestop_id}</td></tr>`;
+  });
+  message += "</table>";
+  return message
 }
 
 export function displayStopList(data){
