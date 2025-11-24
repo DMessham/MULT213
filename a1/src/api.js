@@ -60,9 +60,19 @@ export async function fetchAllRoutes() {
   console.log(data);
 }
 
-export async function fetchStops(route) {
+export async function fetchRouteStops(route) {
   const res = await fetch(
     `${apiBaseURL}/stops?agency_key=${transitFeedID}&served_by_onestop_ids=${route}&apikey=${apikey}`
+  );
+
+  const data = await res.json();
+
+  console.log(data);
+}
+
+export async function fetchStopsLocation(lat, lon) {
+  const res = await fetch(
+    `${apiBaseURL}/stops?agency_key=${transitFeedID}&lat=${lat}&lon=${lon}&apikey=${apikey}`
   );
 
   const data = await res.json();
@@ -83,3 +93,14 @@ export async function fetchStopsR87() {
 }
 
 fetchStopsR87()
+
+
+
+function getNearbyStops(){
+  // from https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
+navigator.geolocation.getCurrentPosition((position) => {
+  fetchStopsLocation(position.coords.latitude, position.coords.longitude);
+});
+}
+
+getNearbyStops()
