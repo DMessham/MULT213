@@ -2,6 +2,7 @@ export function renderMessage(el, text) {
   el.innerHTML = `<p>${text}</p>`;
 }
 
+const stopOutput = document.querySelector("#stop-output");
 
 // export function displayRouteList(data){
 // };
@@ -20,13 +21,13 @@ export function displayStopList(data){
     return message
   }
 
-  export async function displayListButtonEvent(query, elementOutput){
-    renderMessage(elementOutput, "Loading…");
+  export async function displayListButtonEvent(query){
+    renderMessage(stopOutput, "Loading…");
 
     try {
         const data = await fetchRouteStops(query);
         if (data.length === 0) {
-            renderMessage(elementOutput, `No results found for "${query}".`);
+            renderMessage(stopOutput, `No results found for "${query}".`);
             return;
         }
         
@@ -43,8 +44,8 @@ export function displayStopList(data){
         });
         message += "</table>";
         
-        renderMessage(elementOutput, message);
+        renderMessage(stopOutput, message);
     } catch (err) {
-        renderMessage(elementOutput, `Error: ${err.message}`);
+        renderMessage(stopOutput, `Error: ${err.message}`);
     }
 };

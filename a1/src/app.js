@@ -74,10 +74,7 @@ routeForm.addEventListener("submit", async (e) => {
                 <td>${agency_info.agency_name}</td>
                 <td> ${item.onestop_id}</td>
                 <td>
-                <button id="${item.onestop_id}" 
-                onclick='
-                    
-                '>List Stops</button>
+                <button type="button" id="${item.onestop_id}">List Stops</button>
                 </td>
             </tr>`;
             
@@ -90,7 +87,10 @@ routeForm.addEventListener("submit", async (e) => {
 
         //now to add an even listener for the buttons that show each stop in a route
         data.routes.forEach((item) => {
-            displayListButtonEvent(item.onestop_id, stopOutput)
+            document.querySelector(`#${item.onestop_id}`).addEventListener("onClick", async (e) => {
+                //display a list of stops along that route
+                displayListButtonEvent(item.onestop_id)
+            })
         })
     } catch (err) {
         renderMessage(routeList, `Error - ${err.message}`);
