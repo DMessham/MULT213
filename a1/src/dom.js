@@ -15,7 +15,14 @@ export function displayStopList(data){
         const point = item.geometry
         const lat = `${point.coordinates[1]}`
         const lon = `${point.coordinates[0]}`
-        message += `<tr><td>${item.stop_name}</td><td>${location}</td><td>${lat}</td><td>${lon}</td><td> ${item.onestop_id}</td><td><a href="https://maps.google.com/?q=${lat},${lon}">map link</a></td></tr>`;
+        message += `<tr>
+            <td>${item.stop_name}</td>
+            <td>${location}</td>
+            <td>${lat}</td>
+            <td>${lon}</td>
+            <td> ${item.onestop_id}</td>
+            <td><a href="https://maps.google.com/?q=${lat},${lon}">map link</a></td>
+        </tr>`;
     });
     message += "</table>";
     return message
@@ -33,16 +40,7 @@ export function displayStopList(data){
         
         let message = `Found ${data.length} result(s) for ${query}`;
         
-        message += "<table><tr><th>Stop name</th><th>location</th><th>latitude</th><th>longitude</th><th>onestop ID</th><th>Actions</th></tr>";
-        data.forEach((item) => {
-            const loc = item.place
-            const location = `${loc.adm1_name}, ${loc.adm0_name}`
-            const point = item.geometry
-            const lat = `${point.coordinates[1]}`
-            const lon = `${point.coordinates[0]}`
-            message += `<tr><td>${item.stop_name}</td><td>${location}</td><td>${lat}</td><td>${lon}</td><td> ${item.onestop_id}</td><td><a href="https://maps.google.com/?q=${lat},${lon}">map link</a></td></tr>`;
-        });
-        message += "</table>";
+        message += displayStopList(data)
         
         renderMessage(stopOutput, message);
     } catch (err) {
