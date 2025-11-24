@@ -6,7 +6,8 @@ A web app i can use use for the buses in my city, that will work on devices that
 
 ## FOR A1
 get & display nearby stops
-get & display all routes that go by a specified stop
+search routes in the city
+see all stops along a route
 
 ## Planned features (LONG TERM)
     - realtime info for routes i use frequently

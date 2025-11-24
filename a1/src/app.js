@@ -70,8 +70,10 @@ routeForm.addEventListener("submit", async (e) => {
         
         message += "<table><tr><th>#</th><th>Route full name</th><th>agency</th><th>onestop ID</th><th>Actions</th></tr>";
         data.routes.forEach((item) => {
+            //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
+            //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
             const agency_info = item.agency
-            const agency_name = `${agency_info.agency_name}`
+            const agency_name = `${agency_info.agency_name}` //dont use anything else from transit info right now
             message += `<tr >
                 <td style="border-left: 4px #${item.route_color} solid">${item.route_short_name}</td>
                 <td>${item.route_long_name}</td>
@@ -86,7 +88,7 @@ routeForm.addEventListener("submit", async (e) => {
                     List Stops
                 </button>
                 </td>
-            </tr>`;
+            </tr>`;//the list stops button doesnt work properly rn, but its not essential, it was just to save from having to copypaste
             
             
         });
