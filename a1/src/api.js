@@ -71,8 +71,9 @@ export function displayStopList(data){
       const loc = item.place
       const location = `${loc.adm1_name}, ${loc.adm0_name}`
       const point = item.geometry
-      const latlon = `${point.coordinates[1]}</td><td>${point.coordinates[0]}`
-      message += `<tr><td>${item.stop_name}</td><td>${location}</td><td>${latlon}</td><td> ${item.onestop_id}</td></tr>`;
+      const lat = `${point.coordinates[1]}`
+      const lon = `${point.coordinates[0]}`
+      message += `<tr><td>${item.stop_name}</td><td>${location}</td><td>${lat}</td><td>${lon}</td><td> ${item.onestop_id}</td><td><a href="https://maps.google.com/?q=${lat},${lon}">map link</a></td></tr>`;
   });
   message += "</table>";
   return message

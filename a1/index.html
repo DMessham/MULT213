@@ -53,12 +53,22 @@
         <form id="stop-form">
             <fieldset>
                 <legend>Search Stops</legend>
-                <input id="stop" placeholder="Enter a name" required />
+                <input id="stop" placeholder="Enter a query" required />
                 <button>Search stops</button>
             </fieldset>
         </form>
         <section id="stop-output" class="card">
             <p>The first 20 stops matching your search will appear here</p>
+        </section>
+        <form id="routestop-form">
+            <fieldset>
+                <legend>Search Stops along a route</legend>
+                <input id="routestop" placeholder="Enter onestop route ID" required />
+                <button>Show Stops</button>
+            </fieldset>
+        </form>
+        <section id="routestop-output" class="card">
+            <p>The first # stops matching that route will appear here</p>
         </section>
     </main>
 
