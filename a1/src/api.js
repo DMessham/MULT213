@@ -1,34 +1,7 @@
 // API function to integrate with Open-Meteo Geocoding and Weather APIs
 // Reference: https://open-meteo.com/
 
-import { renderMessage } from './dom.js';
 import {apikey} from './key.js'
-
-export async function searchCity(city) {
-  const res = await fetch(
-    `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=10&language=en&format=json`
-  );
-
-  const data = await res.json();
-
-  console.log(data);
-
-  return data.results || [];
-}
-
-export async function fetchWeather(lat, lon) {
-  // Hardcode coordinates or use a simple free API.
-  const res = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
-  );
-
-  const data = await res.json();
-
-  console.log(data);
-
-  return data.current_weather ?? "N/A";
-}
-
 
 const transitFeedID = "o-c9k0-saskatoontransit"; //saskatoon transit
 
@@ -76,7 +49,7 @@ export async function fetchAllRoutes() {
 
 export async function fetchRouteStops(route) {
   const res = await fetch(
-    `${apiBaseURL}/stops?operator_onestop_id=${transitFeedID}&served_by_onestop_ids=${route}&apikey=${apikey}&limit="50"`
+    `${apiBaseURL}/stops?operator_onestop_id=${transitFeedID}&served_by_onestop_ids=${route}&apikey=${apikey}&limit=50`
   );
 
   const data = await res.json();
