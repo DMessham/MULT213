@@ -46,15 +46,16 @@
             <p>Awaiting input…</p>
         </section> -->
 
-        
+        <form id="nearby-form">
+            <button>Show Nearby Stops</button>
+        </form>
         <section id="nearby-list" class="card">
-            <button type="button">Show Nearby Stops</button>
-            <p>Awaiting action…</p>
+            <p>NOTE: First click will not work, wait a few seconds and click again, if that does not work, reload the page</p>
         </section>
 
         <form id="route-form">
             <fieldset>
-                <legend>Search Routes that go to a Onestop Stop ID</legend>
+                <legend>Search Routes</legend>
                 <input id="route" placeholder="Enter a onestop stop ID" required />
                 <button>Search Route</button>
             </fieldset>
@@ -64,8 +65,8 @@
         </section>
         <form id="stop-form">
             <fieldset>
-                <legend>Search Stops by Onestop ID</legend>
-                <input id="stop" placeholder="Enter a onestop stop ID" required />
+                <legend>Search Stops</legend>
+                <input id="stop" placeholder="Enter a name" required />
                 <button>Search stops</button>
             </fieldset>
         </form>

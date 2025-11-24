@@ -88,16 +88,44 @@ export async function fetchRoutesByCommonStop(stopID) {
   return data.stops || [];
 }
 
+export async function fetchStop(stopID) {
+  const res = await fetch(
+    `${apiBaseURL}/stopa?agency_key=${transitFeedID}&served_by_onestop_ids=${stopID}&apikey=${apikey}`
+  );
+
+  const data = await res.json();
+  console.log('getting all Routes using stop ID: ', stopID, data)
+
+  return data.stops || [];
+}
+
+export async function searchRoutes(query) {
+  const res = await fetch(
+    `${apiBaseURL}/routes?agency_key=${transitFeedID}&search=${query}&apikey=${apikey}`
+  );
+
+  const data = await res.json();
+  console.log('getting all Routes matching:', query, data)
+
+  return data || [];
+}
+
+export async function searchStops(query) {
+  const res = await fetch(
+    `${apiBaseURL}/stops?agency_key=${transitFeedID}&search=${query}&apikey=${apikey}`
+  );
+
+  const data = await res.json();
+  console.log('getting all Stops matching:', query, data)
+
+  return data.stops || [];
+}
+
 // fetchAllRoutes()
 
 fetchRouteStops('r-c9k0q-87')
 
-export async function getNearbyStops(){
-  // from https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
-  navigator.geolocation.getCurrentPosition((position) => {
-    fetchStopsLocation(position.coords.latitude, position.coords.longitude);
-  });
-}
 
 
-getNearbyStops()
+
+// getNearbyStops()
