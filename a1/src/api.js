@@ -54,32 +54,25 @@ export async function fetchAllRoutes() {
   return data.results || [];
 }
 
-export function displayRouteList(data){
-  let message = "<table><tr><th>#</th><th>Route full name</th><th>agency</th><th>onestop ID</th><th>Actions</th></tr>";
-  data.forEach((item) => {
-      const agency_info = item.agency
-      const agency_name = `${agency_info.agency_name}`
-      message += `<tr ><td style="border-left: 4px #${item.route_color} solid">${item.route_short_name}</td><td>${item.route_long_name}</td><td>${agency_info.agency_name}</td><td> ${item.onestop_id}</td></tr>`;
-  });
-  message += "</table>";
-  return message
-}
+// export async function displayList(route, elementOutput){
+//     renderMessage(elementOutput, "Loading…");
 
-export function displayStopList(data){
-  let message = "<table><tr><th>Stop name</th><th>location</th><th>latitude</th><th>longitude</th><th>onestop ID</th><th>Actions</th></tr>";
-  data.forEach((item) => {
-      const loc = item.place
-      const location = `${loc.adm1_name}, ${loc.adm0_name}`
-      const point = item.geometry
-      const lat = `${point.coordinates[1]}`
-      const lon = `${point.coordinates[0]}`
-      message += `<tr><td>${item.stop_name}</td><td>${location}</td><td>${lat}</td><td>${lon}</td><td> ${item.onestop_id}</td><td><a href="https://maps.google.com/?q=${lat},${lon}">map link</a></td></tr>`;
-  });
-  message += "</table>";
-  return message
-}
-
-fetchAllRoutes()
+//     try {
+//         const data = await fetchRouteStops(route);
+//         if (data.length === 0) {
+//             renderMessage(elementOutput, `No results found for "${route}".`);
+//             return;
+//         }
+        
+//         let message = `Found ${data.length} result(s) for ${route}`;
+        
+//         message += displayStopList(data)
+        
+//         renderMessage(elementOutput, message);
+//     } catch (err) {
+//         renderMessage(elementOutput, `Error: ${err.message}`);
+//     }
+// }
 
 export async function fetchRouteStops(route) {
   const res = await fetch(
@@ -147,12 +140,3 @@ export async function searchStops(query) {
 
   return data.stops || [];
 }
-
-// fetchAllRoutes()
-
-// fetchRouteStops('r-c9k0q-87')
-
-
-
-
-// getNearbyStops()
