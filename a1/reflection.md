@@ -17,3 +17,11 @@
 - A way to see all routes that use a stop
 - Data caching (like stop locations and routes) instead of calling the api everytime it needs some info, even if just for the session
 - combine the 2 search boxes for the title of routes & stops with radio buttons to select routes or stops
+- move the submit buttons inline with the text to make it look like a normal search bar
+
+# self reflection
+API integration: 4
+Modern Techniques: 3.5 I didn't really use arrow functions for much
+Dynamic Content: 4
+Styling: 3.5 the css doesnt really do anything for different screensizes, following a 1 size fits all approach
+Quality: 3 the process of getting nearby stops is janky
