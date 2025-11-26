@@ -73,7 +73,7 @@ routeForm.addEventListener("submit", async (e) => {
             const agency_info = item.agency
             const agency_name = `${agency_info.agency_name}` //dont use anything else from transit info right now
 
-            message += `<tr >
+            message += `<tr>
                 <td style="border-left: 4px #${item.route_color} solid">${item.route_short_name}</td>
                 <td>${item.route_long_name}</td>
                 <td>${agency_info.agency_name}</td>
