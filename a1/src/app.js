@@ -17,8 +17,6 @@ const routestopOutput = document.querySelector("#routestop-output");
 
 const routeListTableButton = document.querySelector("table tr td button");
 
-
-
 // for seeing nearby routes
 nearbyForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -74,6 +72,7 @@ routeForm.addEventListener("submit", async (e) => {
             //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
             const agency_info = item.agency
             const agency_name = `${agency_info.agency_name}` //dont use anything else from transit info right now
+
             message += `<tr >
                 <td style="border-left: 4px #${item.route_color} solid">${item.route_short_name}</td>
                 <td>${item.route_long_name}</td>
@@ -81,15 +80,11 @@ routeForm.addEventListener("submit", async (e) => {
                 <td>${item.onestop_id}</td>
                 <td><button type="button" 
                     id="${item.onestop_id}" 
-                    onclick="
-                        alert('This feature is WIP, check console for a list of stops');
-                        console.log('stops for ${item.onestop_id}', fetchRouteStops(item.onestop_id))
-                    ">
-                    List Stops
+                    onclick="navigator.clipboard.writeText('${item.onestop_id}');alert('Copied ${item.onestop_id} to clipboard')">
+                    Copy ID
                 </button>
-                </td>
-            </tr>`;//the list stops button doesnt work properly rn, but its not essential, it was just to save from having to copypaste
-            
+                `;//clipboard
+            message+="</td></tr>"
             
         });
         message += "</table>";

@@ -43,7 +43,7 @@
         <form id="route-form">
             <fieldset>
                 <legend>Search Routes</legend>
-                <input id="route" placeholder="Enter a onestop stop ID" required />
+                <input id="route" placeholder="route name" required />
                 <button>Search Route</button>
             </fieldset>
         </form>
@@ -63,12 +63,12 @@
         <form id="routestop-form">
             <fieldset>
                 <legend>Search Stops along a route</legend>
-                <input id="routestop" placeholder="Enter onestop route ID" required />
+                <input id="routestop" placeholder="Enter onestop route ID (r-c9k*-*)" required />
                 <button>Show Stops</button>
             </fieldset>
         </form>
         <section id="routestop-output" class="card">
-            <p>The first # stops matching that route will appear here</p>
+            <p>The first 50 stops matching that route will appear here</p>
         </section>
     </main>
 
