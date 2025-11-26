@@ -1,5 +1,6 @@
 # DMessham's Transit Tracker
 Started: Wed 2025/11/19, 11:32
+finished: Wed 2025/11/26. 11:06
 
 # Goal
 A web app i can use use for the buses in my city, that will work on devices that the official app doesnt support
@@ -9,7 +10,7 @@ get & display nearby stops
 search routes in the city
 see all stops along a route
 
-## Planned features (LONG TERM)
+## initial Planned features (LONG TERM)
     - realtime info for routes i use frequently
     - more complex route planning
     -    - multiple sets of routes that can switch between lines at predefined points automatically if a bus is late, canceled, etc. 
