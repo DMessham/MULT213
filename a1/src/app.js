@@ -1,6 +1,9 @@
-import { renderMessage, displayStopList, displayListButtonEvent, renderImage } from "./dom.js";
+import { renderMessage, displayStopList, displayListButtonEvent, renderImage, renderTable } from "./dom.js";
 import { fetchStopsLocation, fetchRouteStops, searchRoutes, searchStops, fetchAreaImage} from "./api.js";
 
+export const debugmode=true;
+
+console.log(`app debug mode is`, debugmode)
 // Grab references to various parts of the HTML page
 
 const nearbyForm = document.querySelector("#nearby-form");
@@ -19,6 +22,7 @@ const routeListTableButton = document.querySelector("table tr td button");
 
 // for seeing nearby routes
 nearbyForm.addEventListener("submit", async (e) => {
+    if (debugmode){console.log(`getting location`, e)}
     e.preventDefault();
     let nav = navigator.geolocation
     const radius = 250
@@ -26,6 +30,8 @@ nearbyForm.addEventListener("submit", async (e) => {
     nav.getCurrentPosition((position) => {
         latitude = position.coords.latitude
         longitude = position.coords.longitude
+        if (debugmode){console.log(`latitude is`, latitude)}
+        if (debugmode){console.log(`longitude is`, longitude)}
     });
 
     renderMessage(nearbyList, "Loading…");
@@ -64,50 +70,53 @@ routeForm.addEventListener("submit", async (e) => {
 
     try {
         //check if there is any data and display it
+        if (debugmode){console.log(`searching for`, route)}
         const data = await searchRoutes(route);
+        if (debugmode){console.log(`results for search:`, data.length)}
         if (data.length === 0) {
             renderMessage(routeOutput, `No results found for "${route}".`);
             return;
         }
         
         let message = `Found ${data.routes.length} result(s) for "${route}":`;
-        
-        message += "<table><tr><th>#</th><th>Route full name</th><th>agency</th><th>onestop ID</th><th>Actions</th></tr>";
+        let tableArray = []
+        let headerArray = ["#", "Route Name", 'Agency', 'onestopID', 'Actions']
+
+        // message += "<table><tr><th>#</th><th>Route full name</th><th>agency</th><th>onestop ID</th><th>Actions</th></tr>";
+        const actionButtonText = "stops"
+        if (debugmode){console.log(`preparing table for`, route)}
         data.routes.forEach((item) => {
+            if (debugmode){console.log(`preparing table item`, item)}
             //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
             //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
             const agency_info = item.agency
             const agency_name = `${agency_info.agency_name}` //dont use anything else from transit info right now
 
-            message += `<tr>
-                <td style="border-left: 4px #${item.route_color} solid">${item.route_short_name}</td>
-                <td>${item.route_long_name}</td>
-                <td>${agency_info.agency_name}</td>
-                <td>${item.onestop_id}</td>
-                <td><button type="button" 
-                    id="${item.onestop_id}" 
-                    onclick="navigator.clipboard.writeText('${item.onestop_id}');alert('Copied ${item.onestop_id} to clipboard');">
-                    Copy ID
-                </button>
-                `;//clipboard
-            message+="</td></tr>"
-            
+            // message += `<tr>
+            //     <td style="border-left: 4px #${item.route_color} solid">${item.route_short_name}</td>
+            //     <td>${item.route_long_name}</td>
+            //     <td>${agency_info.agency_name}</td>
+            //     <td>${item.onestop_id}</td>
+            //     <td><button type="button" 
+            //         id="${item.onestop_id}" 
+            //         onclick="navigator.clipboard.writeText('${item.onestop_id}');alert('Copied ${item.onestop_id} to clipboard');">
+            //         Copy ID
+            //     </button>
+            //     `;//clipboard
+            // message+="</td></tr>"
+            let actionButtonE = document.createElement("button");
+            actionButtonE.appendChild(document.createTextNode(actionButtonText))
+            actionButtonE.setAttribute('onClick', `displayListButtonEvent(${item.onestop_id})`)
+            tableArray += [document.createTextNode(item.route_short_name), document.createTextNode(item.route_long_name), document.createTextNode(agency_name), document.createTextNode(item.onestop_id), actionButtonE]
         });
-        message += "</table>";
+        // message += "</table>";
         
         
         renderMessage(routeList, message);
-
-        //now to add an even listener for the buttons that show each stop in a route
-        data.routes.forEach((item) => {
-            document.querySelector(`#${item.onestop_id}`).addEventListener("onClick", async (e) => {
-                //display a list of stops along that route
-                // displayListButtonEvent(item.onestop_id)
-                alert("This feature is WIP, check console for a list of stops")
-                // console.log(`stops for ${item.onestop_id}`, fetchRouteStops(item.onestop_id))
-            })
-        })
+        renderTable(routeList, "routeSearchResults", tableArray, headerArray)
+        
     } catch (err) {
+        console.log(err)
         renderMessage(routeList, `Error - ${err.message}`);
     }
 });
