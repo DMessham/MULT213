@@ -19,7 +19,7 @@ export function renderTable(parentEl, tableId, td, headingArray){
         //make the header
         if (debugmode){console.log("reached table header gen")}
         let headerNode = document.createElement("tr");
-        for(let col=0; col<=headingArray.length; col++) {
+        for(let col=0; col<headingArray.length; col++) {
             if (debugmode){console.log("begin table header item", col)}
             let itemNode = document.createElement("th");
             if (debugmode){console.log("table header node generated for item", col)}
@@ -29,13 +29,13 @@ export function renderTable(parentEl, tableId, td, headingArray){
         table.appendChild(headerNode);
         //make each row
         if (debugmode){console.log("reached table row gen")}
-        for (let row=0; row<=td.length; row++){
+        for (let row=0; row<td.length; row++){
             if (debugmode){console.log("starting table row gen for row", row)}
             let rowNode = document.createElement("tr");
             //make each item in each row
             for (let col=0; col<td[row].length; col++) {
-                if (debugmode){console.log("reached table col item gen in row,col", row, col)};
-                let itemNode = document.createElement("tr");
+                if (debugmode){console.log("reached table col item gen row,col,value", row, col, td[row][col])};
+                let itemNode = document.createElement("td");
                 itemNode.innerHTML = td[row][col];
                 rowNode.appendChild(itemNode);
             }

@@ -22,41 +22,50 @@ const routeListTableButton = document.querySelector("table tr td button");
 
 // for seeing nearby routes
 nearbyForm.addEventListener("submit", async (e) => {
+    renderMessage(nearbyList, "Locating…");
     if (debugmode){console.log(`getting location`, e)}
     e.preventDefault();
-    let nav = navigator.geolocation
+    
     const radius = 250
     // based off https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
-    nav.getCurrentPosition((position) => {
-        latitude = position.coords.latitude
-        longitude = position.coords.longitude
-        if (debugmode){console.log(`latitude is`, latitude)}
-        if (debugmode){console.log(`longitude is`, longitude)}
-    });
-
-    renderMessage(nearbyList, "Loading…");
-
-    try {
-        //check if there is any data and display it
+    if ("geolocation" in navigator) {
+        let nav = navigator.geolocation
+        /* geolocation is available */
+        nav.getCurrentPosition(async (position) =>{
+            renderMessage(nearbyList, "Location found…");
+            latitude = position.coords.latitude
+            longitude = position.coords.longitude
+            if (debugmode){console.log(`latitude is`, latitude, `longitude is`, longitude)}
+            // at this point, not loading anymore
+            
+            renderMessage(nearbyList, "Loading nearby stops…");
+            let data = await fetchStopsLocation(latitude, longitude, radius);
+            renderMessage(nearbyList, "Getting map…");
+            let img = await fetchAreaImage(latitude, longitude, radius);
+            
+            try {
+                //check if there is any data and display it
+                if (data.length === 0) {
+                    renderMessage(nearbyList, `ErrorNo results found within ${radius}m`);
+                    return;
+                } else {
+                    let message = `Found ${data.length} result(s) within ${radius}m of ${latitude}, ${longitude}:`;
+                    message += displayStopList(data)
+                
+                    renderMessage(nearbyList, message);
+                }
+                renderImage(nearbyList, img)
+                
+            } catch (err) {
+                renderMessage(nearbyList, `Error: ${err.message}.`);
+                console.log("error in nearby stops:", err.message, err)
+            }
+        });
+    } else {    
+        /* geolocation IS NOT available */
         
-        let data = await fetchStopsLocation(latitude, longitude, radius);
-        let img = await fetchAreaImage(latitude, longitude, radius);
-        if (data.length === 0) {
-            renderMessage(nearbyList, `No results found within ${radius}m`);
-            return;
-        }
-        
-        let message = `Found ${data.length} result(s) within ${radius}m of latitude:${latitude} lon:${longitude}:`;
-        
-        message += displayStopList(data)
-        
-        renderMessage(nearbyList, message);
-
-        renderImage(nearbyList, img)
-    } catch (err) {
-        renderMessage(nearbyList, `Error: ${err.message}, It may take a few seconds to get your location. Wait and try again.`);
-        console.log("error in nearby stops:", err.message, err)
-    }
+        renderMessage(nearbyList, `Error: Location not available from browser, it may be disabled or not supported`);
+    }    
 });
 
 //search routes
@@ -85,30 +94,24 @@ routeForm.addEventListener("submit", async (e) => {
         // message += "<table><tr><th>#</th><th>Route full name</th><th>agency</th><th>onestop ID</th><th>Actions</th></tr>";
         const actionButtonText = "stops"
         if (debugmode){console.log(`preparing table for`, route)}
-        data.routes.forEach((item) => {
+        for (let row=0; row<data.routes.length; row++) {
+            let item = data.routes[row]
             if (debugmode){console.log(`preparing table item`, item)}
             //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
             //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
             const agency_info = item.agency
             const agency_name = `${agency_info.agency_name}` //dont use anything else from transit info right now
-
-            // message += `<tr>
-            //     <td style="border-left: 4px #${item.route_color} solid">${item.route_short_name}</td>
-            //     <td>${item.route_long_name}</td>
-            //     <td>${agency_info.agency_name}</td>
-            //     <td>${item.onestop_id}</td>
-            //     <td><button type="button" 
-            //         id="${item.onestop_id}" 
-            //         onclick="navigator.clipboard.writeText('${item.onestop_id}');alert('Copied ${item.onestop_id} to clipboard');">
-            //         Copy ID
-            //     </button>
-            //     `;//clipboard
-            // message+="</td></tr>"
             let actionButtonE = document.createElement("button");
             actionButtonE.appendChild(document.createTextNode(actionButtonText))
             actionButtonE.setAttribute('onClick', `displayListButtonEvent(${item.onestop_id})`)
-            tableArray += [document.createTextNode(item.route_short_name), document.createTextNode(item.route_long_name), document.createTextNode(agency_name), document.createTextNode(item.onestop_id), actionButtonE]
-        });
+            tableArray[row] = [
+                document.createTextNode(`${item.route_short_name}`),
+                document.createTextNode(`${item.route_long_name}`),
+                document.createTextNode(`${agency_name}`),
+                document.createTextNode(`${item.onestop_id}`),
+                actionButtonE
+            ]
+        };
         // message += "</table>";
         
         
