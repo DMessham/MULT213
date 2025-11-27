@@ -1,5 +1,5 @@
-import { renderMessage, displayStopList, displayListButtonEvent } from "./dom.js";
-import { fetchStopsLocation, fetchRouteStops, searchRoutes, searchStops } from "./api.js";
+import { renderMessage, displayStopList, displayListButtonEvent, renderImage } from "./dom.js";
+import { fetchStopsLocation, fetchRouteStops, searchRoutes, searchStops, fetchAreaImage} from "./api.js";
 
 // Grab references to various parts of the HTML page
 
@@ -20,8 +20,10 @@ const routeListTableButton = document.querySelector("table tr td button");
 // for seeing nearby routes
 nearbyForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    // from https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
-    navigator.geolocation.getCurrentPosition((position) => {
+    let nav = navigator.geolocation
+    const radius = 250
+    // based off https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
+    nav.getCurrentPosition((position) => {
         latitude = position.coords.latitude
         longitude = position.coords.longitude
     });
@@ -31,19 +33,23 @@ nearbyForm.addEventListener("submit", async (e) => {
     try {
         //check if there is any data and display it
         
-        let data = await fetchStopsLocation(latitude, longitude);
+        let data = await fetchStopsLocation(latitude, longitude, radius);
+        let img = await fetchAreaImage(latitude, longitude, radius);
         if (data.length === 0) {
-            renderMessage(nearbyList, `No results found within 250m`);
+            renderMessage(nearbyList, `No results found within ${radius}m`);
             return;
         }
         
-        let message = `Found ${data.length} result(s) within 250m of latitude:${latitude} lon:${longitude}:`;
+        let message = `Found ${data.length} result(s) within ${radius}m of latitude:${latitude} lon:${longitude}:`;
         
         message += displayStopList(data)
         
         renderMessage(nearbyList, message);
+
+        renderImage(nearbyList, img)
     } catch (err) {
         renderMessage(nearbyList, `Error: ${err.message}, It may take a few seconds to get your location. Wait and try again.`);
+        console.log("error in nearby stops:", err.message, err)
     }
 });
 
@@ -80,7 +86,7 @@ routeForm.addEventListener("submit", async (e) => {
                 <td>${item.onestop_id}</td>
                 <td><button type="button" 
                     id="${item.onestop_id}" 
-                    onclick="navigator.clipboard.writeText('${item.onestop_id}');alert('Copied ${item.onestop_id} to clipboard')">
+                    onclick="navigator.clipboard.writeText('${item.onestop_id}');alert('Copied ${item.onestop_id} to clipboard');">
                     Copy ID
                 </button>
                 `;//clipboard
@@ -153,8 +159,10 @@ routestopForm.addEventListener("submit", async (e) => {
         let message = `Found ${data.length} result(s) for "${routestop}":`;
         
         message += displayStopList(data)
+
         
         renderMessage(routestopOutput, message);
+        
     } catch (err) {
         renderMessage(routestopOutput, `Error: ${err.message}`);
     }

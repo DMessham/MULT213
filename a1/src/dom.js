@@ -3,6 +3,10 @@ export function renderMessage(el, text) {
   el.innerHTML = `<p>${text}</p>`;
 }
 
+export function renderImage(el, imgsrc, alttext="") {
+    el.innerHTML += `<img src="${imgsrc}">${alttext}</img>`;
+  }
+
 export function displayStopList(data){
     let message = "<table><tr><th>Stop name</th><th>location</th><th>latitude</th><th>longitude</th><th>onestop ID</th><th>Actions</th></tr>";
     data.forEach((item) => {

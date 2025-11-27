@@ -58,9 +58,23 @@ export async function fetchRouteStops(route) {
   return data.stops || [];
 }
 
-export async function fetchStopsLocation(lat, lon) {
+export async function fetchAreaImage(lat,lon,rad){
   const res = await fetch(
-    `${apiBaseURL}/stops?operator_onestop_id=${transitFeedID}&lat=${lat}&lon=${lon}&radius=250&apikey=${apikey}`
+    `${apiBaseURL}/stops?operator_onestop_id=${transitFeedID}&lat=${lat}&lon=${lon}&radius=${rad}&format=png&apikey=${apikey}`
+  );
+
+  console.log(`getting image of area around: ${lat}, ${lon}`, res);
+
+  data = res.url
+
+ console.log(`image url for ${rad} around lat ${lat} lon ${lon}`, data);
+
+  return data || [];
+}
+
+export async function fetchStopsLocation(lat, lon, rad) {
+  const res = await fetch(
+    `${apiBaseURL}/stops?operator_onestop_id=${transitFeedID}&lat=${lat}&lon=${lon}&radius=${rad}&apikey=${apikey}`
   );
 
   const data = await res.json();
@@ -94,7 +108,7 @@ export async function fetchStop(stopID) {
 
 export async function searchRoutes(query) {
   const res = await fetch(
-    `${apiBaseURL}/routes?operator_onestop_id=${transitFeedID}&search=${query}&apikey=${apikey}`
+    `${apiBaseURL}/routes?&earch=${query}&operator_onestop_id=${transitFeedID}&apikey=${apikey}&include_stops=true`
   );
 
   const data = await res.json();
