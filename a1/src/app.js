@@ -1,4 +1,4 @@
-import { renderMessage, displayStopList, displayListButtonEvent, renderImage, renderTable } from "./dom.js";
+import { renderMessage, displayStopList, displayListButtonEvent, renderImage, renderTable, elementFromNode } from "./dom.js";
 import { fetchStopsLocation, fetchRouteStops, searchRoutes, searchStops, fetchAreaImage} from "./api.js";
 
 export const debugmode=true;
@@ -18,8 +18,6 @@ const stopOutput = document.querySelector("#stop-output");
 const routestopForm = document.querySelector("#routestop-form");
 const routestopOutput = document.querySelector("#routestop-output");
 
-const routeListTableButton = document.querySelector("table tr td button");
-
 // for seeing nearby routes
 nearbyForm.addEventListener("submit", async (e) => {
     renderMessage(nearbyList, "Locating…");
@@ -38,7 +36,7 @@ nearbyForm.addEventListener("submit", async (e) => {
             if (debugmode){console.log(`latitude is`, latitude, `longitude is`, longitude)}
             // at this point, not loading anymore
             
-            renderMessage(nearbyList, "Loading nearby stops…");
+            renderMessage(nearbyList, `Looking for stops within ${radius}m of ${latitude}, ${longitude}:`);
             let data = await fetchStopsLocation(latitude, longitude, radius);
             renderMessage(nearbyList, "Getting map…");
             let img = await fetchAreaImage(latitude, longitude, radius);
@@ -91,7 +89,6 @@ routeForm.addEventListener("submit", async (e) => {
         let tableArray = []
         let headerArray = ["#", "Route Name", 'Agency', 'onestopID', 'Actions']
 
-        // message += "<table><tr><th>#</th><th>Route full name</th><th>agency</th><th>onestop ID</th><th>Actions</th></tr>";
         const actionButtonText = "stops"
         if (debugmode){console.log(`preparing table for`, route)}
         for (let row=0; row<data.routes.length; row++) {
@@ -103,12 +100,13 @@ routeForm.addEventListener("submit", async (e) => {
             const agency_name = `${agency_info.agency_name}` //dont use anything else from transit info right now
             let actionButtonE = document.createElement("button");
             actionButtonE.appendChild(document.createTextNode(actionButtonText))
-            actionButtonE.setAttribute('onClick', `displayListButtonEvent(${item.onestop_id})`)
+            actionButtonE.setAttribute('onClick', `${displayListButtonEvent(item.onestop_id)}`)
+
             tableArray[row] = [
-                document.createTextNode(`${item.route_short_name}`),
-                document.createTextNode(`${item.route_long_name}`),
-                document.createTextNode(`${agency_name}`),
-                document.createTextNode(`${item.onestop_id}`),
+                elementFromNode(document.createTextNode(`${item.route_short_name}`), "td"),
+                elementFromNode(document.createTextNode(`${item.route_long_name}`), "td"),
+                elementFromNode(document.createTextNode(`${agency_name}`), 'td'),
+                elementFromNode(document.createTextNode(`${item.onestop_id}`), 'td'),
                 actionButtonE
             ]
         };

@@ -9,6 +9,11 @@ export function renderImage(el, imgsrc, alttext="") {
     el.innerHTML += `<img src="${imgsrc}">${alttext}</img>`;
   }
 
+export function elementFromNode(node, type){
+    let itemNode = document.createElement(type);
+    itemNode.appendChild(node)
+    return itemNode;
+}
 export function renderTable(parentEl, tableId, td, headingArray){
     if (debugmode){console.log("table gen", parentEl, tableId, td, headingArray)}
     //heading array is a array for the table leadings
@@ -35,8 +40,7 @@ export function renderTable(parentEl, tableId, td, headingArray){
             //make each item in each row
             for (let col=0; col<td[row].length; col++) {
                 if (debugmode){console.log("reached table col item gen row,col,value", row, col, td[row][col])};
-                let itemNode = document.createElement("td");
-                itemNode.innerHTML = td[row][col];
+                let itemNode = td[row][col];
                 rowNode.appendChild(itemNode);
             }
             if (debugmode){console.log(`adding table row`, row)}
@@ -83,7 +87,7 @@ export function displayStopList(data){
   }
 
   export async function displayListButtonEvent(query){
-    
+    if (debugmode){console.log(`begin listbutton for`, query)}
     const stopOutput = document.querySelector("#stop-output"); 
     renderMessage(stopOutput, "Loading…");
     
