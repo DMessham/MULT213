@@ -21,12 +21,15 @@
     - title and message strings
 - list
     - An array of objects
-        - with title & body as strings
-        - id number
-        - due date (optional)
-        - creation/ update date (optional)
-        - state
-        - repitition (optional) - ical rrules
+        - with `title` & `body` as strings
+        - `id number`
+        - `due date` (optional)
+        - `creation`/ update date (optional)
+        - `state` 
+            - `done` bool
+
+        - `repitition` (optional) - ical rrules
+        - `assigned to`
 - card
 - footer
 
@@ -45,3 +48,11 @@
         - change color
         - delete
     - ical rrules for schedules
+
+## making a new todo
+- create new todo object
+- push into array
+
+## mark it as done
+- toggle checkbox
+- move it to done setion
