@@ -7,6 +7,7 @@
     - title and message properties
 - `list`
     - A list of things to do
+    - takes in an array of `todo`s displayed w/ cards
 - `card`
     - `title` displayed at top (required)
     - `subtitle` (optional)
@@ -25,7 +26,7 @@
         - due date (optional)
         - creation/ update date (optional)
         - state
-        - repitition (optional)
+        - repitition (optional) - ical rrules
 - card
 - footer
 
@@ -34,3 +35,13 @@
 - [] make list component
 - [] make card component
 - [] make footer component
+
+# data transformation
+- user actions:
+    - add a TODO
+    - edit it
+        - change it
+        - mark as completed
+        - change color
+        - delete
+    - ical rrules for schedules
