@@ -1,10 +1,26 @@
 # dootis app plan
  - todo app
- - maybe add email for a blackberry hub clone w/ email and social media
+ - maybe add email for a blackberry hub clone w/ creating events from emails (ex: flights, appointments)
+
+## Resources used
+- react
+
+## potential resources
+- https://www.material-toys.com/
+- https://actifyjs.com/getting-started/installation
+- https://mui.com/material-ui/
+
+# devtasks
+- [] make header component
+- [] make list component
+- [] make card component
+- [] make footer component
 
 # components
 - `header`
     - title and message properties
+- `nav` (eventually)
+     - section navigation
 - `list`
     - A list of things to do
     - takes in an array of `todo`s displayed w/ cards
@@ -33,13 +49,8 @@
 - card
 - footer
 
-# devtasks
-- [] make header component
-- [] make list component
-- [] make card component
-- [] make footer component
 
-# data transformation
+## data transformation
 - user actions:
     - add a TODO
     - edit it
@@ -49,10 +60,10 @@
         - delete
     - ical rrules for schedules
 
-## making a new todo
+### making a new todo
 - create new todo object
 - push into array
 
-## mark it as done
+### mark it as done
 - toggle checkbox
 - move it to done setion
