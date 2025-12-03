@@ -1,0 +1,144 @@
+:root{
+  --m3-primary: rgb(166 211 149);
+  --m3-surface-tint: rgb(166 211 149);
+  --m3-on-primary: rgb(18 56 10);
+  --m3-primary-container: rgb(41 79 31);
+  --m3-on-primary-container: rgb(193 239 175);
+  --m3-secondary: rgb(187 203 177);
+  --m3-on-secondary: rgb(39 52 33);
+  --m3-secondary-container: rgb(61 75 55);
+  --m3-on-secondary-container: rgb(215 232 204);
+  --m3-tertiary: rgb(160 207 209);
+  --m3-on-tertiary: rgb(0 55 57);
+  --m3-tertiary-container: rgb(30 78 80);
+  --m3-on-tertiary-container: rgb(188 235 238);
+  --m3-error: rgb(255 180 171);
+  --m3-on-error: rgb(105 0 5);
+  --m3-error-container: rgb(147 0 10);
+  --m3-on-error-container: rgb(255 218 214);
+  --m3-background: rgb(17 20 15);
+  --m3-on-background: rgb(225 228 218);
+  --m3-surface: rgb(16 21 16);
+  --m3-on-surface: rgb(224 228 219);
+  --m3-surface-variant: rgb(67 72 62);
+  --m3-on-surface-variant: rgb(195 200 187);
+  --m3-outline: rgb(141 146 134);
+  --m3-outline-variant: rgb(67 72 62);
+  --m3-shadow: rgb(0 0 0);
+  --m3-scrim: rgb(0 0 0);
+  --m3-inverse-surface: rgb(224 228 219);
+  --m3-inverse-on-surface: rgb(45 50 44);
+  --m3-inverse-primary: rgb(65 104 53);
+  --m3-primary-fixed: rgb(193 239 175);
+  --m3-on-primary-fixed: rgb(2 33 0);
+  --m3-primary-fixed-dim: rgb(166 211 149);
+  --m3-on-primary-fixed-variant: rgb(41 79 31);
+  --m3-secondary-fixed: rgb(215 232 204);
+  --m3-on-secondary-fixed: rgb(18 31 14);
+  --m3-secondary-fixed-dim: rgb(187 203 177);
+  --m3-on-secondary-fixed-variant: rgb(61 75 55);
+  --m3-tertiary-fixed: rgb(188 235 238);
+  --m3-on-tertiary-fixed: rgb(0 32 33);
+  --m3-tertiary-fixed-dim: rgb(160 207 209);
+  --m3-on-tertiary-fixed-variant: rgb(30 78 80);
+  --m3-surface-dim: rgb(16 21 16);
+  --m3-surface-bright: rgb(54 58 53);
+  --m3-surface-container-lowest: rgb(11 15 11);
+  --m3-surface-container-low: rgb(24 29 24);
+  --m3-surface-container: rgb(28 33 28);
+  --m3-surface-container-high: rgb(39 43 38);
+  --m3-surface-container-highest: rgb(49 54 48);
+}
+
+body {
+    margin: 0;
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+    background-color: var(--m3-background);
+    color: var(--m3-on-background);
+  }
+  
+  .todo-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .todo-form__input {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    border: 2px solid var(--m3-outline);
+    font-size: 0.95rem;
+    outline: none;
+    background: var(--m3-surface-container);
+    color: var(--m3-on-surface);
+  }
+  
+  .todo-form__input:focus {
+    border-color: var(--m3-primary-fixed);
+    box-shadow: 0 0 0 2px var(--m3-shadow);
+    background: var(--m3-surface-container-high);
+    color: var(--m3-on-surface);
+  }
+  
+  .todo-form__button {
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    margin:2px 0.5rem;
+    cursor: pointer;
+    background: var(--m3-primary-container);
+    color: var(--m3-on-primary-container);
+    transition: background 0.15s ease;
+    white-space: nowrap;
+  }
+  
+  .todo-form__button:hover {
+    background: #1c6122;
+  }
+  
+  .todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .todo-list__empty {
+    font-size: 0.9rem;
+    color: #999;
+    padding: 0.5rem 0;
+  }
+  
+  .todo-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--m3-outline-variant);
+  }
+  
+  .todo-item:last-child {
+    border-bottom: none;
+  }
+  
+  .todo-item__checkbox {
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+  }
+  
+  .todo-item__label {
+    flex: 1;
+    cursor: pointer;
+    font-size: 0.95rem;
+    user-select: none;
+  }
+  
+  /* Visual completed state: strikethrough when checkbox is checked */
+  .todo-item__checkbox:checked+.todo-item__label {
+    text-decoration: line-through;
+    color: var(--m3-on-surface-variant);
+  }
