@@ -1,9 +1,8 @@
 import './App.css';
 import './card.css';
 import { useState } from 'react';
-import viteLogo from '/vite.svg';
-import reactLogo from './assets/react.svg';
-import Card from './card.jsx';
+import { Card } from './card.jsx';
+import { Header, Footer } from './page.jsx';
 
 
 
@@ -29,10 +28,11 @@ function App() {
     // We call the React hook to update the application state
     setTodos(newTodos);
   };
+  
 
   return (
     <>
-      
+      <Header title="Welcome to My Website!" message="Thanks for visiting my site." />
 
       <main>
         <section>
@@ -53,23 +53,15 @@ function App() {
         <section>
           <h2>My TODOs:</h2>
           <ul className="todo-list" id="todo-list">
-            {listContent}
+            {/* {listContent} */}
           </ul>
         </section>
       </main>
 
-      <footer>
-        <p className="read-the-docs">
-          Click on the Vite (the build tool) and React (the frontend framework) logos to learn more
-        </p>
-
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </footer>
+      <Footer 
+        helptext=" Click on the Vite (the build tool) and React (the frontend framework) logos to learn more"
+        
+      />
     </>
   )
 }
