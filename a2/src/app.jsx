@@ -1,27 +1,17 @@
 import './App.css';
+import './card.css';
 import { useState } from 'react';
 import viteLogo from '/vite.svg';
 import reactLogo from './assets/react.svg';
+import Card from './card.jsx';
+
+
 
 function App() {
   // Define the TODO models
   const [todos, setTodos] = useState([]);
 
-  // Build up the UI element for the TODOs
-  let listContent = <></>;
-
-  if (todos.length == 0) {
-    // If there are no TODOs, tell the user what to do
-    listContent = <li className="todo-list__empty">No tasks yet. Add your first TODO above.</li>;
-  } else {
-    // If there are TODOs, render them as li elements
-    listContent = todos.map((item, i) => {
-      return <li class="todo-item">
-        <input type="checkbox" class="todo-item__checkbox" data-id={i} id={"todo-" + i} />
-        <label for={"todo-" + i} class="todo-item__label">{item.name}</label>
-      </li>
-    })
-  }
+  
 
   // Set up add new TODO form handler
   const handleFormSubmit = (formData) => {
@@ -42,9 +32,7 @@ function App() {
 
   return (
     <>
-      <header>
-        <h1>TODO React App</h1>
-      </header>
+      
 
       <main>
         <section>

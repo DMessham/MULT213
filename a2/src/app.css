@@ -117,7 +117,7 @@ body {
     align-items: center;
     gap: 0.75rem;
     padding: 0.35rem 0;
-    border-bottom: 1px solid var(--m3-outline-variant);
+    /* border-bottom: 1px solid var(--m3-outline-variant); */
   }
   
   .todo-item:last-child {
@@ -141,4 +141,41 @@ body {
   .todo-item__checkbox:checked+.todo-item__label {
     text-decoration: line-through;
     color: var(--m3-on-surface-variant);
+  }
+
+/* checkbox stuff is modified from last years mult classes, which based it off MDN examples */
+  input[type="checkbox"] {
+    padding:2px 2px;
+    appearance: none;
+    color:inherit;
+    position: relative;
+    display:inline-block;
+    width: 1.4em;
+    height: 1.4em;
+    border: 0.175em var(--m3-outline) solid;
+    border-radius: 3px;
+    margin-right:0.3rem;
+    font-family: monospace;
+    /* Adjusts the position of the checkboxes on the text baseline */
+    vertical-align: -0.5em;
+  }
+
+  [type="checkbox"]::after {
+    content: "✘";
+    position: absolute;
+    font-size: 1em;
+    top: -0.2em;
+    left:0.1em;
+    visibility: hidden;
+  }
+  [type="checkbox"]:checked{
+    background-color: var(--m3-primary-container);
+    color: var(--m3-on-primary-container);
+    border: 0.175em var(--m3-on-primary-container) solid;
+  }
+  
+[type="checkbox"]:checked::after {
+    /* Use `visibility` instead of `display` to avoid recalculating layout */
+    visibility: visible;
+    content: "✔";
   }
