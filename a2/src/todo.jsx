@@ -8,7 +8,7 @@ export function todoList (todos){
   } else {
     // If there are TODOs, render them as li elements containg a div for the cards
     listContent = todos.map((item, i) => {
-      return <li class="todo-item">
+      return( <li class="todo-item">
         <div class="card" >
           <header>
             {item.name}
@@ -21,6 +21,6 @@ export function todoList (todos){
         </div>
         
       </li>
-    })
+    )})
   }
 }

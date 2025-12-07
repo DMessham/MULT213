@@ -2,6 +2,7 @@ import './App.css';
 import './card.css';
 import { useState } from 'react';
 import { Card } from './card.jsx';
+import { todoList } from './todo.jsx';
 import { Header, Footer } from './page.jsx';
 
 
@@ -53,7 +54,7 @@ function App() {
         <section>
           <h2>My TODOs:</h2>
           <ul className="todo-list" id="todo-list">
-            {/* {listContent} */}
+            {listContent}
           </ul>
         </section>
       </main>
