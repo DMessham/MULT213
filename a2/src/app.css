@@ -197,7 +197,7 @@ body {
 /* navbar */
 
 .mainhead{
-  background-color: var(--m3-surface-container);
+  background-color: var(--m3-surface-container-high);
   margin:0;
   padding-bottom: 0.05em;
 }
