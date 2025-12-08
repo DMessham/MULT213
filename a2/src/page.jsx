@@ -95,7 +95,7 @@ export function Footer(props){
             imgSrc: viteLogo
         },
         {
-            url: "https://https://github.com/DMessham/MULT213/tree/main/a2",
+            url: "https://github.com/DMessham/MULT213/tree/main/a2",
             text: "github project",
             type: 'imgText',
             imgSrc: githubLogo
