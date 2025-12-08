@@ -141,7 +141,7 @@ body {
   /* Visual completed state: strikethrough when checkbox is checked */
   .todo-item__checkbox:checked+.todo-item__label {
     text-decoration: line-through;
-    color: var(--m3-on-surface-variant);
+    color: var(--m3-outline);
   }
 
 /* checkbox stuff is modified from last years mult classes, which based it off MDN examples */
