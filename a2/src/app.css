@@ -73,15 +73,16 @@ body {
     outline: none;
     background: var(--m3-surface-container);
     color: var(--m3-on-surface);
-    box-shadow: 5px 5px 7px var(--m3-shadow);
+    box-shadow: 2px 2px 5px var(--m3-shadow);
     
   }
   
   .todo-form__input:focus {
     border-color: var(--m3-primary-fixed);
-    box-shadow: 0 0 0 2px var(--m3-shadow);
+    box-shadow: inset 1px 1px 1px 1px var(--m3-shadow);
     background: var(--m3-surface-container-high);
     color: var(--m3-on-surface);
+    
   }
   
   .todo-form__button {
@@ -96,12 +97,19 @@ body {
     transition: background 0.15s ease;
     white-space: nowrap;
     width:4em;
-    box-shadow: 5px 5px 7px var(--m3-shadow);
+    box-shadow: 2px 2px 5px var(--m3-shadow);
+    
+    text-shadow: 1px 1px 1px var(--m3-shadow);
   }
   
   .todo-form__button:hover {
     background: #1c6122;
     
+    box-shadow: inset 1px 1px 1px 0 var(--m3-on-primary-fixed);
+  }
+
+  .todo-form__button:focus {
+    box-shadow: inset 1px 1px 1px 1px var(--m3-shadow);
   }
   
   .todo-list {
@@ -140,6 +148,8 @@ body {
     cursor: pointer;
     font-size: 0.95rem;
     user-select: none;
+    
+    text-shadow: 1px 1px 1px var(--m3-shadow);
   }
   
   /* Visual completed state: strikethrough when checkbox is checked */
@@ -164,6 +174,8 @@ body {
     font-family: monospace;
     /* Adjusts the position of the checkboxes on the text baseline */
     vertical-align: -0.5em;
+    
+    box-shadow: inset 1px 1px 1px 1px var(--m3-shadow);
   }
 
   [type="checkbox"]::after {
@@ -179,6 +191,9 @@ body {
     color: var(--m3-on-primary-container);
     border: 0.175em var(--m3-on-primary-container) solid;
     
+    box-shadow: inset 1px 1px 1px 0 var(--m3-shadow);
+    
+    text-shadow: 1px 1px 1px var(--m3-shadow);
   }
   
 [type="checkbox"]:checked::after {
