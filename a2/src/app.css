@@ -73,6 +73,8 @@ body {
     outline: none;
     background: var(--m3-surface-container);
     color: var(--m3-on-surface);
+    box-shadow: 5px 5px 7px var(--m3-shadow);
+    
   }
   
   .todo-form__input:focus {
@@ -93,11 +95,13 @@ body {
     color: var(--m3-on-primary-container);
     transition: background 0.15s ease;
     white-space: nowrap;
-    width:4em
+    width:4em;
+    box-shadow: 5px 5px 7px var(--m3-shadow);
   }
   
   .todo-form__button:hover {
     background: #1c6122;
+    
   }
   
   .todo-list {
@@ -174,6 +178,7 @@ body {
     background-color: var(--m3-primary-container);
     color: var(--m3-on-primary-container);
     border: 0.175em var(--m3-on-primary-container) solid;
+    
   }
   
 [type="checkbox"]:checked::after {
@@ -188,6 +193,7 @@ body {
   display:block;
   margin:auto;
   padding: 0.25em 0.75em;
+  
 }
 
 .mainContentArea{
@@ -201,10 +207,14 @@ body {
   background-color: var(--m3-surface-container-high);
   margin:0;
   padding-bottom: 0.05em;
+  
+  box-shadow: 0 1px 7px var(--m3-shadow);
 }
 
 .mainhead nav{
   background-color: var(--m3-secondary-container);
+  
+  box-shadow: 0 1px 3px var(--m3-shadow);
 }
 
 .mainhead nav .contentW{
@@ -235,6 +245,7 @@ body {
 .mainhead nav a:hover{
   background-color: var(--m3-on-secondary);
   color: var(--m3-secondary-fixed);
+  box-shadow: inset 1px 1px 1px var(--m3-on-secondary-fixed);
 }
 .mainhead nav a:focus{
   background-color: var(--m3-secondary-fixed-dim);
@@ -251,6 +262,7 @@ body>div>footer{
   position:fixed;
   padding-top: 0;
   padding-bottom: 1.5em;
+  box-shadow: inset 0 1px 3px var(--m3-shadow);
 }
 
 body>div>footer a{
@@ -263,10 +275,14 @@ body>div>footer a{
   padding: 0.3em;
   padding-inline-end: 0.5em;
   background-color: var(--m3-shadow);
+  
+  box-shadow: inset 1px 1px 1px black;
 }
 body>div>footer a:hover{
   background-color: var(--m3-on-secondary);
   color: var(--m3-secondary-fixed);
+  
+  box-shadow: inset 1px 1px 1px var(--m3-on-secondary-fixed);
 }
 
 body>div>footer p{
