@@ -3,10 +3,13 @@ import reactLogo from './assets/react.svg';
 
 export function Header(props){
     return (<>
-      <header>
-          <h1>{props.title}</h1>
-          <p>Dootis - Daniel Messham 2025</p>
-          <p>{props.message}</p>
+      <header className="mainhead">
+        <div className='contentW'>
+            <h1>{props.title}</h1>
+            <p>Dootis - Daniel Messham 2025</p>
+            <p>{props.message}</p>
+        </div>
+          
         </header>
     </>)
   }
@@ -67,10 +70,13 @@ export function Footer(props){
 
     return (<>
         <footer>
-            <p className="read-the-docs">
-                {props.helptext}
-            </p>
-            {linksOutput}
+            <div className='contentW'>
+                <p className="read-the-docs">
+                    {props.helptext}
+                </p>
+                {linksOutput}
+            </div>
+            
         </footer>
     </>)
   }

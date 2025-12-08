@@ -35,23 +35,25 @@ function App() {
     <>
       <Header title="Welcome to My Website!" message="Thanks for visiting my site." />
 
-      <main>
-        <section>
-          <form id="todo-form" action={handleFormSubmit}>
-            <input
-              className="todo-form__input"
-              id="todo-input"
-              name="title"
-              type="text"
-              placeholder="Add a new task…"
-              autoComplete="off"
-              required
-            />
-            <button className="todo-form__button" type="submit">Add</button>
-          </form>
-        </section>
-        <TodoList todos = {todos}></TodoList>
-        
+      <main className='mainContentArea'>
+        <div className='contentW'>
+          <section>
+            
+            <form id="todo-form" action={handleFormSubmit}>
+              <input
+                className="todo-form__input"
+                id="todo-input"
+                name="title"
+                type="text"
+                placeholder="Add a new task…"
+                autoComplete="off"
+                required
+              />
+              <button className="todo-form__button" type="submit">Add</button>
+            </form>
+          </section>
+          <TodoList todos = {todos}></TodoList>
+        </div>
       </main>
 
       <Footer 

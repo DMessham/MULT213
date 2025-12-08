@@ -17,11 +17,12 @@ export function TodoList (props){
     )})
   }
   return ( <>
-  <section>
-          <h2>My TODOs:</h2>
-          <ul className="todo-list" id="todo-list">
-            {listContent}
-    </ul>
+  <section >
+      <h2>My TODOs:</h2>
+            <ul className="todo-list" id="todo-list">
+              {listContent}
+      </ul>
+          
   </section>
   </>
 
