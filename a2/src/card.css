@@ -1,16 +1,28 @@
 .card{
     border-radius: 8px;
     background-color: var(--m3-surface-container);
-    
+    border: 1px solid var(--m3-outline-variant);
+    min-width: 13em;
+    min-height: 15em;
+    position: relative;
     header{
-      padding:0.75em;
-      background-color: var(--m3-surface-container);
+      padding:0.5em 0.75em;
+      background-color: var(--m3-surface-container-high);
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
     }
     main{
+      padding:0.25em 0.75em;
+      border-radius: 8px;
+    }
+    footer{
+      position: absolute; 
+      /* make it stick to the bottom */
+      bottom: 0;
+      left:0;
+      right:0;
       background-color: var(--m3-surface-container-low);
-      padding:0.75em;
+      padding:0.25em 0.75em;
       border-bottom-left-radius: 8px;
       border-bottom-right-radius: 8px;
     }
