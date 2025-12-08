@@ -11,8 +11,12 @@ export function TodoList (props){
   } else {
     // If there are TODOs, render them as li elements containg a div for the cards
     listContent = todos.map((item, i) => {
+      let actions = <>
+      <input type="checkbox" className="todo-item__checkbox" data-id={i} id={"todo-" + i} />
+      <label for={"todo-" + i} className="todo-item__label">done</label>
+      </>
       return( <li class="todo-item">
-        <Card title={item.name} content="todo item"></Card>
+        <Card content={item.name} title="todo item" actions={actions} ></Card>
       </li>
     )})
   }

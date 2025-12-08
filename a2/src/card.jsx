@@ -17,7 +17,6 @@ export function Card(props){
     const imageElement = (props.image ? <img src={props.image} /> : null)
 
     const actionsElement = (props.actions ? <>{props.actions}</> : null)
-
     // for (i=0; i<props.actions.length; i++){
     //     actionElement += (props.actions[i]? <a href={props.actions[i].href}>{props.actions[i].content}</a> : null)
     // }
@@ -31,8 +30,6 @@ export function Card(props){
             <main>
                 {imageElement}
                 {contentElement}
-                {/* <input type="checkbox" className="todo-item__checkbox" data-id={i} id={"todo-" + i} /> */}
-                {/* <label for={"todo-" + i} className="todo-item__label">done</label> */}
             </main>
             <footer>
                 {actionsElement}
