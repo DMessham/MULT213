@@ -181,6 +181,7 @@ body {
     content: "✔";
   }
 
+/* content box stuff for making the header and footer bg full width */
 .contentW{
   width:70vw;
   display:block;
@@ -190,8 +191,10 @@ body {
 
 .mainContentArea{
   margin: 1em 0;
-  
+
 }
+
+/* navbar */
 
 .mainhead{
   background-color: var(--m3-surface-container);
@@ -199,6 +202,45 @@ body {
   padding-bottom: 0.05em;
   padding-top:0.5em
 }
+
+.mainhead nav{
+  background-color: var(--m3-secondary-container);
+}
+
+.mainhead nav .contentW{
+  display:flex;
+  flex-direction: row;
+  gap:0.15em;
+}
+
+.mainhead nav a{
+  color: var(--m3-secondary-fixed-dim);
+  min-height: 24px;
+  padding: 0.15em 0.25em;
+  border-radius: 5px;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  gap:0.4em;
+  
+  
+}
+.mainhead nav a img{
+  border-radius: 6px;
+  margin: -0.2em;
+  max-height: 32px;
+}
+
+.mainhead nav a:hover{
+  background-color: var(--m3-on-secondary);
+  color: var(--m3-secondary-fixed);
+}
+.mainhead nav a:focus{
+  background-color: var(--m3-secondary-fixed-dim);
+  color: var(--m3-on-secondary);
+}
+
+/* footer */
 
 body>div>footer{
   background-color: var(--m3-surface-container-lowest);
@@ -208,14 +250,30 @@ body>div>footer{
   position:fixed;
   padding-top: 0;
   padding-bottom: 1.5em;
-  p{
-    margin:0.75em 0;
-  }
-  a{
-    display:inline
-  }
 }
 
+body>div>footer a{
+  display: inline-flex;
+  align-items: center;
+  gap:0.3rem;
+  margin-inline-end:0.5em;
+  color:var(--m3-primary);
+  border-radius: 6px;
+  padding: 0.2em;
+}
+body>div>footer a:hover{
+  background-color: var(--m3-on-secondary);
+  color: var(--m3-secondary-fixed);
+}
+
+body>div>footer p{
+  margin:0.75em 0;
+}
+
+body>div>footer img{
+  max-height: 32px;
+  border-radius: 4px;
+}
 h1, h2, h3{
   margin:0.75rem 0;
 }

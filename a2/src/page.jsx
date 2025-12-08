@@ -1,9 +1,43 @@
 import viteLogo from '/vite.svg';
 import reactLogo from './assets/react.svg';
+import githubLogo from './assets/github-mark-white.svg';
 
 export function Header(props){
+    let navArray = [
+        {
+            url: "https://dmessham.ca",
+            text: "DMessham.ca",
+            type: 'imgText',
+            imgSrc: "https://dmessham.ca/icons/profpic_gradient-64.png"
+        },
+        {
+            url: "https://dmessham.com/blog",
+            text: "blog",
+            type: 'text'
+        },
+        {
+            url: "https://dmessham.com/projects",
+            text: "projects",
+            type: 'text'
+        },
+        {
+            url: "https://dmessham.ca/school",
+            text: "school",
+            type: 'text',
+        }
+    ]
+
+    let navOutput=[]
+    for(let i=0; i< navArray.length; i++) {
+        navOutput[i]=makeLink(navArray[i]);
+    }
     return (<>
       <header className="mainhead">
+        <nav >
+            <div className='contentW'>
+                {navOutput}
+            </div>
+        </nav>
         <div className='contentW'>
             <h1>{props.title}</h1>
             <p>Dootis - Daniel Messham 2025</p>
@@ -44,21 +78,27 @@ export function Footer(props){
     let linkArray = [
         {
             url: "https://dmessham.ca",
-            text: "DMessham.ca",
-            type: 'img',
+            text: "My site",
+            type: 'imgText',
             imgSrc: "https://dmessham.ca/icons/profpic_gradient-32.png"
         },
         {
             url: "https://react.dev",
             text: "react",
-            type: 'img',
+            type: 'imgText',
             imgSrc: reactLogo,
         },
         {
             url: "https://vite.dev",
             text: "vite",
-            type: 'img',
+            type: 'imgText',
             imgSrc: viteLogo
+        },
+        {
+            url: "https://https://github.com/DMessham/MULT213/tree/main/a2",
+            text: "github project",
+            type: 'imgText',
+            imgSrc: githubLogo
         }
     ]
 
