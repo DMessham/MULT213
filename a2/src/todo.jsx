@@ -1,6 +1,9 @@
-export function todoList (todos){
+
+import { Card } from './card.jsx';
+export function TodoList (props){
     // Build up the UI element for the TODOs
   let listContent = <></>;
+  const todos = props.todos
 
   if (todos.length == 0) {
     // If there are no TODOs, tell the user what to do
@@ -9,18 +12,19 @@ export function todoList (todos){
     // If there are TODOs, render them as li elements containg a div for the cards
     listContent = todos.map((item, i) => {
       return( <li class="todo-item">
-        <div class="card" >
-          <header>
-            {item.name}
-          </header>
-          <main>
-          <input type="checkbox" class="todo-item__checkbox" data-id={i} id={"todo-" + i} />
-          <label for={"todo-" + i} class="todo-item__label">done</label>
-          </main>
-          
-        </div>
-        
+        <Card title={item.name}></Card>
       </li>
     )})
   }
+  return ( <>
+  <section>
+          <h2>My TODOs:</h2>
+          <ul className="todo-list" id="todo-list">
+            {listContent}
+    </ul>
+  </section>
+  </>
+
+  )
+  
 }

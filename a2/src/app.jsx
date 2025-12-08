@@ -2,7 +2,7 @@ import './App.css';
 import './card.css';
 import { useState } from 'react';
 import { Card } from './card.jsx';
-import { todoList } from './todo.jsx';
+import { TodoList } from './todo.jsx';
 import { Header, Footer } from './page.jsx';
 
 
@@ -50,13 +50,8 @@ function App() {
             <button className="todo-form__button" type="submit">Add</button>
           </form>
         </section>
-
-        <section>
-          <h2>My TODOs:</h2>
-          <ul className="todo-list" id="todo-list">
-            {listContent}
-          </ul>
-        </section>
+        <TodoList todos = {todos}></TodoList>
+        
       </main>
 
       <Footer 

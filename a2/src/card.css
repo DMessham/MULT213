@@ -10,6 +10,9 @@
       background-color: var(--m3-surface-container-low);
       padding:1em;
     }
+    h1, h2{
+      margin:0;
+    }
   }
 
   .card:first-child{
