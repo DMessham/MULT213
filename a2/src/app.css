@@ -373,6 +373,7 @@ h1, h2, h3{
 @media (width > 1770px ) {
   .todo-list {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+   gap: 3px 12px;
   }
 }
 @media (width > 1950px ) {
@@ -388,6 +389,7 @@ h1, h2, h3{
 @media (width > 2500px ) {
   .todo-list {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 17px 20px;
   }
 }
 
@@ -400,6 +402,7 @@ h1, h2, h3{
 @media (width > 3400px ) {
   .todo-list {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 24px 32px;
   }
 }
 
