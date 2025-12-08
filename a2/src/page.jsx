@@ -46,7 +46,7 @@ export function Footer(props){
             imgSrc: "https://dmessham.ca/icons/profpic_gradient-32.png"
         },
         {
-            url: "react.dev",
+            url: "https://react.dev",
             text: "react",
             type: 'img',
             imgSrc: reactLogo,
