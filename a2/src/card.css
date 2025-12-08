@@ -33,11 +33,13 @@
     right:0;
     background-color: var(--m3-surface-container-low);
     padding:0.4em 0.85em;
-    border-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
     border-top: 1px solid var(--m3-outline-variant);
     display: flex;
     align-items: center;
     justify-content: right;
+    
   }
 
   .card main{
