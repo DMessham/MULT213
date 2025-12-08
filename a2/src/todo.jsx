@@ -12,7 +12,7 @@ export function TodoList (props){
     // If there are TODOs, render them as li elements containg a div for the cards
     listContent = todos.map((item, i) => {
       return( <li class="todo-item">
-        <Card title={item.name}></Card>
+        <Card title={item.name} content="todo item"></Card>
       </li>
     )})
   }
