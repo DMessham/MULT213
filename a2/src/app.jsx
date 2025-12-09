@@ -38,12 +38,12 @@ function App() {
       <main className='mainContentArea'>
         <div className='contentW'>
           <section>
-          <TodoList todos={[
+          {/* <TodoList todos={[
             { id: 1, text: "Complete React assignment", completed: false },
             { id: 2, text: "Study for math test", completed: false },
             { id: 3, text: "Do laundry", completed: true }
           ]} />
-          <Card title="My Card Title" subtitle="My Card Subtitle" content="This is the content of my card." image="https://example.com/my-image.jpg" />
+          <Card title="My Card Title" subtitle="My Card Subtitle" content="This is the content of my card." image="https://example.com/my-image.jpg" /> */}
 
             <form id="todo-form" action={handleFormSubmit}>
               <input
