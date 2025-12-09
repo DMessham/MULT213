@@ -40,7 +40,6 @@ export function Header(props){
         </nav>
         <div className='contentW'>
             <h1>{props.title}</h1>
-            <p>Dootis - Daniel Messham 2025</p>
             <p>{props.message}</p>
         </div>
           
@@ -111,6 +110,9 @@ export function Footer(props){
     return (<>
         <footer>
             <div className='contentW'>
+            <p className="read-the-docs">
+                    {props.message}
+                </p>
                 <p className="read-the-docs">
                     {props.helptext}
                 </p>

@@ -38,7 +38,13 @@ function App() {
       <main className='mainContentArea'>
         <div className='contentW'>
           <section>
-            
+          <TodoList todos={[
+            { id: 1, text: "Complete React assignment", completed: false },
+            { id: 2, text: "Study for math test", completed: false },
+            { id: 3, text: "Do laundry", completed: true }
+          ]} />
+          <Card title="My Card Title" subtitle="My Card Subtitle" content="This is the content of my card." image="https://example.com/my-image.jpg" />
+
             <form id="todo-form" action={handleFormSubmit}>
               <input
                 className="todo-form__input"
@@ -58,7 +64,7 @@ function App() {
 
       <Footer 
         helptext=" Click on the Vite (the build tool) and React (the frontend framework) logos to learn more"
-        
+        message="Dootis - Daniel Messham 2025"
       />
     </>
   )

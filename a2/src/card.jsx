@@ -8,11 +8,11 @@ export function Card(props){
         //props.actions - (WONTDO - maybe for a later project)
     // end docs
 
-    const contentElement = (props.content ? <p>{props.content}</p> : null)
+    const contentElement = (props.content ? <p>{props.content}</p> : (props.text ? <p>{props.text}</p> : null) )
 
-    const subtitleElement = (props.subtitle ? <p>{props.subtitle}</p> : null)
+    const subtitleElement = (props.subtitle ? <h2>{props.subtitle}</h2> : null)
 
-    const titleElement = (props.title ? <h2>{props.title}</h2> : null)
+    const titleElement = (props.title ? <h1>{props.title}</h1> : <h2>Card Title</h2>)
 
     const imageElement = (props.image ? <img src={props.image} /> : null)
 
