@@ -1,0 +1,32 @@
+import { ThemeOptions } from '@mui/material/styles';
+
+export const themeOptions: ThemeOptions = {
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#325f26',
+    },
+    secondary: {
+      main: '#30565a',
+    },
+    divider: '#8d9286',
+    info: {
+      main: '#2a4343',
+      contrastText: 'rgba(48,92,92,0.87)',
+    },
+    error: {
+      main: '#aa2718',
+    },
+    success: {
+      main: '#3e523e',
+    },
+    warning: {
+      main: '#a6811c',
+      contrastText: 'rgba(74,68,42,0.87)',
+    },
+    background: {
+      default: '#d8dcd1',
+      paper: '#edede8',
+    },
+  },
+};

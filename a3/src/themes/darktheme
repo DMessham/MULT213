@@ -1,0 +1,48 @@
+import { ThemeOptions } from '@mui/material/styles';
+
+export const themeOptions: ThemeOptions = {
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#9ac487',
+      contrastText: '#182519',
+      dark: '#749669',
+      light: '#97c68f',
+    },
+    secondary: {
+      main: '#b4c0a5',
+      dark: '#8c937b',
+    },
+    background: {
+      paper: '#181c18',
+    },
+    divider: '#8d9286',
+    info: {
+      main: '#9fcfd1',
+      dark: '#1f5152',
+      contrastText: 'rgba(48,92,92,0.87)',
+      light: '#9fcfd1',
+    },
+    text: {
+      primary: '#f0ffeb',
+      secondary: '#bfc8b8',
+      hint: '#7bb98f',
+      disabled: 'rgba(70,68,68,0.5)',
+    },
+    error: {
+      main: '#ffb4ab',
+      light: '#f6c5c5',
+      dark: '#79070e',
+      contrastText: 'rgba(35,6,6,0.87)',
+    },
+    success: {
+      main: '#89b389',
+      dark: '#396039',
+    },
+    warning: {
+      main: '#e6c389',
+      dark: '#9e740b',
+      contrastText: 'rgba(74,68,42,0.87)',
+    },
+  },
+};
