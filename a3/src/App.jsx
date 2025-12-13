@@ -10,6 +10,7 @@ import './App.css'
 import { ThemeProvider} from '@mui/material/styles';
 import { theme } from './theme';
 import ResponsiveDrawer from './elements/drawer';
+import BottomAppBar from './elements/bottomBar';
 
 
 
@@ -21,7 +22,6 @@ function App() {
     <>
     
     <ThemeProvider theme={theme}>
-    <ResponsiveDrawer> </ResponsiveDrawer>
       
       <Container maxWidth="sm">
         <Box sx={{ my: 4 }}>
@@ -51,6 +51,7 @@ function App() {
             Click on the Vite and React logos to learn more
           </p>
       </Container>
+      <BottomAppBar></BottomAppBar>
       </ThemeProvider>
     </>
   )
