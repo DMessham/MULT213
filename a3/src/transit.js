@@ -19,10 +19,9 @@ const routestopForm = document.querySelector("#routestop-form");
 const routestopOutput = document.querySelector("#routestop-output");
 
 // for seeing nearby routes
-nearbyForm.addEventListener("submit", async (e) => {
+export function getLocationButton() {
     renderMessage(nearbyList, "Locating…");
-    if (debugmode){console.log(`getting location`, e)}
-    e.preventDefault();
+    if (debugmode){console.log(`getting location`)}
     
     const radius = 250
     // based off https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
@@ -67,8 +66,7 @@ nearbyForm.addEventListener("submit", async (e) => {
 });
 
 //search routes
-routeForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
+export function routesearch() {
 
     const route = document.querySelector("#route").value;
     if (!route) return;
@@ -120,7 +118,7 @@ routeForm.addEventListener("submit", async (e) => {
         console.log(err)
         renderMessage(routeList, `Error - ${err.message}`);
     }
-});
+};
 
 // searching all stops
 stopForm.addEventListener("submit", async (e) => {
