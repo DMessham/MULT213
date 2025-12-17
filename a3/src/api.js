@@ -1,7 +1,7 @@
 // API function to integrate with Open-Meteo Geocoding and Weather APIs
 // Reference: https://open-meteo.com/
 
-import {apikey} from './../a1/src/key.js'
+import {apikey} from './key.js'
 
 const transitFeedID = "o-c9k0-saskatoontransit"; //saskatoon transit
 

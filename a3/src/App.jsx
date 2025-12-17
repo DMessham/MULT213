@@ -12,12 +12,11 @@ import { theme } from './theme';
 import ResponsiveDrawer from './elements/drawer';
 import BottomAppBar from './elements/bottomBar';
 import Routelist from './elements/routelist'
+import StopList from './elements/stoplist';
 
 import TextField from '@mui/material/TextField';
 
 import { fetchStopsLocation, fetchRouteStops, searchRoutes, searchStops, fetchAreaImage} from "./api.js";
-
-
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,28 +24,24 @@ function App() {
     // Define the routeSearch models
   const [routeSearchs, setrouteSearchs] = useState([]);
 
-  
-    // Define the stopSearch models
-    const [stopSearchs, setstopSearchs] = useState([]);
+  // Define the stopSearch models
+  const [stopSearchs, setstopSearchs] = useState([]);
 
-    
+  // Define the stopSearch models
+  const [getLocation, setlocation] = useState([]);
+
 
   // Set up add new routeSearch form handler
-  const handleRouteFormSubmit = (formData) => {
+  const handleRouteFormSubmit = async (formData) => {
     const titleField = formData.get('title');
     console.log(`Handling new routeSearch: ${titleField}`);
-
-    // Make new routeSearch model
-    const newrouteSearch = {
-      name: titleField
-    };
-
-    // We need to make a new list, otherwise React will not update
-    const newrouteSearchs = [...routeSearchs, newrouteSearch];
-
+    let outputArray = []
+    // call the func from api
+    const data = await searchRoutes(titleField);
     // We call the React hook to update the application state
-    setrouteSearchs(newrouteSearchs);
+    setrouteSearchs(data.routes);
   };
+
     // Set up add new stopSearch form handler
   const handleStopFormSubmit = (formData) => {
     const titleField = formData.get('title');
@@ -65,8 +60,9 @@ function App() {
   };
 
   //current Location Button Logic
-
-  getLocationButton => {
+  let latitude = 0.0
+  let longitude = 0.0
+  const getLocationButton = async () => {
     console.log(`getting location`)
     
     const radius = 250
@@ -82,8 +78,8 @@ function App() {
             
             console.log(`Looking for stops within ${radius}m of ${latitude}, ${longitude}:`);
             let data = await fetchStopsLocation(latitude, longitude, radius);
-            console.log("Getting map…");
-            let img = await fetchAreaImage(latitude, longitude, radius);
+            // console.log("Getting map…");
+            // let img = await fetchAreaImage(latitude, longitude, radius);
             
             try {
                 //check if there is any data and display it
@@ -96,7 +92,7 @@ function App() {
                 
                     console.log(message);
                 }
-                console.log(img)
+                return(latitude, longitude)
                 
             } catch (err) {
                 console.log("error in nearby stops:", err.message, err)
@@ -122,37 +118,30 @@ function App() {
           <div>
           <form id="routeSearch-form" action={handleRouteFormSubmit}>
             <TextField 
-              label="Search for routes" 
-              variant="standard" 
+              label="Search for routes" variant="standard" 
               className="routeSearch-form__input"
-                id="routeSearch-input"
-                name="title"
-                type="text"
-                placeholder="name"
-                autoComplete="off"
-                required
+                id="routeSearch-input" name="title"
+                type="text" placeholder="name"
+                autoComplete="off" required
             />
-              <button className="routeSearch-form__button" type="submit">Search</button>
-              <Button variant="contained">Search</Button>
+              <Button variant="contained" className="routeSearch-form__button" type="submit">Search</Button>
             </form>
-            
-            {/* <TodoList todos = {todos}></TodoList> */}
+            <Routelist props={routeSearchs} ></Routelist>
           </div>
           <div>
           <form id="stopSearch-form" action={handleStopFormSubmit}>
             <TextField 
-                label="Search for Stops" 
-                variant="standard" 
-                className="stopSearch-form__input"
-                id="stopSearch-input"
-                name="title"
-                type="text"
-                placeholder="name"
-                autoComplete="off"
+                label="Search for Stops" variant="standard" 
+                className="stopSearch-form__input" id="stopSearch-input"
+                name="title" type="text"
+                placeholder="name" autoComplete="off"
               />
               <Button variant="contained" className="stopSearch-form__button" type="submit">Search</Button>
-              <Button variant="outlined">Near me</Button>
+              
+            <Button variant="outlined" onClick={getLocationButton}>Near me</Button>
             </form>
+            
+            <StopList></StopList>
           </div>
           <div className="card">
             <Button variant="contained" onClick={() => setCount((count) => count + 1)}>
@@ -172,7 +161,7 @@ function App() {
           
       </Container>
       
-      <Routelist></Routelist>
+      
       <BottomAppBar></BottomAppBar>
       </ThemeProvider>
     </>
