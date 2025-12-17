@@ -29,10 +29,9 @@ export function getLocationButton() {
         let nav = navigator.geolocation
         /* geolocation is available */
         nav.getCurrentPosition(async (position) =>{
-            renderMessage(nearbyList, "Location found…");
             latitude = position.coords.latitude
             longitude = position.coords.longitude
-            if (debugmode){console.log(`latitude is`, latitude, `longitude is`, longitude)}
+            console.log(`latitude is`, latitude, `longitude is`, longitude)
             // at this point, not loading anymore
             
             renderMessage(nearbyList, `Looking for stops within ${radius}m of ${latitude}, ${longitude}:`);
@@ -54,7 +53,6 @@ export function getLocationButton() {
                 renderImage(nearbyList, img)
                 
             } catch (err) {
-                renderMessage(nearbyList, `Error: ${err.message}.`);
                 console.log("error in nearby stops:", err.message, err)
             }
         });
@@ -66,49 +64,35 @@ export function getLocationButton() {
 });
 
 //search routes
-export function routesearch() {
+export function routesearch(route) {
 
-    const route = document.querySelector("#route").value;
+    let output = ''
+
     if (!route) return;
 
-    renderMessage(routeList, "Loading…");
+    output == "Loading…";
 
     try {
         //check if there is any data and display it
-        if (debugmode){console.log(`searching for`, route)}
         const data = await searchRoutes(route);
         if (debugmode){console.log(`results for search:`, data.length)}
         if (data.length === 0) {
-            renderMessage(routeOutput, `No results found for "${route}".`);
+            output == `No results found for "${route}".`;
             return;
         }
         
         let message = `Found ${data.routes.length} result(s) for "${route}":`;
-        let tableArray = []
-        let headerArray = ["#", "Route Name", 'Agency', 'onestopID', 'Actions']
 
-        const actionButtonText = "stops"
         if (debugmode){console.log(`preparing table for`, route)}
         for (let row=0; row<data.routes.length; row++) {
             let item = data.routes[row]
-            if (debugmode){console.log(`preparing table item`, item)}
-            //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
-            //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
             const agency_info = item.agency
             const agency_name = `${agency_info.agency_name}` //dont use anything else from transit info right now
-            let actionButtonE = document.createElement("button");
-            actionButtonE.appendChild(document.createTextNode(actionButtonText))
-            actionButtonE.setAttribute('onClick', `${displayListButtonEvent(item.onestop_id)}`)
 
-            tableArray[row] = [
-                elementFromNode(document.createTextNode(`${item.route_short_name}`), "td"),
-                elementFromNode(document.createTextNode(`${item.route_long_name}`), "td"),
-                elementFromNode(document.createTextNode(`${agency_name}`), 'td'),
-                elementFromNode(document.createTextNode(`${item.onestop_id}`), 'td'),
-                actionButtonE
+            output += [
+
             ]
         };
-        // message += "</table>";
         
         
         renderMessage(routeList, message);

@@ -16,7 +16,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import Routelist from './routelist';
 
 
 const StyledFab = styled(Fab)({
@@ -33,7 +32,6 @@ const StyledFab = styled(Fab)({
 export default function BottomAppBar() {
   return (
     <React.Fragment>
-      <Routelist></Routelist>
       <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
         <Toolbar>
           <IconButton color="inherit" aria-label="open drawer">

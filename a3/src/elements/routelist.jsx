@@ -20,19 +20,19 @@ import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
 
-const messages = [
+// get data from api and feed it in
+
+const input = [
     {
       id: 1,
       primary: 'City Center / 8th street',
       secondary: "Arriving in 5 minutes",
-      person: '/static/images/avatar/5.jpg',
     },
     {
       id: 2,
       primary: 'Birthday Gift',
       secondary: `Do you have a suggestion for a good present for John on his work
         anniversary. I am really confused & would love your thoughts on it.`,
-      person: '/static/images/avatar/1.jpg',
     },
   ];
 
@@ -47,7 +47,7 @@ export default function routelist(){
             Bus routes
             </Typography>
             <List sx={{ mb: 2 }}>
-            {messages.map(({ id, primary, secondary, person }) => (
+            {input.map(({ id, primary, secondary }) => (
                 <React.Fragment key={id}>
                 {id === 1 && (
                     <ListSubheader sx={{ bgcolor: 'background.paper' }}>
@@ -61,7 +61,7 @@ export default function routelist(){
                 )}
                 <ListItemButton>
                     <ListItemAvatar>
-                    <Avatar alt="Profile Picture" src={person} />
+                    <Avatar>N</Avatar>
                     </ListItemAvatar>
                     <ListItemText primary={primary} secondary={secondary} />
                 </ListItemButton>

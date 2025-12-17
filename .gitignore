@@ -29,6 +29,7 @@ yarn-error.log*
 */src/private/
 */keys.json
 a1/src/key.js
+a3/src/key.js
 /workingdir/
 */dist/main.js
 a1/dist/main.js
