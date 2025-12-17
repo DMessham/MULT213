@@ -11,6 +11,7 @@ import ListSubheader from '@mui/material/ListSubheader';
 import Avatar from '@mui/material/Avatar';
 import RouteListItem from './routeListItem';
 
+import Badge from '@mui/material/Badge';
 
 
 
@@ -27,7 +28,7 @@ export default function routelist(props){
     console.log(`Found ${props.props.length} result(s):`);
     for (let row=0; row<props.props.length; row++) {
       let item = props.props[row]
-      console.log(`preparing table item`, item)
+      // console.log(`preparing table item`, item)
       //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
       //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
       const agency_info = item.agency
@@ -38,7 +39,10 @@ export default function routelist(props){
           'primary':`${item.route_long_name}`,
           'agency':`${agency_name}`,
           'secondary':`${item.onestop_id}`,
-          'id':row
+          'id':`${item.route_id}`,
+          'bgColor':`${item.route_color}`,
+          'fgColor':`${item.route_text_color}`,
+          'stops':`${item.route_stops}`
       }
     }
 
@@ -53,15 +57,10 @@ export default function routelist(props){
             Bus routes
             </Typography>
             <List sx={{ mb: 2 }}>
-            {newData.map(({ onestop_id, primary, secondary }) => (
-                <React.Fragment key={onestop_id}>
-                {/* <RouteListItem primary={props.props.primary} secondary="TEST"></RouteListItem> */}
-                <ListItemButton selected={open}>
-                      <ListItemAvatar>
-                      <Avatar variant="rounded">num</Avatar>
-                      </ListItemAvatar>
-                      <ListItemText primary={primary} secondary={secondary} />
-                  </ListItemButton>
+            {newData.map(({ id, primary, secondary, short, agency, bgColor, fgColor }) => (
+                <React.Fragment key={id}>
+                <RouteListItem title={primary} content={agency+" "+secondary} bgColor={bgColor} fgColor={fgColor} number={short} />
+                
                 </React.Fragment>
             ))}
             </List>

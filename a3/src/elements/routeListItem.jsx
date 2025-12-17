@@ -14,6 +14,7 @@ import List from '@mui/material/List';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
+import Badge from '@mui/material/Badge';
 import StopListItem from './stopListItem';
 
 export default function RouteListItem(props) {
@@ -21,11 +22,13 @@ export default function RouteListItem(props) {
     //so i can use some text
     const secondary = (props.content ? props.content : (props.text ? props.text : 'Schedule not available') )
 
-    const subtitleElement = (props.subtitle ? props.subtitle : null)
+    const subtitle = (props.subtitle ? props.subtitle : null)
 
     const primary = (props.title ? props.title : 'Route Name ERROR')
 
-    const short = (props.image ? <avatar src={props.image} sx={{ width: 24, height: 24 }} /> : props.number ? <Avatar variant="rounded">{props.number}</Avatar> : <Avatar variant="rounded"><DirectionsBusRoundedIcon></DirectionsBusRoundedIcon></Avatar>)
+    const avicolor = (props.bgColor ? `{{ width: 24, height: 24, avicolor,backgroundColor: ${props.bgColor}, color: ${props.fgColor}}}` : '{{ width: 24, height: 24, avicolor}}')
+
+    const short = (props.image ? <avatar src={props.image} sx={avicolor} /> : props.number ? <Badge badgeContent={props.number} color="secondary" overlap="circular" ><Avatar variant="rounded" ><DirectionsBusRoundedIcon></DirectionsBusRoundedIcon></Avatar></Badge> : <Avatar variant="rounded"><DirectionsBusRoundedIcon></DirectionsBusRoundedIcon></Avatar>)
 
     const actionElement = (props.action ? <>{props.action}</> : null)
 
@@ -41,7 +44,7 @@ export default function RouteListItem(props) {
     return (<>
     <ListItemButton onClick={handleClick} selected={open}>
         <ListItemAvatar>
-        {short}
+            {short}
         </ListItemAvatar>
         <ListItemText primary={primary} secondary={secondary} />
         {open ? "Hide Stops" : "Show Stops"}
