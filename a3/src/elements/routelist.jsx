@@ -17,16 +17,16 @@ import RouteListItem from './routeListItem';
 // get data from api and feed it in
   let favCount = 0;
 export default function routelist(props){
-  console.log(props)
+  console.log(props.props)
   
-  let newData = [{primary:"No Results", id:0, }]
+  let newData = [{primary:"No Results"}]
   if (props.length === 0) {
     console.log(`No results found.`);
   }
   else{
-    console.log(`Found ${props.length} result(s):`);
-    for (let row=0; row<props.length; row++) {
-      let item = props[row]
+    console.log(`Found ${props.props.length} result(s):`);
+    for (let row=0; row<props.props.length; row++) {
+      let item = props.props[row]
       console.log(`preparing table item`, item)
       //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
       //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
@@ -44,8 +44,8 @@ export default function routelist(props){
 
   }
 
-  console.log("Pricessed routelist data",newData, "from", props, "mapped to")
-  //from https://react.dev/learn/rendering-lists
+  console.log("Pricessed routelist data",newData, "from", props)
+
     return (
         <>
         <Paper square sx={{ pb: '50px' }}>
@@ -53,15 +53,15 @@ export default function routelist(props){
             Bus routes
             </Typography>
             <List sx={{ mb: 2 }}>
-            {newData.map(({ id, primary, secondary }) => (
-                <React.Fragment key={id}>
-                <RouteListItem primary={primary} secondary={secondary}></RouteListItem>
-                {/* <ListItemButton selected={open}>
+            {newData.map(({ onestop_id, primary, secondary }) => (
+                <React.Fragment key={onestop_id}>
+                {/* <RouteListItem primary={props.props.primary} secondary="TEST"></RouteListItem> */}
+                <ListItemButton selected={open}>
                       <ListItemAvatar>
                       <Avatar variant="rounded">num</Avatar>
                       </ListItemAvatar>
-                      <RouteListItem primary={primary} secondary={secondary} />
-                  </ListItemButton> */}
+                      <ListItemText primary={primary} secondary={secondary} />
+                  </ListItemButton>
                 </React.Fragment>
             ))}
             </List>
