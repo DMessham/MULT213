@@ -36,19 +36,20 @@ export default function StopListItem(props) {
       <ListItemButton onClick={handleClick} selected={open}>
         <ListItem inset>
           <ListItemAvatar>
-            {TransferWithinAStationRoundedIcon}
+            {/* {TransferWithinAStationRoundedIcon} */}
           </ListItemAvatar>
-          {/* <ListItemText primary={primary} secondary={secondary} /> */}
-          <ListItemText primary={props.primary} secondary={props.secondary} />
+          {console.log('making listtext item')}
+          <ListItemText primary={primary} secondary={secondary} />
+          {/* <ListItemText primary={props.primary} secondary={props.secondary} /> */}
           {open ? "Hide Map" : "Show Map"}
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
       </ListItemButton>
 
 
+      {console.log('making collapse item')}
       <Collapse in={open} timeout="auto" unmountOnExit>
         map goes here
-        {/* {mapElement} */}
       </Collapse>
     </>
     )
@@ -59,6 +60,8 @@ export default function StopListItem(props) {
           <ListItemAvatar>
             {TransferWithinAStationRoundedIcon}
           </ListItemAvatar>
+          
+          {console.log('stoplist failed', error)}
           <ListItemText primary="ERROR" secondary="something went wrong" />
         </ListItem>
     </>

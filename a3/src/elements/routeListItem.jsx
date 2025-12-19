@@ -55,7 +55,7 @@ export default function RouteListItem(props) {
     </ListItemButton>
     <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" dense>
-          {/* <StopList stops={stoparray} type="routelist"/> */}
+          <StopList stops={stoparray} type="routelist"/>
         </List>
       </Collapse>
 </>)}
