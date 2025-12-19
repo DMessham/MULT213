@@ -23,9 +23,9 @@ export default function StopListItem(props) {
 
     const primary = (props.title ? props.title : 'Stop Name ERROR')
 
-    const short = (props.image ? <avatar src={props.image} sx={{ width: 24, height: 24 }} /> : props.number ? <Avatar variant="rounded">{props.number}</Avatar> : <Avatar variant="rounded"><TransferWithinAStationRoundedIcon/></Avatar>)
-
     const actionElement = (props.action ? <>{props.action}</> : null)
+    
+    const mapElement = (props.mapimg ? <><img src={mapimg}></img></> : null)
 
     // dropdown to show advanced info
 
@@ -34,33 +34,33 @@ export default function StopListItem(props) {
     const handleClick = () => {
         setOpen(!open);
     };
-
     
     return (<>
     <ListItemButton onClick={handleClick} selected={open}>
       <ListItem inset>
         <ListItemAvatar>
-        {short}
+          {TransferWithinAStationRoundedIcon}
         </ListItemAvatar>
         <ListItemText primary={primary} secondary={secondary} />
-        {open ? "Info" : "More Info"}
+        {open ? "Hide Map" : "Show Map"}
         {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
     </ListItemButton>
 
     
     <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding dense>
+      map goes here
+      {mapElement}
+        {/* <List component="div" disablePadding dense>
           
           <ListItemButton sx={{ pl: 4 }}>
             <ListItem inset>
               <ListItemIcon>
-                <TransferWithinAStationRoundedIcon />
+                test
               </ListItemIcon>
-              <ListItemText primary="info" secondary="moreinfo" />
-              arrival time
+              Not implemented
             </ListItem>
           </ListItemButton>
-        </List>
+        </List> */}
       </Collapse>
 </>)}

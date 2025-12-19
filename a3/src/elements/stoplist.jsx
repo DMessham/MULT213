@@ -9,11 +9,17 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import Avatar from '@mui/material/Avatar';
-
+import StopListItem from './stopListItem';
 
 // get data from api and feed it in
 
-const input = [
+
+
+
+
+export default function StopList(props){
+
+  let newData = [
     {
       id: 1,
       primary: 'Meadows BLVD/Rosewood Gate N',
@@ -38,39 +44,61 @@ const input = [
 
   let favCount = 3;
 
-
-export default function StopList(){
-    return (
+    if (props.stops.length <= 2) {
+      console.log(`No results found.`);
+      console.log(props)
+      return (
         <>
         <Paper square sx={{ pb: '50px' }}>
             <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
-            Bus Stops
+            Bus routes
             </Typography>
             <List sx={{ mb: 2 }}>
-            {input.map(({ id, primary, secondary }) => (
                 <React.Fragment key={id}>
-                {id === 1 && (
-                    <ListSubheader sx={{ bgcolor: 'background.paper' }}>
-                    Favorites
-                    </ListSubheader>
-                )}
-                {id === favCount+1 && (
-                    <ListSubheader sx={{ bgcolor: 'background.paper' }}>
-                    Nearby
-                    </ListSubheader>
-                )}
-                <ListItemButton>
-                    <ListItemAvatar>
-                    <Avatar>N</Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary={primary} secondary={secondary} />
-                </ListItemButton>
+                <StopListItem title="No stops" content="refine your search" number="" />
                 </React.Fragment>
-            ))}
             </List>
         </Paper>
         
       <CssBaseline />
         </>
     )
+    }
+  else{
+    console.log(`Stoplist:`, props);
+    for (let row=0; row<props.stops.length; row++) {
+      let item = props.stops[row]
+      // console.log(`preparing table item`, item)
+      //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
+      //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
+      newData[row] = {
+          'primary':`${item.stop_name}`,
+          'agency':`${item.id}`,
+          'secondary':`${item.stop_id}`,
+          'id':`${item._id}`,
+      }
+    }
+    return (
+      <>
+      <Paper square sx={{ pb: '50px' }}>
+          <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
+          Bus routes
+          </Typography>
+          <List sx={{ mb: 2 }}>
+          {newData.map(({ id, primary, secondary}) => (
+              <React.Fragment key={id}>
+              <StopListItem title={primary} content={secondary} number={id} />
+              </React.Fragment>
+          ))}
+          </List>
+      </Paper>
+      
+    <CssBaseline />
+      </>
+  )
+  }
+
+  console.log("Pricessed stoplist data",newData, "from", props)
+
+    
 }

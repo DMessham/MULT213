@@ -4,16 +4,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import Avatar from '@mui/material/Avatar';
 import RouteListItem from './routeListItem';
-
-import Badge from '@mui/material/Badge';
-
-
 
 // get data from api and feed it in
   let favCount = 0;
@@ -23,7 +14,22 @@ export default function routelist(props){
   let newData = [{primary:"No Results"}]
   if (props.length === 0) {
     console.log(`No results found.`);
-  }
+    return (
+      <>
+      <Paper square sx={{ pb: '50px' }}>
+          <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
+          Bus routes
+          </Typography>
+          <List sx={{ mb: 2 }}>
+              <React.Fragment key={id}>
+              <RouteListItem title="No Results" content="try searching something else" bgColor="001100" fgColor="aaffaa" number=""stops={[{stop_name:"no data", id:0, stop_id:""}]} />
+              </React.Fragment>
+          </List>
+      </Paper>
+      
+    <CssBaseline />
+      </>
+  )}
   else{
     console.log(`Found ${props.props.length} result(s):`);
     for (let row=0; row<props.props.length; row++) {
@@ -45,10 +51,7 @@ export default function routelist(props){
           'stops':`${item.route_stops}`
       }
     }
-
-  }
-
-  console.log("Pricessed routelist data",newData, "from", props)
+    console.log("Pricessed routelist data",newData, "from", props)
 
     return (
         <>
@@ -57,10 +60,9 @@ export default function routelist(props){
             Bus routes
             </Typography>
             <List sx={{ mb: 2 }}>
-            {newData.map(({ id, primary, secondary, short, agency, bgColor, fgColor }) => (
+            {newData.map(({ id, primary, secondary, short, agency, bgColor, fgColor, stops }) => (
                 <React.Fragment key={id}>
-                <RouteListItem title={primary} content={agency+" "+secondary} bgColor={bgColor} fgColor={fgColor} number={short} />
-                
+                <RouteListItem title={primary} content={agency+" "+secondary} bgColor={bgColor} fgColor={fgColor} number={short} stops={stops} />
                 </React.Fragment>
             ))}
             </List>
@@ -69,4 +71,5 @@ export default function routelist(props){
       <CssBaseline />
         </>
     )
+  }
 }

@@ -35,7 +35,6 @@ function App() {
   const handleRouteFormSubmit = async (formData) => {
     const titleField = formData.get('title');
     console.log(`Handling new routeSearch: ${titleField}`);
-    let outputArray = []
     // call the func from api
     const data = await searchRoutes(titleField);
     // We call the React hook to update the application state
@@ -43,7 +42,7 @@ function App() {
   };
 
     // Set up add new stopSearch form handler
-  const handleStopFormSubmit = (formData) => {
+  const handleStopFormSubmit = async (formData) => {
     const titleField = formData.get('title');
     console.log(`Handling new stopSearch: ${titleField}`);
 
@@ -51,6 +50,8 @@ function App() {
     const newstopSearch = {
       name: titleField
     };
+
+    const data = await searchStops(titleField);
 
     // We need to make a new list, otherwise React will not update
     const newstopSearchs = [...stopSearchs, newstopSearch];
@@ -141,7 +142,7 @@ function App() {
             <Button variant="outlined" onClick={getLocationButton}>Near me</Button>
             </form>
             
-            <StopList></StopList>
+            {/* <StopList props={stopSearchs}></StopList> */}
           </div>
           <div className="card">
             <Button variant="contained" onClick={() => setCount((count) => count + 1)}>

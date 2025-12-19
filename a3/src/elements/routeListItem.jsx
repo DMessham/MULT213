@@ -15,7 +15,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
 import Badge from '@mui/material/Badge';
-import StopListItem from './stopListItem';
+import StopList from './stoplist';
 
 export default function RouteListItem(props) {
 
@@ -31,6 +31,8 @@ export default function RouteListItem(props) {
     const short = (props.image ? <avatar src={props.image} sx={avicolor} /> : props.number ? <Badge badgeContent={props.number} color="secondary" overlap="circular" ><Avatar variant="rounded" ><DirectionsBusRoundedIcon></DirectionsBusRoundedIcon></Avatar></Badge> : <Avatar variant="rounded"><DirectionsBusRoundedIcon></DirectionsBusRoundedIcon></Avatar>)
 
     const actionElement = (props.action ? <>{props.action}</> : null)
+
+    const stoparray = (props.stops ? <>{props.stops}</> : null)
 
     // dropdown to show advanced info
 
@@ -52,7 +54,7 @@ export default function RouteListItem(props) {
     </ListItemButton>
     <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" dense>
-          <StopListItem/>
+          <StopList />
         </List>
       </Collapse>
 </>)}
