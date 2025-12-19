@@ -74,13 +74,14 @@ export default function StopList(props) {
             title: `${item.stop_name}`,
             content: `Desc:${item.stop_desc}\nOneStopID: ${item.onestop_id}\nStopcode: ${item.stop_code}`,
             number: `${item.id}`,
+            img:`${item.onestop_id}`,
           }
         }
         let item = newData[row].stop
 
         output += (<>
           <React.Fragment key={row}>
-            <StopListItem title={item.stop_name} content={item.stop_id} number={item.id} />
+            <StopListItem title={item.stop_name} content={item.stop_id} number={item.id} img={item.img} />
           </React.Fragment>
         </>)
         console.log("Pricessed stoplist data", newData, "from", props)
@@ -91,9 +92,9 @@ export default function StopList(props) {
                 stops
               </Typography>
               <List sx={{ mb: 2 }}>
-                {output.map(({ id, primary, secondary }) => (
+                {output.map(({ id, primary, secondary, img }) => (
                   <React.Fragment key={id}>
-                    <StopListItem title={primary} content={secondary} number={id} />
+                    <StopListItem title={primary} content={secondary} number={id} mapimg={img} />
                   </React.Fragment>
                 ))}
                 {output}

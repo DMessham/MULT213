@@ -13,6 +13,7 @@ import List from '@mui/material/List';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { ListItem } from '@mui/material';
+import StopListMap from './stoplistMap';
 
 export default function StopListItem(props) {
   console.log("creatng stoplist item", props)
@@ -22,7 +23,7 @@ export default function StopListItem(props) {
 
     const primary = (props.title != null ? props.title : 'Stop Name ERROR')
 
-    const mapElement = (props.mapimg ? <><img src={mapimg}></img></> : null)
+    
 
     // dropdown to show advanced info
 
@@ -49,7 +50,7 @@ export default function StopListItem(props) {
 
       {console.log('making collapse item')}
       <Collapse in={open} timeout="auto" unmountOnExit>
-        map goes here
+        {StopListMap("bruh")}
       </Collapse>
     </>
     )
