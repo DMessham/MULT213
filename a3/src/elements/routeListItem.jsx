@@ -20,7 +20,7 @@ import StopList from './stoplist';
 export default function RouteListItem(props) {
 
     //so i can use some text
-    const secondary = (props.content ? props.content : (props.text ? props.text : 'Schedule not available') )
+    const secondary = (props.content ? props.content : 'not available')
 
     const subtitle = (props.subtitle ? props.subtitle : null)
 
@@ -32,7 +32,28 @@ export default function RouteListItem(props) {
 
     const actionElement = (props.action ? <>{props.action}</> : null)
 
-    const stoparray = (props.stops ? <>{props.stops}</> : null)
+    const stoparray = (props.route_stops ? props.route_stops : {stops:[
+    {
+      id: 101,
+      stop_name: 'Meadows BLVD/Rosewood Gate N',
+      stop_id: "2 minutes from Home",
+    },
+    {
+      id: 102,
+      stop_name: 'Idylwyld/32nd Street',
+      stop_id: `1 Minute from school`,
+    },
+    {
+      id: 103,
+      stop_name: 'Taylor/Rosewood Gate N',
+      stop_id: "5 minutes from Home",
+    },
+    {
+      id: 104,
+      stop_name: 'Idylwyld/33rd Street',
+      stop_id: `4 Minutes from school`,
+    },
+  ]})
 
     // dropdown to show advanced info
 
@@ -54,7 +75,7 @@ export default function RouteListItem(props) {
     </ListItemButton>
     <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" dense>
-          <StopList />
+          <StopList stops={stoparray}/>
         </List>
       </Collapse>
 </>)}

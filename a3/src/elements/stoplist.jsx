@@ -19,29 +19,28 @@ import StopListItem from './stopListItem';
 
 export default function StopList(props){
 
-  let newData = [
+  let newData = {stops:[
     {
       id: 1,
-      primary: 'Meadows BLVD/Rosewood Gate N',
-      secondary: "2 minutes from Home",
+      stop_name: 'Meadows BLVD/Rosewood Gate N',
+      stop_id: "2 minutes from Home",
     },
     {
       id: 2,
-      primary: 'Idylwyld/32nd Street',
-      secondary: `1 Minute from school`,
+      stop_name: 'Idylwyld/32nd Street',
+      stop_id: `1 Minute from school`,
     },
     {
       id: 3,
-      primary: 'Taylor/Rosewood Gate N',
-      secondary: "5 minutes from Home",
+      stop_name: 'Taylor/Rosewood Gate N',
+      stop_id: "5 minutes from Home",
     },
     {
       id: 4,
-      primary: 'Idylwyld/33rd Street',
-      secondary: `4 Minutes from school`,
+      stop_name: 'Idylwyld/33rd Street',
+      stop_id: `4 Minutes from school`,
     },
-  ];
-
+  ]};
   let favCount = 3;
 
     if (props.stops.length <= 2) {
@@ -66,6 +65,7 @@ export default function StopList(props){
     }
   else{
     console.log(`Stoplist:`, props);
+    let output = ""
     for (let row=0; row<props.stops.length; row++) {
       let item = props.stops[row]
       // console.log(`preparing table item`, item)
@@ -75,8 +75,18 @@ export default function StopList(props){
           'primary':`${item.stop_name}`,
           'agency':`${item.id}`,
           'secondary':`${item.stop_id}`,
-          'id':`${item._id}`,
+          'id':`${item.id}`,
       }
+      
+      output+=`
+      
+         ${item.stop_name} content=${item.stop_id} id=${item.id}
+      `
+      output +=(<> 
+        <React.Fragment key={id}>
+          <StopListItem title={primary} content={secondary} number={id} />
+        </React.Fragment>
+      </>)
     }
     return (
       <>
@@ -85,11 +95,12 @@ export default function StopList(props){
           Bus routes
           </Typography>
           <List sx={{ mb: 2 }}>
-          {newData.map(({ id, primary, secondary}) => (
+          {/* {newData.map(({ id, primary, secondary}) => (
               <React.Fragment key={id}>
               <StopListItem title={primary} content={secondary} number={id} />
               </React.Fragment>
-          ))}
+          ))} */}
+            {output}
           </List>
       </Paper>
       
@@ -97,6 +108,8 @@ export default function StopList(props){
       </>
   )
   }
+
+  
 
   console.log("Pricessed stoplist data",newData, "from", props)
 
