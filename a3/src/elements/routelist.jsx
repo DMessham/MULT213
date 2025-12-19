@@ -4,12 +4,14 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import List from '@mui/material/List';
-import RouteListItem from './routeListItem';
+import RouteListItem from './routeListItem'
+
+import { fetchStopsLocation, fetchRouteStops, searchRoutes, searchStops, fetchAreaImage} from "../api.js";
 
 // get data from api and feed it in
   let favCount = 0;
 export default function routelist(props){
-  console.log("stoplist begin",props.props)
+  console.log("routelist begin",props.props)
   
   let newData = [{primary:"No Results"}]
 
@@ -33,16 +35,18 @@ export default function routelist(props){
         </>
       )}
     else{
+      let stops= []
       let output= ""
-      console.log(`Found ${props.props.length} result(s):`);
+      // console.log(`Routelist: Found ${props.props.length} result(s):`, props.props);
       for (let row=0; row<props.props.length; row++) {
         let item = props.props[row]
+        stops[row]=fetchRouteStops(item.onestop_id);
         // console.log(`preparing table item`, item)
         //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
         //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
         const agency_info = item.agency
         const agency_name = agency_info.agency_name //dont use anything else from transit info right now
-        console.log(`RouteINFO: ${item.route_short_name}`,`${item.route_long_name}`,`${agency_name}`,`${item.onestop_id}`, item.route_stops)
+        // console.log(`RouteINFO: ${item.route_short_name}`,`${item.route_long_name}`,`${agency_name}`,`${item.onestop_id}`, item.route_stops)
 
         newData[row] = {
             'short':item.route_short_name,
@@ -52,9 +56,9 @@ export default function routelist(props){
             'id':item.route_id,
             'bgColor':item.route_color,
             'fgColor':item.route_text_color,
-            'stops': item.route_stops
+            'stops': stops[row]
         }
-      console.log("Processed routelist data",newData, "from", props)
+      // console.log("Processed routelist data",newData, "from", props)
       }
       return (
           <>

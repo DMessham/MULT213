@@ -54,7 +54,7 @@ function App() {
     const data = await searchStops(titleField);
 
     // We need to make a new list, otherwise React will not update
-    const newstopSearchs = data;
+    const newstopSearchs = data.stops;
     console.log(`stopSearch got:`, data);
     // We call the React hook to update the application state
     setstopSearchs(newstopSearchs);
@@ -141,10 +141,16 @@ function App() {
               
             <Button variant="outlined" onClick={getLocationButton}>Near me</Button>
             </form>
-            
+            Stops
             <StopList stops={stopSearchs} type="stopsearch"></StopList>
           </div>
-          <div className="card">
+         
+          
+        </Box>
+
+          
+      </Container>
+      <div className="card">
             <Button variant="contained" onClick={() => setCount((count) => count + 1)}>
               count is {count}
             </Button>
@@ -152,16 +158,6 @@ function App() {
               Edit <code>src/App.jsx</code> and save to test HMR
             </p>
           </div>
-          
-        </Box>
-          <p className="read-the-docs">
-            Click on the Vite and React logos to learn more
-            
-          </p>
-
-          
-      </Container>
-      
       
       <BottomAppBar></BottomAppBar>
       </ThemeProvider>

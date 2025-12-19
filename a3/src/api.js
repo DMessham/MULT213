@@ -125,5 +125,5 @@ export async function searchStops(query) {
   const data = await res.json();
   console.log('getting all Stops matching:', query, data)
 
-  return data.stops || [];
+  return data || [];
 }
