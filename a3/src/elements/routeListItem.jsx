@@ -30,8 +30,6 @@ export default function RouteListItem(props) {
 
     const short = (props.image ? <avatar src={props.image} sx={avicolor} /> : props.number ? <Badge badgeContent={props.number} color="secondary" overlap="circular" ><Avatar variant="rounded" ><DirectionsBusRoundedIcon></DirectionsBusRoundedIcon></Avatar></Badge> : <Avatar variant="rounded"><DirectionsBusRoundedIcon></DirectionsBusRoundedIcon></Avatar>)
 
-    const actionElement = (props.action ? <>{props.action}</> : null)
-
     const stoparray = (props.route_stops ? props.route_stops : null)
 
     // dropdown to show advanced info

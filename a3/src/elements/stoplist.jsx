@@ -34,7 +34,7 @@ export default function StopList(props) {
 
   try {
     let output = []
-    //for when it comes from the dropdown in the bus routes list
+    //for when it recieves it as an object with an array
     if (props.stops != null) {
       console.log("stopslist is in object mode", props.stops)
       for (let row = 0; row < props.stops.length; row++) {
@@ -66,6 +66,7 @@ export default function StopList(props) {
       )
     }
     else {
+      //for when it is recieved as a plain array
       console.log("stoplist is in array mode", props)
       for (let row = 0; row < props.length; row++) {
         for (let row = 0; row < props.stops.length; row++) {
@@ -107,6 +108,7 @@ export default function StopList(props) {
       }
     }
   } catch (err) {
+    //so the app doent break
     console.log(`stoplist error`, err);
     return (
       <>
