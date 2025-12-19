@@ -17,101 +17,104 @@ import StopListItem from './stopListItem';
 
 
 
-export default function StopList(props){
+export default function StopList(props) {
 
-  let newData = {stops:[
-    {
-      id: 1,
-      stop_name: 'Meadows BLVD/Rosewood Gate N',
-      stop_id: "2 minutes from Home",
-    },
-    {
-      id: 2,
-      stop_name: 'Idylwyld/32nd Street',
-      stop_id: `1 Minute from school`,
-    },
-    {
-      id: 3,
-      stop_name: 'Taylor/Rosewood Gate N',
-      stop_id: "5 minutes from Home",
-    },
-    {
-      id: 4,
-      stop_name: 'Idylwyld/33rd Street',
-      stop_id: `4 Minutes from school`,
-    },
-  ]};
-  let favCount = 3;
+  let newData = {
+    stops: [
+      {
+        stop: {
+          id: 1,
+          stop_name: 'Meadows BLVD/Rosewood Gate N',
+          stop_id: "2 minutes from Home",
+        }
+      },
+      {
+        stop: {
+          id: 2,
+          stop_name: 'Idylwyld/32nd Street',
+          stop_id: `1 Minute from school`,
+        }
+      },
+      {
+        stop: {
+          id: 3,
+          stop_name: 'Taylor/Rosewood Gate N',
+          stop_id: "5 minutes from Home",
+        }
+      },
+      {
+        stop: {
+          id: 4,
+          stop_name: 'Idylwyld/33rd Street',
+          stop_id: `4 Minutes from school`,
+        }
+      },
+    ]
+  };
 
-    if (props.stops.length <= 2) {
-      console.log(`No results found.`);
-      console.log(props)
-      return (
-        <>
-        <Paper square sx={{ pb: '50px' }}>
-            <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
-            Bus routes
-            </Typography>
-            <List sx={{ mb: 2 }}>
-                <React.Fragment key={id}>
-                <StopListItem title="No stops" content="refine your search" number="" />
-                </React.Fragment>
-            </List>
-        </Paper>
-        
-      <CssBaseline />
-        </>
-    )
-    }
-  else{
+  try {
     console.log(`Stoplist:`, props);
     let output = ""
-    for (let row=0; row<props.stops.length; row++) {
-      let item = props.stops[row]
+    if(props.stops != null){
+    for (let row = 0; row < props.stops.length; row++) {
+      let item = props.stops[row].stop
       // console.log(`preparing table item`, item)
       //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
       //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
       newData[row] = {
-          'primary':`${item.stop_name}`,
-          'agency':`${item.id}`,
-          'secondary':`${item.stop_id}`,
-          'id':`${item.id}`,
+        'primary': `${item.stop_name}`,
+        'agency': `${item.id}`,
+        'secondary': `${item.stop_id}`,
+        'id': `${item.id}`,
       }
-      
-      output+=`
-      
-         ${item.stop_name} content=${item.stop_id} id=${item.id}
-      `
-      output +=(<> 
-        <React.Fragment key={id}>
-          <StopListItem title={primary} content={secondary} number={id} />
+
+      output += (<>
+        <React.Fragment key={row}>
+          <StopListItem title={item.stop_name} content={item.stop_id} number={item.id} />
         </React.Fragment>
       </>)
     }
+  }
+
+    console.log("Pricessed stoplist data", newData, "from", props)
     return (
       <>
-      <Paper square sx={{ pb: '50px' }}>
+        <Paper square sx={{ pb: '50px' }}>
           <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
-          Bus routes
+            stops
           </Typography>
           <List sx={{ mb: 2 }}>
-          {/* {newData.map(({ id, primary, secondary}) => (
+            {/* {newData.map(({ id, primary, secondary}) => (
               <React.Fragment key={id}>
               <StopListItem title={primary} content={secondary} number={id} />
               </React.Fragment>
           ))} */}
             {output}
           </List>
-      </Paper>
-      
-    <CssBaseline />
+        </Paper>
+
+        <CssBaseline />
       </>
-  )
+    )
+  
+  } catch (err) {
+    console.log(`stoplist error`, err, "using imput set of", props);
+    let id = 2000
+    return (
+      <>
+        <Paper square sx={{ pb: '50px' }}>
+          <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
+            stops
+          </Typography>
+          <List sx={{ mb: 2 }}>
+              <StopListItem title="No stops" content="refine your search" number={id + 1} />  
+          </List>
+        </Paper>
+      </>
+    )
   }
 
-  
 
-  console.log("Pricessed stoplist data",newData, "from", props)
 
-    
+
 }

@@ -32,28 +32,7 @@ export default function RouteListItem(props) {
 
     const actionElement = (props.action ? <>{props.action}</> : null)
 
-    const stoparray = (props.route_stops ? props.route_stops : {stops:[
-    {
-      id: 101,
-      stop_name: 'Meadows BLVD/Rosewood Gate N',
-      stop_id: "2 minutes from Home",
-    },
-    {
-      id: 102,
-      stop_name: 'Idylwyld/32nd Street',
-      stop_id: `1 Minute from school`,
-    },
-    {
-      id: 103,
-      stop_name: 'Taylor/Rosewood Gate N',
-      stop_id: "5 minutes from Home",
-    },
-    {
-      id: 104,
-      stop_name: 'Idylwyld/33rd Street',
-      stop_id: `4 Minutes from school`,
-    },
-  ]})
+    const stoparray = (props.route_stops ? props.route_stops : null)
 
     // dropdown to show advanced info
 
