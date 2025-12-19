@@ -36,7 +36,7 @@ export default function StopList(props) {
     let output = []
     //for when it comes from the dropdown in the bus routes list
     if (props.stops != null) {
-      console.log("stopslist is in searchlist mode", props.stops)
+      console.log("stopslist is in object mode", props.stops)
       for (let row = 0; row < props.stops.length; row++) {
         let item = props.stops[row]
         output[row] = {
@@ -66,8 +66,16 @@ export default function StopList(props) {
       )
     }
     else {
-      console.log("stoplist is in routelist mode", props)
+      console.log("stoplist is in array mode", props)
       for (let row = 0; row < props.length; row++) {
+        for (let row = 0; row < props.stops.length; row++) {
+          let item = props.stops[row]
+          output[row] = {
+            title: `${item.stop_name}`,
+            content: `Desc:${item.stop_desc}\nOneStopID: ${item.onestop_id}\nStopcode: ${item.stop_code}`,
+            number: `${item.id}`,
+          }
+        }
         let item = newData[row].stop
 
         output += (<>

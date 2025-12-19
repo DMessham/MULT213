@@ -5,9 +5,19 @@ import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import List from '@mui/material/List';
 import RouteListItem from './routeListItem'
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
+import Avatar from '@mui/material/Avatar';
+import DirectionsBusRoundedIcon from '@mui/icons-material/DirectionsBusRounded';//
+import TransferWithinAStationRoundedIcon from '@mui/icons-material/TransferWithinAStationRounded';
 
-import { fetchStopsLocation, fetchRouteStops, searchRoutes, searchStops, fetchAreaImage} from "../api.js";
+import Collapse from '@mui/material/Collapse';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
+import Badge from '@mui/material/Badge';
+import StopList from './stoplist';
 // get data from api and feed it in
   let favCount = 0;
 export default function routelist(props){
@@ -40,8 +50,7 @@ export default function routelist(props){
       // console.log(`Routelist: Found ${props.props.length} result(s):`, props.props);
       for (let row=0; row<props.props.length; row++) {
         let item = props.props[row]
-        stops[row]=fetchRouteStops(item.onestop_id);
-        // console.log(`preparing table item`, item)
+        // stops[row]=fetchRouteStops(item.onestop_id);
         //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
         //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
         const agency_info = item.agency
@@ -56,10 +65,16 @@ export default function routelist(props){
             'id':item.route_id,
             'bgColor':item.route_color,
             'fgColor':item.route_text_color,
-            'stops': stops[row]
+            'stops': stops[row],
         }
       // console.log("Processed routelist data",newData, "from", props)
       }
+      const [open, setOpen] = React.useState(false);
+
+    const handleClick = () => {
+        setOpen(!open);
+
+    };
       return (
           <>
           <Paper square sx={{ pb: '50px' }}>
@@ -69,7 +84,19 @@ export default function routelist(props){
               <List sx={{ mb: 2 }}>
               {newData.map(({ id, primary, secondary, short, agency, bgColor, fgColor, stops }) => (
                   <React.Fragment key={id}>
-                  <RouteListItem title={primary} content={agency+" "+secondary} bgColor={bgColor} fgColor={fgColor} number={short} stops={stops} type="routelist" />
+                  <ListItemButton onClick={handleClick} selected={open}>
+                      <ListItemAvatar>
+                          {short}
+                      </ListItemAvatar>
+                      <ListItemText primary={primary} secondary={secondary} />
+                      {open ? "Hide Stops" : "Show Stops"}
+                      {open ? <ExpandLess /> : <ExpandMore />}
+                  </ListItemButton>
+                  <Collapse in={open} timeout="auto" unmountOnExit>
+                      <List component="div" dense>
+                        <StopList stops={stops} type="routelist"/>
+                      </List>
+                    </Collapse>
                   </React.Fragment>
               ))}
               </List>
@@ -82,6 +109,7 @@ export default function routelist(props){
   }
   catch(error){
     console.log(`routelist error:`, error)
+    let id=Math.random(200,500)
     return (
       <>
       <Paper square sx={{ pb: '50px' }}>
