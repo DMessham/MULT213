@@ -57,7 +57,7 @@ function App() {
     const newstopSearchs = data.stops;
     console.log(`stopSearch got:`, data);
     // We call the React hook to update the application state
-    setstopSearchs(newstopSearchs);
+    setstopSearchs(data);
   };
 
   //current Location Button Logic

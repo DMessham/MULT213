@@ -18,6 +18,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 
 import Badge from '@mui/material/Badge';
 import StopList from './stoplist';
+import { fetchRouteStops } from '../api';
 // get data from api and feed it in
   let favCount = 0;
 export default function routelist(props){
@@ -45,11 +46,11 @@ export default function routelist(props){
         </>
       )}
     else{
-      let stops= []
       let output= ""
       // console.log(`Routelist: Found ${props.props.length} result(s):`, props.props);
       for (let row=0; row<props.props.length; row++) {
         let item = props.props[row]
+        let stops= fetchRouteStops(item.route_id)
         // stops[row]=fetchRouteStops(item.onestop_id);
         //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
         //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf

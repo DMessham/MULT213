@@ -8,7 +8,7 @@ import StopListItem from './stopListItem';
 // get data from api and feed it in
 
 export default function StopList(props) {
-
+  console.log("stoplist begin", props)
   let newData = [
     {
       id: 1,
@@ -91,7 +91,7 @@ export default function StopList(props) {
                 stops
               </Typography>
               <List sx={{ mb: 2 }}>
-                {newData.map(({ id, primary, secondary }) => (
+                {output.map(({ id, primary, secondary }) => (
                   <React.Fragment key={id}>
                     <StopListItem title={primary} content={secondary} number={id} />
                   </React.Fragment>
