@@ -54,8 +54,8 @@ function App() {
     const data = await searchStops(titleField);
 
     // We need to make a new list, otherwise React will not update
-    const newstopSearchs = [...stopSearchs, newstopSearch];
-
+    const newstopSearchs = data;
+    console.log(`stopSearch got:`, data);
     // We call the React hook to update the application state
     setstopSearchs(newstopSearchs);
   };
@@ -142,7 +142,7 @@ function App() {
             <Button variant="outlined" onClick={getLocationButton}>Near me</Button>
             </form>
             
-            {/* <StopList props={stopSearchs}></StopList> */}
+            <StopList stops={stopSearchs} type="stopsearch"></StopList>
           </div>
           <div className="card">
             <Button variant="contained" onClick={() => setCount((count) => count + 1)}>

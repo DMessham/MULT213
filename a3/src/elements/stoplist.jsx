@@ -1,21 +1,11 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import Avatar from '@mui/material/Avatar';
 import StopListItem from './stopListItem';
 
 // get data from api and feed it in
-
-
-
-
 
 export default function StopList(props) {
 
@@ -53,62 +43,121 @@ export default function StopList(props) {
   };
 
   try {
-    console.log(`Stoplist:`, props);
+    console.log(`Stoplist:`, {...props});
     let output = ""
-    if(props.stops != null){
-    for (let row = 0; row < props.stops.length; row++) {
-      let item = props.stops[row].stop
-      // console.log(`preparing table item`, item)
-      //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
-      //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
-      newData[row] = {
-        'primary': `${item.stop_name}`,
-        'agency': `${item.id}`,
-        'secondary': `${item.stop_id}`,
-        'id': `${item.id}`,
+    if(props.type == "routelist"){
+      for (let row = 0; row < stops.length; row++) {
+        let item = stops[row].stop
+        // console.log(`preparing table item`, item)
+        //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
+        //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
+        newData[row] = {
+          'primary': `${item.stop_name}`,
+          'agency': `${item.id}`,
+          'secondary': `${item.stop_id}`,
+          'id': `${item.id}`,
+        }
+
+        output += (<>
+          <React.Fragment key={row}>
+            <StopListItem title={item.stop_name} content={item.stop_id} number={item.id} />
+          </React.Fragment>
+        </>)
+        console.log("Pricessed stoplist data", newData, "from", props)
+          return (
+            <>
+              <Paper square sx={{ pb: '50px' }}>
+                <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
+                  stops
+                </Typography>
+                <List sx={{ mb: 2 }}>
+                  {/* {newData.map(({ id, primary, secondary}) => (
+                    <React.Fragment key={id}>
+                    <StopListItem title={primary} content={secondary} number={id} />
+                    </React.Fragment>
+                ))} */}
+                  {output}
+                </List>
+              </Paper>
+    
+              <CssBaseline />
+            </>
+          )
       }
-
-      output += (<>
-        <React.Fragment key={row}>
-          <StopListItem title={item.stop_name} content={item.stop_id} number={item.id} />
-        </React.Fragment>
-      </>)
     }
-  }
+    else if(props.stops == null){
+      for (let row = 0; row < props.stops.length; row++) {
+        let item = props.stops[row].stop
+        // console.log(`preparing table item`, item)
+        //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
+        //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
+        newData[row] = {
+          'primary': `${item.stop_name}`,
+          'agency': `${item.id}`,
+          'secondary': `${item.stop_id}`,
+          'id': `${item.id}`,
+        }
 
-    console.log("Pricessed stoplist data", newData, "from", props)
-    return (
-      <>
-        <Paper square sx={{ pb: '50px' }}>
-          <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
-            stops
-          </Typography>
-          <List sx={{ mb: 2 }}>
-            {/* {newData.map(({ id, primary, secondary}) => (
-              <React.Fragment key={id}>
-              <StopListItem title={primary} content={secondary} number={id} />
-              </React.Fragment>
-          ))} */}
-            {output}
-          </List>
-        </Paper>
+        output += (<>
+          <React.Fragment key={row}>
+            <StopListItem title={item.stop_name} content={item.stop_id} number={item.id} />
+          </React.Fragment>
+        </>)
+        console.log("Pricessed stoplist data", newData, "from", props)
+          return (
+            <>
+              <Paper square sx={{ pb: '50px' }}>
+                <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
+                  stops
+                </Typography>
+                <List sx={{ mb: 2 }}>
+                  {/* {newData.map(({ id, primary, secondary}) => (
+                    <React.Fragment key={id}>
+                    <StopListItem title={primary} content={secondary} number={id} />
+                    </React.Fragment>
+                ))} */}
+                  {output}
+                </List>
+              </Paper>
+    
+              <CssBaseline />
+            </>
+          )
+      }
+    }
+    else {
+      console.log("Pricessed stoplist data", newData, "from", props)
+      return (
+        <>
+          <Paper square sx={{ pb: '50px' }}>
+            <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
+              stops
+            </Typography>
+            <List sx={{ mb: 2 }}>
+              {/* {newData.map(({ id, primary, secondary}) => (
+                <React.Fragment key={id}>
+                <StopListItem title={primary} content={secondary} number={id} />
+                </React.Fragment>
+            ))} */}
+              {output}
+            </List>
+          </Paper>
 
-        <CssBaseline />
-      </>
-    )
-  
+          <CssBaseline />
+        </>
+      )
+    }
   } catch (err) {
     console.log(`stoplist error`, err, "using imput set of", props);
-    let id = 2000
     return (
       <>
         <Paper square sx={{ pb: '50px' }}>
           <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
             stops
           </Typography>
-          <List sx={{ mb: 2 }}>
+          {/* <List sx={{ mb: 2 }}>
               <StopListItem title="No stops" content="refine your search" number={id + 1} />  
-          </List>
+          </List> */}
         </Paper>
       </>
     )

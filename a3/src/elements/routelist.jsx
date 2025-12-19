@@ -9,7 +9,7 @@ import RouteListItem from './routeListItem';
 // get data from api and feed it in
   let favCount = 0;
 export default function routelist(props){
-  console.log(props.props)
+  console.log("stoplist begin",props.props)
   
   let newData = [{primary:"No Results"}]
 
@@ -65,7 +65,7 @@ export default function routelist(props){
               <List sx={{ mb: 2 }}>
               {newData.map(({ id, primary, secondary, short, agency, bgColor, fgColor, stops }) => (
                   <React.Fragment key={id}>
-                  <RouteListItem title={primary} content={agency+" "+secondary} bgColor={bgColor} fgColor={fgColor} number={short} stops={stops} />
+                  <RouteListItem title={primary} content={agency+" "+secondary} bgColor={bgColor} fgColor={fgColor} number={short} stops={stops} type="routelist" />
                   </React.Fragment>
               ))}
               </List>
@@ -86,7 +86,7 @@ export default function routelist(props){
           </Typography>
           <List sx={{ mb: 2 }}>
               <React.Fragment key={id}>
-              <RouteListItem title="No Results" content="try searching something else" bgColor="001100" fgColor="aaffaa" number="" short="" stops={[{stop_name:"no data", id:0, stop_id:""}]} />
+              <RouteListItem title="No Results" content="try searching something else" bgColor="001100" fgColor="aaffaa" number="" short="" stops={[{stop_name:"no data", id:0, stop_id:"", }]} type="routelist" />
               </React.Fragment>
           </List>
       </Paper>
