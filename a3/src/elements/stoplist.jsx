@@ -5,7 +5,9 @@ import Paper from '@mui/material/Paper';
 import List from '@mui/material/List';
 import StopListItem from './stopListItem';
 
-// get data from api and feed it in
+// this is a horrible mess, the api for getting a list of stops returns a different format depending on how you ask
+// some stops have missing data too
+// and react is weird about being able to pass objects into display elements sometimes just converts the value the part of the object it to the text, displays 'object Object' or gives an error
 
 export default function StopList(props) {
   console.log("stoplist begin", props)
@@ -73,7 +75,7 @@ export default function StopList(props) {
           let item = props.stops[row]
           output[row] = {
             title: `${item.stop_name}`,
-            content: `Desc:${item.stop_desc}\nOneStopID: ${item.onestop_id}\nStopcode: ${item.stop_code}`,
+            content: `OneStopID: ${item.onestop_id}\n Stopcode: ${item.stop_code}`,
             number: `${item.id}`,
             img:`${item.onestop_id}`,
           }
