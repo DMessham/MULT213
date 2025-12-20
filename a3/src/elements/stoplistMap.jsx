@@ -15,18 +15,18 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import { ListItem } from '@mui/material';
 
 import { fetchAreaImage } from '../api';
+import GoogleMapsDisplay from './map';
 
 
 export default function StopListMap(props) {
-    if (props.mapimg == "NONE"){
-        return(<></>)
-    }
-    else{
         console.log("creatng stoplist map", props)
-        const mapElement = (props.mapimg ? <><img src={mapimg}></img></> : <><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuX43a-udPTMZ515YqpVQhb8ZVI-cziDZvZA&s"></img></>)
+        if (props.lat!=null&&props.long!=null){
+            let mapElement = <><GoogleMapsDisplay lat={props.lat} long={props.long}></GoogleMapsDisplay></>
+        }else{
+            const mapElement = (props.mapimg ? <><img src={mapimg}></img></> : <><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuX43a-udPTMZ515YqpVQhb8ZVI-cziDZvZA&s"></img></>)
+        
         return(
             <>
-                <p>map goes here</p>
                 {mapElement}
             </>
         )
