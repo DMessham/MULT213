@@ -39,7 +39,7 @@ export default function StopList(props) {
   try {
     let output = []
     //for when it recieves data in format of an object with an array called stops
-    if (props.stops != null) {
+    if (props.stops.route_stops == null) {
       console.log("stopslist is in object mode", props.stops)
       for (let row = 0; row < props.stops.length; row++) {
         let item = props.stops[row]
@@ -47,11 +47,11 @@ export default function StopList(props) {
           title: `${item.stop_name}`,
           content: `OneStopID: ${item.onestop_id}\nStopcode: ${item.stop_code}`,
           number: `${item.id}`,
-          img:`${item.onestop_id}`,
+          img: `${item.onestop_id}`,
         }
       }
-      
-      console.log("Pricessed stoplist data", newData, "from", props, "will output:", output)
+
+      // console.log("Pricessed stoplist data", newData, "from", props, "will output:", output)
       return (
         <>
           <Paper square sx={{ pb: '50px' }}>
@@ -60,7 +60,7 @@ export default function StopList(props) {
             </Typography>
             <List sx={{ mb: 2 }}>
               {/* {output.map(({ title,content,number }) => ( */}
-              {output.map(({ title,content,number, img}) => (
+              {output.map(({ title, content, number, img }) => (
                 <React.Fragment key={number}>
                   <StopListItem title={title} content={content} type="stoplist" mapimg={img} />
                 </React.Fragment>
@@ -72,54 +72,48 @@ export default function StopList(props) {
     }
     else {
       //for when it is recieved as a plain array
-      console.log("stoplist is in array mode", props)
-      for (let row = 0; row < props.length; row++) {
-          item = props[row];
-          output[row] = {
-            title: `${item.stop_name}`,
-            content: `OneStopID: ${item.onestop_id}\n Stopcode: ${item.stop_code}`,
-            number: `${item.id}`,
-            img:`${item.onestop_id}`,
-          }
-
-          //i honestly have no ide why i have to move beteen arrays like that for it to work
-        let item = newData[row].stop
-
-        output += (<>
-          <React.Fragment key={row}>
-            <StopListItem title={item.stop_name} content={item.stop_id} number={item.id} img={item.img} />
-          </React.Fragment>
-        </>)
-        console.log("Processed stoplist data", newData, "from", props)
-        return (
-          <>
-            <Paper square sx={{ pb: '50px' }}>
-              <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
-                stops from array
-              </Typography>
-              <List sx={{ mb: 2 }}>
-                {output.map(({ id, primary, secondary, img }) => (
-                  <React.Fragment key={id}>
-                    <StopListItem title={primary} content={secondary} number={id} mapimg={img} />
-                  </React.Fragment>
-                ))}
-                {output}
-              </List>
-            </Paper>
-
-            <CssBaseline />
-          </>
-        )
+      let route = props.stops
+      console.log("stoplist is in array mode", props.stops)
+      for (let row = 0; row < route.route_stops.length; row++) {
+        let item = route.route_stops[row].stop;
+        output[row] = {
+          title: `${item.stop_name}`,
+          content: `OneStopID: ${item.onestop_id}\n Stopcode: ${item.stop_code}`,
+          number: `${item.id}`,
+          img: `${item.onestop_id}`
+        }
       }
+      // console.log("Processed stoplist data", newData, "from", props)
+      return (
+        <>
+          <Paper square sx={{ pb: '50px' }}>
+            <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
+              stops from array
+            </Typography>
+            <List sx={{ mb: 2 }}>
+              {output.map(({ id, primary, secondary, img }) => (
+                <React.Fragment key={Math.random(1200,3800)}>
+                  <StopListItem title={primary} content={secondary} number={id} mapimg={img} />
+                </React.Fragment>
+              ))}
+              {output}
+            </List>
+          </Paper>
+
+          <CssBaseline />
+        </>
+      )
     }
   } catch (err) {
     //so the app doent break
     console.log(`stoplist error`, err);
+    let errmsg = `ERROR: ${err}`
     return (
       <>
         <Paper square sx={{ pb: '50px' }}>
           <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
-            stops
+            stops error
+            <p>{errmsg}</p>
           </Typography>
         </Paper>
       </>

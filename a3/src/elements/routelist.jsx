@@ -50,7 +50,6 @@ export default function routelist(props){
       // console.log(`Routelist: Found ${props.props.length} result(s):`, props.props);
       for (let row=0; row<props.props.length; row++) {
         let item = props.props[row]
-        let stops= fetchRouteStops(item.route_id)
         // stops[row]=fetchRouteStops(item.onestop_id);
         //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
         //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
@@ -66,7 +65,7 @@ export default function routelist(props){
             'id':item.route_id,
             'bgColor':item.route_color,
             'fgColor':item.route_text_color,
-            'stops': stops[row],
+            'stops': item,
         }
       // console.log("Processed routelist data",newData, "from", props)
       }
@@ -86,16 +85,16 @@ export default function routelist(props){
               {newData.map(({ id, primary, secondary, short, agency, bgColor, fgColor, stops }) => (
                   <React.Fragment key={id}>
                   <ListItemButton onClick={handleClick} selected={open}>
+                  <RouteListItem title={primary} content={secondary} bgColor="001100" fgColor="aaffaa" number={short} short={short} stops={[{stop_name:"no data", id:0, stop_id:"", }]} type="routelist" />
                       <ListItemAvatar>
-                          {short}
                       </ListItemAvatar>
-                      <ListItemText primary={primary} secondary={secondary} />
-                      {open ? "Hide Stops" : "Show Stops"}
+                      {agency}
+                      
                       {open ? <ExpandLess /> : <ExpandMore />}
                   </ListItemButton>
                   <Collapse in={open} timeout="auto" unmountOnExit>
                       <List component="div" dense>
-                        <StopList stops={stops} type="routelist"/>
+                        <StopList stops={stops.route_stops} type="routelist"/>
                       </List>
                     </Collapse>
                   </React.Fragment>
@@ -110,7 +109,7 @@ export default function routelist(props){
   }
   catch(error){
     console.log(`routelist error:`, error)
-    let id=Math.random(200,500)
+    let id=Math.random(200,800)
     return (
       <>
       <Paper square sx={{ pb: '50px' }}>

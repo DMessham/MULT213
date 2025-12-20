@@ -3,11 +3,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListSubheader from '@mui/material/ListSubheader';
 import Avatar from '@mui/material/Avatar';
 import DirectionsBusRoundedIcon from '@mui/icons-material/DirectionsBusRounded';//
-import TransferWithinAStationRoundedIcon from '@mui/icons-material/TransferWithinAStationRounded';
 
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
@@ -16,6 +13,9 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 
 import Badge from '@mui/material/Badge';
 import StopList from './stoplist';
+
+
+import { fetchRouteStops } from '../api';
 
 export default function RouteListItem(props) {
 
@@ -28,7 +28,7 @@ export default function RouteListItem(props) {
 
     const avicolor = (props.bgColor ? `{{ width: 24, height: 24, avicolor,backgroundColor: ${props.bgColor}, color: ${props.fgColor}}}` : '{{ width: 24, height: 24, avicolor}}')
 
-    const short = (props.image ? <avatar src={props.image} sx={avicolor} /> : props.number ? <Badge badgeContent={props.number} color="secondary" overlap="circular" ><Avatar variant="rounded" ><DirectionsBusRoundedIcon></DirectionsBusRoundedIcon></Avatar></Badge> : <Avatar variant="rounded"><DirectionsBusRoundedIcon></DirectionsBusRoundedIcon></Avatar>)
+    const short = (props.number ? <Badge badgeContent={<DirectionsBusRoundedIcon></DirectionsBusRoundedIcon>} color="secondary" ><Avatar variant="rounded" >{props.number}</Avatar></Badge> : <Avatar variant="rounded"><DirectionsBusRoundedIcon></DirectionsBusRoundedIcon></Avatar>)
 
     const stoparray = (props.route_stops ? props.route_stops : null)
 
@@ -43,17 +43,8 @@ export default function RouteListItem(props) {
 
     
     return (<>
-    <ListItemButton onClick={handleClick} selected={open}>
         <ListItemAvatar>
             {short}
         </ListItemAvatar>
         <ListItemText primary={primary} secondary={secondary} />
-        {open ? "Hide Stops" : "Show Stops"}
-        {open ? <ExpandLess /> : <ExpandMore />}
-    </ListItemButton>
-    <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" dense>
-          <StopList stops={stoparray} type="routelist"/>
-        </List>
-      </Collapse>
 </>)}

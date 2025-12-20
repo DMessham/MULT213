@@ -39,7 +39,6 @@ export default function StopListItem(props) {
           <ListItemAvatar>
             {/* {TransferWithinAStationRoundedIcon} */}
           </ListItemAvatar>
-          {console.log('making listtext item')}
           <ListItemText primary={primary} secondary={secondary} />
           {/* <ListItemText primary={props.primary} secondary={props.secondary} /> */}
           {open ? "Hide Map" : "Show Map"}
@@ -48,7 +47,6 @@ export default function StopListItem(props) {
       </ListItemButton>
 
 
-      {console.log('making collapse item')}
       <Collapse in={open} timeout="auto" unmountOnExit>
         {StopListMap(props.mapimg)}
       </Collapse>
