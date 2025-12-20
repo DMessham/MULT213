@@ -60,7 +60,7 @@ export default function StopListItem(props) {
             {TransferWithinAStationRoundedIcon}
           </ListItemAvatar>
           
-          {console.log('stoplist failed', error)}
+          {console.error('stoplist failed', error)}
           <ListItemText primary="ERROR" secondary="something went wrong" />
         </ListItem>
     </>

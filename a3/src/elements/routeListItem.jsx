@@ -30,17 +30,6 @@ export default function RouteListItem(props) {
 
     const short = (props.number ? <Badge badgeContent={<DirectionsBusRoundedIcon></DirectionsBusRoundedIcon>} color="secondary" ><Avatar variant="rounded" >{props.number}</Avatar></Badge> : <Avatar variant="rounded"><DirectionsBusRoundedIcon></DirectionsBusRoundedIcon></Avatar>)
 
-    const stoparray = (props.route_stops ? props.route_stops : null)
-
-    // dropdown to show advanced info
-
-    const [open, setOpen] = React.useState(false);
-
-    const handleClick = () => {
-        setOpen(!open);
-
-    };
-
     
     return (<>
         <ListItemAvatar>

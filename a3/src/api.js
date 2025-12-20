@@ -108,7 +108,7 @@ export async function fetchStop(stopID) {
 
 export async function searchRoutes(query) {
   const res = await fetch(
-    `${apiBaseURL}/routes?&earch=${query}&operator_onestop_id=${transitFeedID}&apikey=${apikey}&include_stops=true`
+    `${apiBaseURL}/routes?&search=${query}&operator_onestop_id=${transitFeedID}&apikey=${apikey}&include_stops=true&limit=50`
   );
 
   const data = await res.json();

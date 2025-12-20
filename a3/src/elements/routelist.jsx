@@ -28,7 +28,7 @@ export default function routelist(props){
 
   try{
     if (props.length <= 1) {
-      console.log(`No results found.`);
+      console.warn(`No results found.`);
       return (
         <>
         <Paper square sx={{ pb: '50px' }}>
@@ -65,9 +65,9 @@ export default function routelist(props){
             'id':item.route_id,
             'bgColor':item.route_color,
             'fgColor':item.route_text_color,
-            'stops': item,
+            'stops': item.route_stops,
         }
-      // console.log("Processed routelist data",newData, "from", props)
+      console.log("Processed routelist data",newData, "from", props)
       }
       const [open, setOpen] = React.useState(false);
 
@@ -85,7 +85,7 @@ export default function routelist(props){
               {newData.map(({ id, primary, secondary, short, agency, bgColor, fgColor, stops }) => (
                   <React.Fragment key={id}>
                   <ListItemButton onClick={handleClick} selected={open}>
-                  <RouteListItem title={primary} content={secondary} bgColor="001100" fgColor="aaffaa" number={short} short={short} stops={[{stop_name:"no data", id:0, stop_id:"", }]} type="routelist" />
+                  <RouteListItem title={primary} content={secondary} bgColor={bgColor} fgColor={fgColor} number={short} short={short} stops={[{stop_name:"no data", id:0, stop_id:"", }]} type="routelist" />
                       <ListItemAvatar>
                       </ListItemAvatar>
                       {agency}
@@ -94,7 +94,7 @@ export default function routelist(props){
                   </ListItemButton>
                   <Collapse in={open} timeout="auto" unmountOnExit>
                       <List component="div" dense>
-                        <StopList stops={stops.route_stops} type="routelist"/>
+                        <StopList stops={stops} type="routelist"/>
                       </List>
                     </Collapse>
                   </React.Fragment>
@@ -108,7 +108,7 @@ export default function routelist(props){
     }
   }
   catch(error){
-    console.log(`routelist error:`, error)
+    console.error(`routelist error:`, error)
     let id=Math.random(200,800)
     return (
       <>
