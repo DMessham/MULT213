@@ -16,9 +16,8 @@ import {
   OverlayLayout,
   PlacePicker,
 } from "@googlemaps/extended-component-library/react";
-import 'googleAPIkey' as API_KEY from "./key";
-const API_KEY = globalThis.GOOGLE_MAPS_API_KEY ?? "YOUR_API_KEY";
-inport googleAPIkey
+import { googleAPIkey } from "./key";
+const API_KEY = globalThis.GOOGLE_MAPS_API_KEY ?? googleAPIkey;
 const DEFAULT_CENTER = { lat: 38, lng: -98 };
 const DEFAULT_ZOOM = 4;
 const DEFAULT_ZOOM_WITH_LOCATION = 16;
@@ -27,7 +26,7 @@ const DEFAULT_ZOOM_WITH_LOCATION = 16;
  * Sample app that helps users locate a college on the map, with place info such
  * as ratings, photos, and reviews displayed on the side.
  */
-export map = () => {
+export function map(location){
   const overlayLayoutRef = useRef(null);
   const pickerRef = useRef(null);
   const [college, setCollege] = useState(undefined);
