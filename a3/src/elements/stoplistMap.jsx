@@ -14,6 +14,8 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { ListItem } from '@mui/material';
 
+import { fetchAreaImage } from '../api';
+
 
 export default function StopListMap(props) {
     console.log("creatng stoplist map", props)
@@ -21,6 +23,7 @@ export default function StopListMap(props) {
     return(
         <>
             <p>map goes here</p>
+            {mapElement}
         </>
     )
 }

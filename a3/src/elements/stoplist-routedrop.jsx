@@ -141,7 +141,7 @@ export default function StopList(props) {
             <StopListItem title={item.stop_name} content={item.stop_id} number={item.id} />
           </React.Fragment>
         </>)
-        console.log("Pricessed stoplist data", newData, "from", props)
+        console.log("Processed stoplist data", newData, "from", props)
           return (
             <>
               <Paper square sx={{ pb: '50px' }}>
@@ -173,7 +173,7 @@ export default function StopList(props) {
             <StopListItem title={item.stop_name} content={item.stop_id} number={item.id} />
           </React.Fragment>
         </>)
-        console.log("Pricessed stoplist data", newData, "from", props)
+        console.log("Processed stoplist data", newData, "from", props)
           return (
             <>
               <Paper square sx={{ pb: '50px' }}>

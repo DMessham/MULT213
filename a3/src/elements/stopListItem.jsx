@@ -18,7 +18,7 @@ import StopListMap from './stoplistMap';
 export default function StopListItem(props) {
   console.log("creatng stoplist item", props)
   try {
-    //so i can use some text
+    //default filler text
     const secondary = (props.content != null ? props.content : (props.text ? props.text : 'Location not available'))
 
     const primary = (props.title != null ? props.title : 'Stop Name ERROR')
@@ -50,7 +50,7 @@ export default function StopListItem(props) {
 
       {console.log('making collapse item')}
       <Collapse in={open} timeout="auto" unmountOnExit>
-        {StopListMap("bruh")}
+        {StopListMap(props.mapimg)}
       </Collapse>
     </>
     )
