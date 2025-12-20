@@ -56,7 +56,7 @@ export default function StopList(props) {
         <>
           <Paper square sx={{ pb: '50px' }}>
             <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
-              Bus Stops (from obj)
+              Bus Stops
             </Typography>
             <List sx={{ mb: 2 }}>
               {/* {output.map(({ title,content,number }) => ( */}
@@ -89,7 +89,7 @@ export default function StopList(props) {
         <>
           <Paper square sx={{ pb: '50px' }}>
             <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
-              Bus Stops (from obj)
+              Bus Stops (array)
             </Typography>
             <List sx={{ mb: 2 }}>
               {/* {output.map(({ title,content,number }) => ( */}

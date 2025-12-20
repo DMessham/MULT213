@@ -38,7 +38,7 @@ export default function StopList(props) {
 
   try {
     let output = []
-    //for when it recieves data in format of an object with an array called stops
+    //for when it recieves data in format of an object
     if (props.stops != null) {
       console.debug("stopslist is in object mode", props.stops)
       for (let row = 0; row < props.stops.length; row++) {
@@ -56,7 +56,7 @@ export default function StopList(props) {
         <>
           <Paper square sx={{ pb: '50px' }}>
             <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
-              Bus Stops (from obj)
+              Bus Stops
             </Typography>
             <List sx={{ mb: 2 }}>
               {/* {output.map(({ title,content,number }) => ( */}
@@ -89,7 +89,7 @@ export default function StopList(props) {
         <>
           <Paper square sx={{ pb: '50px' }}>
             <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
-              Bus Stops (from obj)
+              Bus Stops
             </Typography>
             <List sx={{ mb: 2 }}>
               {/* {output.map(({ title,content,number }) => ( */}
