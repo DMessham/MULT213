@@ -18,12 +18,17 @@ import { fetchAreaImage } from '../api';
 
 
 export default function StopListMap(props) {
-    console.log("creatng stoplist map", props)
-    const mapElement = (props.mapimg ? <><img src={mapimg}></img></> : <><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuX43a-udPTMZ515YqpVQhb8ZVI-cziDZvZA&s"></img></>)
-    return(
-        <>
-            <p>map goes here</p>
-            {mapElement}
-        </>
-    )
+    if (props.mapimg == "NONE"){
+        return(<></>)
+    }
+    else{
+        console.log("creatng stoplist map", props)
+        const mapElement = (props.mapimg ? <><img src={mapimg}></img></> : <><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuX43a-udPTMZ515YqpVQhb8ZVI-cziDZvZA&s"></img></>)
+        return(
+            <>
+                <p>map goes here</p>
+                {mapElement}
+            </>
+        )
+    }
 }

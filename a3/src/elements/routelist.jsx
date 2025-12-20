@@ -17,7 +17,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
 import Badge from '@mui/material/Badge';
-import StopList from './stoplist';
+import StopList from './stoplist-routedrop';
 import { fetchRouteStops } from '../api';
 // get data from api and feed it in
   let favCount = 0;
@@ -51,11 +51,10 @@ export default function routelist(props){
       for (let row=0; row<props.props.length; row++) {
         let item = props.props[row]
         // stops[row]=fetchRouteStops(item.onestop_id);
-        //because the routes list is special, and its only used here, it isnt broken out into a function in dom.js like stops are
         //route color doesnt seem to match saskatoon transit's offical app, it might be from the routemap pdf
         const agency_info = item.agency
         const agency_name = agency_info.agency_name //dont use anything else from transit info right now
-        // console.log(`RouteINFO: ${item.route_short_name}`,`${item.route_long_name}`,`${agency_name}`,`${item.onestop_id}`, item.route_stops)
+        console.info(`RouteINFO: ${item.route_short_name}`,`${item.route_long_name}`,`${agency_name}`,`${item.onestop_id}`, item.route_stops, item.route_color, item.route_text_color,)
 
         newData[row] = {
             'short':item.route_short_name,
@@ -67,7 +66,6 @@ export default function routelist(props){
             'fgColor':item.route_text_color,
             'stops': item.route_stops,
         }
-      console.log("Processed routelist data",newData, "from", props)
       }
       const [open, setOpen] = React.useState(false);
 
