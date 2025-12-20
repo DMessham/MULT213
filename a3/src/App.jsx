@@ -17,11 +17,7 @@ import StopList from './elements/stoplist';
 import TextField from '@mui/material/TextField';
 
 import { fetchStopsLocation, fetchRouteStops, searchRoutes, searchStops, fetchAreaImage} from "./api.js";
-
-
-import { APIProvider, Map } from '@vis.gl/react-google-maps';
-import { googleAPIkey } from "./key";
-const API_KEY = globalThis.GOOGLE_MAPS_API_KEY ?? googleAPIkey;
+import GoogleMapsDisplay from './elements/map.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -121,17 +117,7 @@ function App() {
           <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
             TransitTrac
           </Typography>
-          <APIProvider
-            solutionChannel='GMP_devsite_samples_v3_rgmbasicmap'
-            apiKey={API_KEY}>
-            <Map
-              defaultZoom={15}
-              defaultCenter={{ lat: 52.09844, lng: -106.550787 }}
-              gestureHandling={'greedy'}
-              disableDefaultUI={false}
-              style={{height:'300px'}}
-            />
-          </APIProvider>
+          <GoogleMapsDisplay></GoogleMapsDisplay>
           <div>
           <form id="routeSearch-form" action={handleRouteFormSubmit}>
             <TextField 
@@ -170,9 +156,6 @@ function App() {
             <Button variant="contained" onClick={() => setCount((count) => count + 1)}>
               count is {count}
             </Button>
-            <p>
-              Edit <code>src/App.jsx</code> and save to test HMR
-            </p>
           </div>
       
       <BottomAppBar></BottomAppBar>
